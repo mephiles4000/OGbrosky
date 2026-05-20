@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Избранное | BroSky</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%); }
+        :root {
+            --primary-blue: #2c7da0;
+            --pure-white: #ffffff;
+            --cool-gray: #5a6e7c;
+            --charcoal: #2c3e44;
+            --shadow-sm: 0 12px 28px rgba(0, 32, 64, 0.08);
+            --shadow-hover: 0 20px 32px rgba(27, 65, 92, 0.12);
+            --transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+        header { padding: 24px 0 16px; backdrop-filter: blur(8px); background: rgba(255, 255, 255, 0.72); position: sticky; top: 0; z-index: 100; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.8rem; font-weight: 700; color: var(--charcoal); text-decoration: none; }
+        .logo i { color: var(--primary-blue); font-size: 2rem; }
+        .nav-links { display: flex; gap: 32px; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; font-weight: 500; color: var(--cool-gray); transition: var(--transition); }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary-blue); }
+        .btn-outline-light { border: 1.5px solid var(--primary-blue); background: transparent; padding: 8px 20px; border-radius: 40px; color: var(--primary-blue); font-weight: 600; text-decoration: none; }
+        .favorites-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; margin: 40px 0; }
+        .favorite-card { background: white; border-radius: 28px; overflow: hidden; transition: var(--transition); box-shadow: var(--shadow-sm); position: relative; }
+        .favorite-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+        .card-image { height: 200px; background: linear-gradient(135deg, #d4e6f1, #b8d4e8); display: flex; align-items: center; justify-content: center; position: relative; }
+        .remove-btn { position: absolute; top: 16px; right: 16px; background: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; transition: var(--transition); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .remove-btn i { color: #ff6b6b; font-size: 1.2rem; }
+        .remove-btn:hover { background: #ff6b6b; transform: scale(1.05); }
+        .remove-btn:hover i { color: white; }
+        .card-content { padding: 20px; }
+        .card-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 8px; }
+        .empty-state { text-align: center; padding: 80px 20px; background: white; border-radius: 28px; margin: 40px 0; }
+        footer { text-align: center; padding: 30px 0; border-top: 1px solid rgba(44, 125, 160, 0.2); margin-top: 40px; }
+        @media (max-width: 768px) { .container { padding: 0 20px; } .navbar { flex-direction: column; } }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="navbar">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="BroSky" style="height: 60px; width: auto;">
+                <span>BroSky</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Жильё</a>
+                <a href="favorites.html" class="active">Избранное</a>
+                <a href="contact.html">Контакты</a>
+                <a href="login.html" class="btn-outline-light"><i class="far fa-user"></i> Войти</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <h1 style="margin: 40px 0 20px;">❤️ Избранное</h1>
+        <div id="favoritesList" class="favorites-grid"></div>
+    </div>
+</main>
+
+<footer>
+    <div class="container"><p><i class="fas fa-dove"></i> BroSky — аренда без хлопот. © 2025</p></div>
+</footer>
+
+<script>
+    // Те же данные, что и в каталоге
+    const allListings = [
+        { id: 1, title: "Светлая студия в центре", location: "Москва, ул. Тверская", price: 4500, type: "apartment", city: "Москва", beds: 1, baths: 1 },
+        { id: 2, title: "Дизайнерский лофт", location: "СПб, Невский пр.", price: 6800, type: "loft", city: "СПб", beds: 2, baths: 1 },
+        { id: 3, title: "Коттедж с садом", location: "Сочи, Адлерский р-н", price: 12000, type: "house", city: "Сочи", beds: 3, baths: 2 },
+        { id: 4, title: "Уютная двушка", location: "Казань, ул. Баумана", price: 3200, type: "apartment", city: "Казань", beds: 2, baths: 1 },
+        { id: 5, title: "Loft с панорамным видом", location: "Москва, Москва-Сити", price: 9500, type: "loft", city: "Москва", beds: 2, baths: 2 },
+        { id: 6, title: "Дом у моря", location: "Сочи, Лазаревское", price: 15000, type: "house", city: "Сочи", beds: 4, baths: 2 }
+    ];
+
+    // Получение избранных ID из localStorage
+    function getFavoritesIds() {
+        const favorites = localStorage.getItem('favoritesIds');
+        return favorites ? JSON.parse(favorites) : [];
+    }
+
+    // Сохранение избранных ID
+    function saveFavoritesIds(ids) {
+        localStorage.setItem('favoritesIds', JSON.stringify(ids));
+    }
+
+    // Получение полных объектов избранных объявлений
+    function getFavoriteListings() {
+        const favoriteIds = getFavoritesIds();
+        return allListings.filter(listing => favoriteIds.includes(listing.id));
+    }
+
+    // Удаление из избранного
+    function removeFromFavorites(listingId) {
+        let favorites = getFavoritesIds();
+        favorites = favorites.filter(id => id !== listingId);
+        saveFavoritesIds(favorites);
+
+        // Показываем уведомление
+        showNotification('Удалено из избранного 💔');
+
+        // Обновляем отображение
+        renderFavorites();
+    }
+
+    // Уведомление
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--charcoal);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 48px;
+            font-weight: 500;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        `;
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }, 2000);
+    }
+
+    // Отображение избранных объявлений
+    function renderFavorites() {
+        const container = document.getElementById('favoritesList');
+        const favorites = getFavoriteListings();
+
+        if (favorites.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="far fa-heart" style="font-size: 4rem; color: #ccc;"></i>
+                    <h3 style="margin: 20px 0;">У вас пока нет избранного</h3>
+                    <p style="margin-bottom: 24px; color: var(--cool-gray);">Добавляйте понравившиеся объявления, нажимая на сердечко ❤️</p>
+                    <a href="catalog.html" class="btn-outline-light" style="display: inline-block;">Перейти в каталог</a>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = favorites.map(item => `
+            <div class="favorite-card">
+                <div class="card-image">
+                    <i class="fas fa-home" style="font-size: 3rem; color: var(--primary-blue);"></i>
+                    <button class="remove-btn" onclick="removeFromFavorites(${item.id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">${item.title}</div>
+                    <div class="card-location" style="margin: 8px 0; color: var(--cool-gray);"><i class="fas fa-map-marker-alt"></i> ${item.location}</div>
+                    <div class="card-price" style="font-size: 1.3rem; font-weight: 700; color: var(--primary-blue);">${item.price.toLocaleString()} ₽ / сутки</div>
+                    <div class="card-details" style="display: flex; gap: 16px; margin-top: 12px;">
+                        <span><i class="fas fa-bed"></i> ${item.beds} комн.</span>
+                        <span><i class="fas fa-bath"></i> ${item.baths} ванна</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Делаем функцию глобальной
+    window.removeFromFavorites = removeFromFavorites;
+
+    // Загружаем избранное при открытии страницы
+    renderFavorites();
+
+    // Проверяем в консоли
+    console.log('Текущее избранное:', getFavoritesIds());
+</script>
+</body>
+</html>

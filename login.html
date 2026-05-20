@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход | BroSky</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%);
+            min-height: 100vh;
+        }
+
+        :root {
+            --primary-blue: #2c7da0;
+            --pure-white: #ffffff;
+            --cool-gray: #5a6e7c;
+            --charcoal: #2c3e44;
+            --shadow-sm: 0 12px 28px rgba(0, 32, 64, 0.08);
+            --transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 24px 0;
+            text-align: center;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo i {
+            color: var(--primary-blue);
+            font-size: 2rem;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 32px;
+            padding: 48px 40px;
+            box-shadow: var(--shadow-sm);
+            margin: 20px 0 60px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+            border-bottom: 2px solid #eef2f7;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--cool-gray);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .tab:hover {
+            color: var(--primary-blue);
+        }
+
+        .tab.active {
+            color: var(--primary-blue);
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary-blue);
+        }
+
+        .form-panel {
+            display: none;
+        }
+
+        .form-panel.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--charcoal);
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #d0dee9;
+            border-radius: 16px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(44, 125, 160, 0.1);
+        }
+
+        .btn-login {
+            width: 100%;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 48px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 16px;
+        }
+
+        .btn-login:hover {
+            background: #236e8a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(44, 125, 160, 0.3);
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: 12px;
+        }
+
+        .forgot-password a {
+            color: var(--cool-gray);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .forgot-password a:hover {
+            color: var(--primary-blue);
+        }
+
+        .social-login {
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 16px;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid #d0dee9;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.3rem;
+            color: var(--cool-gray);
+        }
+
+        .social-btn:hover {
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 24px 0;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e0e8f0;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 16px;
+            position: relative;
+            color: var(--cool-gray);
+            font-size: 0.9rem;
+        }
+
+        .register-note {
+            text-align: center;
+            margin-top: 24px;
+            color: var(--cool-gray);
+            font-size: 0.9rem;
+        }
+
+        .register-note a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--cool-gray);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(44, 125, 160, 0.1);
+        }
+
+        @media (max-width: 560px) {
+            .login-card {
+                padding: 32px 24px;
+            }
+            .tabs {
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="BroSky" style="height: 60px; width: auto;">
+            <span>BroSky</span>
+        </a>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <div class="login-card">
+            <div class="tabs">
+                <div class="tab active" data-tab="login">Вход</div>
+                <div class="tab" data-tab="register">Регистрация</div>
+            </div>
+
+            <!-- Форма входа -->
+            <div class="form-panel active" id="loginPanel">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label>Email или телефон</label>
+                        <input type="email" id="loginEmail" required placeholder="example@mail.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input type="password" id="loginPassword" required placeholder="••••••••">
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#">Забыли пароль?</a>
+                    </div>
+                    <button type="submit" class="btn-login"><i class="fas fa-arrow-right-to-bracket"></i> Войти</button>
+                </form>
+
+                <div class="divider">
+                    <span>или</span>
+                </div>
+
+                <div class="social-login">
+                    <p style="color: var(--cool-gray); margin-bottom: 12px;">Войти через</p>
+                    <div class="social-buttons">
+                        <div class="social-btn" onclick="socialLogin('Google')"><i class="fab fa-google"></i></div>
+                        <div class="social-btn" onclick="socialLogin('VK')"><i class="fab fa-vk"></i></div>
+                        <div class="social-btn" onclick="socialLogin('Apple')"><i class="fab fa-apple"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Форма регистрации -->
+            <div class="form-panel" id="registerPanel">
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label>Имя и фамилия</label>
+                        <input type="text" id="regName" required placeholder="Иван Иванов">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="regEmail" required placeholder="ivan@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Телефон</label>
+                        <input type="tel" id="regPhone" placeholder="+7 (999) 123-45-67">
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input type="password" id="regPassword" required placeholder="минимум 6 символов">
+                    </div>
+                    <div class="form-group">
+                        <label>Подтверждение пароля</label>
+                        <input type="password" id="regPasswordConfirm" required placeholder="повторите пароль">
+                    </div>
+                    <button type="submit" class="btn-login"><i class="fas fa-user-plus"></i> Зарегистрироваться</button>
+                </form>
+
+                <div class="register-note">
+                    Регистрируясь, вы соглашаетесь с <a href="#">условиями использования</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <p><i class="fas fa-dove"></i> BroSky — аренда без хлопот. © 2025</p>
+    </div>
+</footer>
+
+<script>
+    // Переключение между вкладками
+    const tabs = document.querySelectorAll('.tab');
+    const loginPanel = document.getElementById('loginPanel');
+    const registerPanel = document.getElementById('registerPanel');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            if (tab.dataset.tab === 'login') {
+                loginPanel.classList.add('active');
+                registerPanel.classList.remove('active');
+            } else {
+                registerPanel.classList.add('active');
+                loginPanel.classList.remove('active');
+            }
+        });
+    });
+
+    // Обработка входа
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        alert(`Добро пожаловать обратно! Выполнен вход как ${email}`);
+        // Здесь можно добавить перенаправление на главную
+        // window.location.href = 'index.html';
+    });
+
+    // Обработка регистрации
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('regName').value;
+        const password = document.getElementById('regPassword').value;
+        const confirm = document.getElementById('regPasswordConfirm').value;
+
+        if (password !== confirm) {
+            alert('Пароли не совпадают!');
+            return;
+        }
+
+        if (password.length < 6) {
+            alert('Пароль должен содержать минимум 6 символов');
+            return;
+        }
+
+        alert(`Регистрация успешно завершена! Добро пожаловать, ${name}!`);
+        // Очистка формы
+        this.reset();
+        // Можно переключить на вкладку входа
+        tabs[0].click();
+    });
+
+    function socialLogin(provider) {
+        alert(`Вход через ${provider} (демо-режим). В реальном проекте здесь будет OAuth-авторизация.`);
+    }
+</script>
+</body>
+</html>

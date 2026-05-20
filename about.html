@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О нас | BroSky</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%);
+            color: #1a2c3e;
+        }
+
+        :root {
+            --primary-blue: #2c7da0;
+            --soft-blue: #d4e6f1;
+            --light-slate: #eef2f7;
+            --pure-white: #ffffff;
+            --cool-gray: #5a6e7c;
+            --charcoal: #2c3e44;
+            --shadow-sm: 0 12px 28px rgba(0, 32, 64, 0.08);
+            --shadow-hover: 0 20px 32px rgba(27, 65, 92, 0.12);
+            --transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        header {
+            padding: 24px 0 16px;
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.72);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(44, 125, 160, 0.15);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo i {
+            color: var(--primary-blue);
+            font-size: 2rem;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: var(--cool-gray);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary-blue);
+            transition: width 0.25s;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover:after, .nav-links a.active:after {
+            width: 100%;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-blue);
+        }
+
+        .btn-outline-light {
+            border: 1.5px solid var(--primary-blue);
+            background: transparent;
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .btn-outline-light:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 48px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: #236e8a;
+            transform: translateY(-4px);
+            box-shadow: 0 18px 28px -10px rgba(44, 125, 160, 0.4);
+        }
+
+        /* About specific styles */
+        .about-hero {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+
+        .about-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 20px;
+        }
+
+        .about-hero p {
+            font-size: 1.2rem;
+            color: var(--cool-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            background: white;
+            border-radius: 32px;
+            padding: 48px;
+            margin: 40px 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--cool-gray);
+            margin-bottom: 24px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 48px 0;
+            gap: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            padding: 24px;
+            background: linear-gradient(135deg, #f8fbfe, var(--light-slate));
+            border-radius: 28px;
+            transition: var(--transition);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--charcoal);
+            font-weight: 500;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            margin: 48px 0;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 32px 20px;
+            background: var(--light-slate);
+            border-radius: 28px;
+            transition: var(--transition);
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            background: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .feature i {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 16px;
+        }
+
+        .feature h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--charcoal);
+        }
+
+        .feature p {
+            color: var(--cool-gray);
+            font-size: 0.9rem;
+        }
+
+        .team-section {
+            margin: 48px 0;
+            text-align: center;
+        }
+
+        .team-section h2 {
+            font-size: 2rem;
+            margin-bottom: 32px;
+            color: var(--charcoal);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary-blue), #5fa3c2);
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-blue), #3b8db0);
+            border-radius: 32px;
+            padding: 60px 40px;
+            text-align: center;
+            margin: 48px 0;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            margin-bottom: 32px;
+            opacity: 0.95;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary-blue);
+            padding: 14px 32px;
+            border-radius: 48px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid rgba(44, 125, 160, 0.2);
+            color: var(--cool-gray);
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            .navbar {
+                flex-direction: column;
+            }
+            .about-hero h1 {
+                font-size: 2rem;
+            }
+            .about-content {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="navbar">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="BroSky" style="height: 60px; width: auto;">
+                <span>BroSky</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Жильё</a>
+                <a href="favorites.html">Избранное</a>
+                <a href="about.html" class="active">О нас</a>
+                <a href="contact.html">Контакты</a>
+                <a href="login.html" class="btn-outline-light"><i class="far fa-user"></i> Войти</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <div class="about-hero">
+            <h1>О сервисе BroSky</h1>
+            <p>Мы создаём комфортное пространство для путешественников и владельцев жилья</p>
+        </div>
+
+        <div class="about-content">
+            <p class="about-text">
+                <strong>BroSky</strong> — это современная платформа для аренды жилья, основанная в 2025 году.
+                Мы объединяем владельцев уютных квартир, домов и лофтов с теми, кто ищет идеальное место
+                для временного проживания. Наша команда верит, что поиск жилья должен быть простым,
+                быстрым и приятным.
+            </p>
+            <p class="about-text">
+                Каждое объявление на нашей платформе проходит ручную проверку, чтобы вы могли быть уверены
+                в качестве предлагаемого жилья. Мы предоставляем безопасную систему бронирования,
+                круглосуточную поддержку и гарантию возврата средств в случае непредвиденных ситуаций.
+            </p>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Объявлений</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15k+</div>
+                    <div class="stat-label">Счастливых гостей</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Поддержка</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Довольных клиентов</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Безопасность</h3>
+                <p>Проверенные объявления и защита платежей</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-headset"></i>
+                <h3>Поддержка 24/7</h3>
+                <p>Поможем в любое время суток</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-undo-alt"></i>
+                <h3>Возврат средств</h3>
+                <p>Гарантия возврата при отмене</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-map-marked-alt"></i>
+                <h3>Широкий выбор</h3>
+                <p>Жильё в 50+ городах России</p>
+            </div>
+        </div>
+
+        <div class="team-section">
+            <h2><i class="fas fa-users"></i> Наша команда</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar"><i class="fas fa-user"></i></div>
+                    <h3>Анна Петрова</h3>
+                    <p>Основатель и CEO</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar"><i class="fas fa-user"></i></div>
+                    <h3>Михаил Соколов</h3>
+                    <p>Руководитель отдела качества</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar"><i class="fas fa-user"></i></div>
+                    <h3>Елена Волкова</h3>
+                    <p>Клиентский сервис</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Готовы найти своё идеальное жильё?</h2>
+            <p>Присоединяйтесь к сообществу BroSky уже сегодня</p>
+            <a href="catalog.html" class="btn-white"><i class="fas fa-search"></i> Начать поиск</a>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <p><i class="fas fa-dove"></i> BroSky — аренда без хлопот. © 2025 | Ваше комфортное пространство</p>
+    </div>
+</footer>
+</body>
+</html>

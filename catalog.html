@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог жилья | BroSky</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%); }
+        :root {
+            --primary-blue: #2c7da0;
+            --pure-white: #ffffff;
+            --cool-gray: #5a6e7c;
+            --charcoal: #2c3e44;
+            --shadow-sm: 0 12px 28px rgba(0, 32, 64, 0.08);
+            --shadow-hover: 0 20px 32px rgba(27, 65, 92, 0.12);
+            --transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+        header { padding: 24px 0 16px; backdrop-filter: blur(8px); background: rgba(255, 255, 255, 0.72); position: sticky; top: 0; z-index: 100; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.8rem; font-weight: 700; color: var(--charcoal); text-decoration: none; }
+        .logo i { color: var(--primary-blue); font-size: 2rem; }
+        .nav-links { display: flex; gap: 32px; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; font-weight: 500; color: var(--cool-gray); transition: var(--transition); }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary-blue); }
+        .btn-outline-light { border: 1.5px solid var(--primary-blue); background: transparent; padding: 8px 20px; border-radius: 40px; color: var(--primary-blue); font-weight: 600; text-decoration: none; }
+        .filters { background: white; border-radius: 24px; padding: 24px; margin: 32px 0; box-shadow: var(--shadow-sm); }
+        .filters-grid { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end; }
+        .filter-group { flex: 1; min-width: 150px; }
+        .filter-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: var(--charcoal); }
+        .filter-group select, .filter-group input { width: 100%; padding: 10px 14px; border: 1px solid #d0dee9; border-radius: 16px; font-family: inherit; }
+        .btn-filter { background: var(--primary-blue); color: white; border: none; padding: 10px 24px; border-radius: 20px; cursor: pointer; font-weight: 600; }
+        .listings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; margin: 40px 0; }
+        .listing-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+        .listing-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+        .card-image {
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #d4e6f1, #b8d4e8);
+        }
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .listing-card:hover .card-image img { transform: scale(1.05); }
+        .favorite-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 10;
+        }
+        .favorite-btn i { font-size: 1.2rem; transition: var(--transition); }
+        .favorite-btn.active { background: #ff6b6b; }
+        .favorite-btn.active i { color: white; }
+        .favorite-btn:not(.active) i { color: #ff6b6b; }
+        .card-content { padding: 20px; }
+        .card-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: var(--charcoal); }
+        .card-location { color: var(--cool-gray); font-size: 0.85rem; margin-bottom: 12px; }
+        .card-price { font-size: 1.5rem; font-weight: 800; color: var(--primary-blue); margin: 12px 0; }
+        .card-details { display: flex; gap: 16px; color: var(--cool-gray); font-size: 0.85rem; }
+        footer { text-align: center; padding: 30px 0; border-top: 1px solid rgba(44, 125, 160, 0.2); margin-top: 40px; color: var(--cool-gray); }
+        @media (max-width: 768px) { .container { padding: 0 20px; } .navbar { flex-direction: column; } }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="navbar">
+            <a href="index.html" class="logo"><i class="fas fa-cloud"></i><span>BroSky</span></a>
+            <div class="nav-links">
+                <a href="index.html">Главная</a>
+                <a href="catalog.html" class="active">Жильё</a>
+                <a href="favorites.html">Избранное</a>
+                <a href="contact.html">Контакты</a>
+                <a href="login.html" class="btn-outline-light"><i class="far fa-user"></i> Войти</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <h1 style="margin: 40px 0 20px; font-size: 2.5rem;">Найдите идеальное жильё</h1>
+
+        <div class="filters">
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label>Тип жилья</label>
+                    <select id="typeFilter">
+                        <option value="all">Все</option>
+                        <option value="apartment">Квартира</option>
+                        <option value="house">Дом</option>
+                        <option value="loft">Loft</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Город</label>
+                    <select id="cityFilter">
+                        <option value="all">Все города</option>
+                        <option value="Москва">Москва</option>
+                        <option value="СПб">Санкт-Петербург</option>
+                        <option value="Сочи">Сочи</option>
+                        <option value="Казань">Казань</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Цена до (₽)</label>
+                    <input type="number" id="priceFilter" placeholder="Любая">
+                </div>
+                <div class="filter-group">
+                    <button class="btn-filter" onclick="applyFilters()">Применить фильтр</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="listings-grid" id="listingsGrid"></div>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <p><i class="fas fa-dove"></i> BroSky — аренда без хлопот. © 2025</p>
+    </div>
+</footer>
+
+<script>
+    // ========== ДАННЫЕ ОБЪЯВЛЕНИЙ С ФОТО ==========
+    const listings = [
+        {
+            id: 1,
+            title: "Светлая студия в центре",
+            location: "Москва, ул. Тверская",
+            price: 4500,
+            type: "apartment",
+            city: "Москва",
+            beds: 1,
+            baths: 1,
+            guests: 2,
+            image: "images/apartments/apartment-1.jpg",
+            imageAlt: "Современная студия"
+        },
+        {
+            id: 2,
+            title: "Дизайнерский лофт",
+            location: "СПб, Невский пр.",
+            price: 6800,
+            type: "loft",
+            city: "СПб",
+            beds: 2,
+            baths: 1,
+            guests: 4,
+            image: "images/dloft/dloft-1.jpg",
+            imageAlt: "Просторный лофт"
+        },
+        {
+            id: 3,
+            title: "Коттедж с садом",
+            location: "Сочи, Адлерский р-н",
+            price: 12000,
+            type: "house",
+            city: "Сочи",
+            beds: 3,
+            baths: 2,
+            guests: 6,
+            image: "images/kotteg/kotteg-1.jpg",
+            imageAlt: "Загородный дом"
+        },
+        {
+            id: 4,
+            title: "Уютная двушка",
+            location: "Казань, ул. Баумана",
+            price: 3200,
+            type: "apartment",
+            city: "Казань",
+            beds: 2,
+            baths: 1,
+            guests: 4,
+            image: "images/uyutnaya2/uyutnaya2-1.jpg",
+            imageAlt: "Уютная квартира"
+        },
+        {
+            id: 5,
+            title: "Loft с панорамным видом",
+            location: "Москва, Москва-Сити",
+            price: 9500,
+            type: "loft",
+            city: "Москва",
+            beds: 2,
+            baths: 2,
+            guests: 4,
+            image: "images/loftp/loftp-1.jpg",
+            imageAlt: "Loft с видом"
+        },
+        {
+            id: 6,
+            title: "Дом у моря",
+            location: "Сочи, Лазаревское",
+            price: 15000,
+            type: "house",
+            city: "Сочи",
+            beds: 4,
+            baths: 2,
+            guests: 8,
+            image: "images/domumorya/domumorya-1.jpg",
+            imageAlt: "Вилла у моря"
+        }
+    ];
+
+    // ИЗБРАННОЕ
+    function getFavorites() {
+        const favorites = localStorage.getItem('favoritesIds');
+        return favorites ? JSON.parse(favorites) : [];
+    }
+
+    function saveFavorites(favoritesIds) {
+        localStorage.setItem('favoritesIds', JSON.stringify(favoritesIds));
+    }
+
+    function addToFavorites(listingId) {
+        let favorites = getFavorites();
+        if (!favorites.includes(listingId)) {
+            favorites.push(listingId);
+            saveFavorites(favorites);
+            showNotification('Добавлено в избранное! ❤️');
+            renderListings(currentFilteredListings);
+        }
+    }
+
+    function removeFromFavorites(listingId) {
+        let favorites = getFavorites();
+        favorites = favorites.filter(id => id !== listingId);
+        saveFavorites(favorites);
+        showNotification('Удалено из избранного 💔');
+        renderListings(currentFilteredListings);
+    }
+
+    function isFavorite(listingId) {
+        return getFavorites().includes(listingId);
+    }
+
+    function toggleFavorite(listingId, event) {
+        event.stopPropagation();
+        if (isFavorite(listingId)) {
+            removeFromFavorites(listingId);
+        } else {
+            addToFavorites(listingId);
+        }
+    }
+
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2c3e44;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 48px;
+            font-weight: 500;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        `;
+        document.body.appendChild(notification);
+        setTimeout(() => {
+            notification.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }, 2000);
+    }
+
+    // ОТОБРАЖЕНИЕ
+    let currentFilteredListings = [...listings];
+
+    function renderListings(filteredListings) {
+        const grid = document.getElementById('listingsGrid');
+        if (!grid) return;
+
+        grid.innerHTML = '';
+
+        if (!filteredListings || filteredListings.length === 0) {
+            grid.innerHTML = '<div style="text-align: center; padding: 60px; background: white; border-radius: 28px;">Ничего не найдено 😔</div>';
+            return;
+        }
+
+        filteredListings.forEach(listing => {
+            const card = document.createElement('a');
+            card.className = 'listing-card';
+            card.href = `listing-detail.html?id=${listing.id}`;
+
+            const isFav = isFavorite(listing.id);
+
+            card.innerHTML = `
+                <div class="card-image">
+                    <img src="${listing.image}"
+                         alt="${listing.imageAlt}"
+                         loading="lazy"
+                         onerror="this.onerror=null; this.src='https://placehold.co/500x300/2c7da0/white?text=BroSky'">
+                    <button class="favorite-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite(${listing.id}, event)">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">${listing.title}</div>
+                    <div class="card-location"><i class="fas fa-map-marker-alt"></i> ${listing.location}</div>
+                    <div class="card-price">${listing.price.toLocaleString()} ₽ <span style="font-size: 0.9rem;">/ сутки</span></div>
+                    <div class="card-details">
+                        <span><i class="fas fa-bed"></i> ${listing.beds} спальни</span>
+                        <span><i class="fas fa-bath"></i> ${listing.baths} ванна</span>
+                        <span><i class="fas fa-users"></i> до ${listing.guests} гостей</span>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    function applyFilters() {
+        const type = document.getElementById('typeFilter').value;
+        const city = document.getElementById('cityFilter').value;
+        const maxPrice = document.getElementById('priceFilter').value;
+
+        let filtered = [...listings];
+
+        if (type !== 'all') {
+            filtered = filtered.filter(l => l.type === type);
+        }
+        if (city !== 'all') {
+            filtered = filtered.filter(l => l.city === city);
+        }
+        if (maxPrice) {
+            filtered = filtered.filter(l => l.price <= parseInt(maxPrice));
+        }
+
+        currentFilteredListings = filtered;
+        renderListings(filtered);
+    }
+
+    window.toggleFavorite = toggleFavorite;
+    window.applyFilters = applyFilters;
+
+    applyFilters();
+</script>
+</body>
+</html>
