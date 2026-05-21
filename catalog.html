@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Каталог жилья | BroSky</title>
+    <title>Каталог | BroSky</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%); }
+
         :root {
             --primary-blue: #2c7da0;
             --pure-white: #ffffff;
@@ -18,48 +19,163 @@
             --shadow-hover: 0 20px 32px rgba(27, 65, 92, 0.12);
             --transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
+
         .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
-        header { padding: 24px 0 16px; backdrop-filter: blur(8px); background: rgba(255, 255, 255, 0.72); position: sticky; top: 0; z-index: 100; }
-        .navbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.8rem; font-weight: 700; color: var(--charcoal); text-decoration: none; }
+
+        header {
+            padding: 24px 0 16px;
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.72);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(44, 125, 160, 0.15);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            text-decoration: none;
+        }
+
         .logo i { color: var(--primary-blue); font-size: 2rem; }
-        .nav-links { display: flex; gap: 32px; align-items: center; flex-wrap: wrap; }
-        .nav-links a { text-decoration: none; font-weight: 500; color: var(--cool-gray); transition: var(--transition); }
-        .nav-links a:hover, .nav-links a.active { color: var(--primary-blue); }
-        .btn-outline-light { border: 1.5px solid var(--primary-blue); background: transparent; padding: 8px 20px; border-radius: 40px; color: var(--primary-blue); font-weight: 600; text-decoration: none; }
-        .filters { background: white; border-radius: 24px; padding: 24px; margin: 32px 0; box-shadow: var(--shadow-sm); }
-        .filters-grid { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end; }
-        .filter-group { flex: 1; min-width: 150px; }
-        .filter-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: var(--charcoal); }
-        .filter-group select, .filter-group input { width: 100%; padding: 10px 14px; border: 1px solid #d0dee9; border-radius: 16px; font-family: inherit; }
-        .btn-filter { background: var(--primary-blue); color: white; border: none; padding: 10px 24px; border-radius: 20px; cursor: pointer; font-weight: 600; }
-        .listings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; margin: 40px 0; }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: var(--cool-gray);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover { color: var(--primary-blue); }
+
+        .btn-outline-light {
+            border: 1.5px solid var(--primary-blue);
+            background: transparent;
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-outline-light:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .filters {
+            background: white;
+            border-radius: 24px;
+            padding: 24px;
+            margin: 32px 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .filters-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: flex-end;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--charcoal);
+        }
+
+        .filter-group select, .filter-group input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #d0dee9;
+            border-radius: 16px;
+            font-family: inherit;
+        }
+
+        .btn-filter {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 32px;
+            margin: 40px 0;
+        }
+
         .listing-card {
             background: white;
             border-radius: 28px;
             overflow: hidden;
             transition: var(--transition);
             box-shadow: var(--shadow-sm);
-            position: relative;
             cursor: pointer;
             text-decoration: none;
             display: block;
             color: inherit;
         }
-        .listing-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+
+        .listing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
         .card-image {
             height: 240px;
             overflow: hidden;
             position: relative;
             background: linear-gradient(135deg, #d4e6f1, #b8d4e8);
         }
+
         .card-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
-        .listing-card:hover .card-image img { transform: scale(1.05); }
+
+        .listing-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
         .favorite-btn {
             position: absolute;
             top: 16px;
@@ -77,19 +193,51 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
             z-index: 10;
         }
-        .favorite-btn i { font-size: 1.2rem; transition: var(--transition); }
+
+        .favorite-btn i { font-size: 1.2rem; }
         .favorite-btn.active { background: #ff6b6b; }
         .favorite-btn.active i { color: white; }
         .favorite-btn:not(.active) i { color: #ff6b6b; }
+
         .card-content { padding: 20px; }
         .card-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: var(--charcoal); }
         .card-location { color: var(--cool-gray); font-size: 0.85rem; margin-bottom: 12px; }
         .card-price { font-size: 1.5rem; font-weight: 800; color: var(--primary-blue); margin: 12px 0; }
         .card-details { display: flex; gap: 16px; color: var(--cool-gray); font-size: 0.85rem; }
-        footer { text-align: center; padding: 30px 0; border-top: 1px solid rgba(44, 125, 160, 0.2); margin-top: 40px; color: var(--cool-gray); }
-        @media (max-width: 768px) { .container { padding: 0 20px; } .navbar { flex-direction: column; } }
-        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid rgba(44, 125, 160, 0.2);
+            margin-top: 40px;
+            color: var(--cool-gray);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2c3e44;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 48px;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            .navbar { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
@@ -98,15 +246,17 @@
     <div class="container">
         <div class="navbar">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="BroSky" style="height: 60px; width: auto;">
+                <img src="images/logo.png" alt="BroSky" style="height: 50px; width: auto;">
                 <span>BroSky</span>
             </a>
             <div class="nav-links">
                 <a href="index.html">Главная</a>
                 <a href="catalog.html" class="active">Жильё</a>
                 <a href="favorites.html">Избранное</a>
+                <a href="my-bookings.html">Мои брони</a>
                 <a href="contact.html">Контакты</a>
-                <a href="login.html" class="btn-outline-light"><i class="far fa-user"></i> Войти</a>
+                <a href="admin-bookings.html" id="adminLink" style="display: none;"><i class="fas fa-chart-line"></i> Админка</a>
+                <div id="userMenu"></div>
             </div>
         </div>
     </div>
@@ -152,102 +302,145 @@
 </main>
 
 <footer>
-    <div class="container">
-        <p><i class="fas fa-dove"></i> BroSky — аренда без хлопот. © 2025</p>
-    </div>
+    <div class="container"><p><i class="fas fa-dove"></i> BroSky — аренда без хлопот. © 2026</p></div>
 </footer>
 
 <script>
-    // ========== ДАННЫЕ ОБЪЯВЛЕНИЙ С ФОТО ==========
-    const listings = [
+    // ==================== НАСТРОЙКА ОБЪЯВЛЕНИЙ ====================
+    // ⬇️⬇️⬇️ ЗДЕСЬ ТЫ ВСТАВЛЯЕШЬ СВОИ ФОТО ⬇️⬇️⬇️
+    //
+    // 1. Положи свои фото в папку images (например: images/photo1.jpg)
+    // 2. В поле "image" укажи путь к фото: "images/photo1.jpg"
+    // 3. Меняй названия, цены, описания как хочешь
+    // =============================================================
+
+    const MY_LISTINGS = [
         {
             id: 1,
             title: "Светлая студия в центре",
-            location: "Москва, ул. Тверская",
-            price: 4500,
-            type: "apartment",
             city: "Москва",
+            type: "apartment",
+            address: "Москва, ул. Тверская",
+            price: 4500,
             beds: 1,
             baths: 1,
             guests: 2,
-            image: "images/apartments/apartment-1.jpg",
-            imageAlt: "Современная студия"
+            description: "Просторная светлая студия в самом центре Москвы.",
+            amenities: ["Wi-Fi", "Кухня", "Телевизор", "Кондиционер"],
+            image: "images/apartments/apartment-1.jpg"   // ← СЮДА ПУТЬ К ТВОЕМУ ФОТО
         },
         {
             id: 2,
             title: "Дизайнерский лофт",
-            location: "СПб, Невский пр.",
-            price: 6800,
-            type: "loft",
             city: "СПб",
+            type: "loft",
+            address: "СПб, Невский пр.",
+            price: 6800,
             beds: 2,
             baths: 1,
             guests: 4,
-            image: "images/dloft/dloft-1.jpg",
-            imageAlt: "Просторный лофт"
+            description: "Стильный лофт с высокими потолками.",
+            amenities: ["Wi-Fi", "Кухня", "Телевизор", "Кондиционер"],
+            image: "images/loft1.jpg"        // ← СЮДА ПУТЬ К ТВОЕМУ ФОТО
         },
         {
             id: 3,
             title: "Коттедж с садом",
-            location: "Сочи, Адлерский р-н",
-            price: 12000,
-            type: "house",
             city: "Сочи",
+            type: "house",
+            address: "Сочи, Адлерский р-н",
+            price: 12000,
             beds: 3,
             baths: 2,
             guests: 6,
-            image: "images/kotteg/kotteg-1.jpg",
-            imageAlt: "Загородный дом"
+            description: "Уютный коттедж с собственным садом.",
+            amenities: ["Wi-Fi", "Кухня", "Сауна", "Мангал"],
+            image: "images/house1.jpg"       // ← СЮДА ПУТЬ К ТВОЕМУ ФОТО
         },
         {
             id: 4,
             title: "Уютная двушка",
-            location: "Казань, ул. Баумана",
-            price: 3200,
-            type: "apartment",
             city: "Казань",
+            type: "apartment",
+            address: "Казань, ул. Баумана",
+            price: 3200,
             beds: 2,
             baths: 1,
             guests: 4,
-            image: "images/uyutnaya2/uyutnaya2-1.jpg",
-            imageAlt: "Уютная квартира"
+            description: "Уютная квартира в центре Казани.",
+            amenities: ["Wi-Fi", "Кухня", "Телевизор"],
+            image: "images/apartment2.jpg"   // ← СЮДА ПУТЬ К ТВОЕМУ ФОТО
         },
         {
             id: 5,
             title: "Loft с панорамным видом",
-            location: "Москва, Москва-Сити",
-            price: 9500,
-            type: "loft",
             city: "Москва",
+            type: "loft",
+            address: "Москва, Москва-Сити",
+            price: 9500,
             beds: 2,
             baths: 2,
             guests: 4,
-            image: "images/loftp/loftp-1.jpg",
-            imageAlt: "Loft с видом"
+            description: "Лофт с панорамным видом на город.",
+            amenities: ["Wi-Fi", "Умный дом", "Джакузи"],
+            image: "images/loft2.jpg"        // ← СЮДА ПУТЬ К ТВОЕМУ ФОТО
         },
         {
             id: 6,
             title: "Дом у моря",
-            location: "Сочи, Лазаревское",
-            price: 15000,
-            type: "house",
             city: "Сочи",
+            type: "house",
+            address: "Сочи, Лазаревское",
+            price: 15000,
             beds: 4,
             baths: 2,
             guests: 8,
-            image: "images/domumorya/domumorya-1.jpg",
-            imageAlt: "Вилла у моря"
+            description: "Вилла с выходом к морю.",
+            amenities: ["Wi-Fi", "Камин", "Барбекю"],
+            image: "images/house2.jpg"       // ← СЮДА ПУТЬ К ТВОЕМУ ФОТО
         }
     ];
 
-    // ИЗБРАННОЕ
-    function getFavorites() {
-        const favorites = localStorage.getItem('favoritesIds');
-        return favorites ? JSON.parse(favorites) : [];
+    // ==================== КОД НИЖЕ НЕ ТРОГАЙ ====================
+
+    // Получение объявлений из localStorage или использование MY_LISTINGS
+    function getMainListings() {
+        const listings = localStorage.getItem('brosky_main_listings');
+        if (listings) {
+            return JSON.parse(listings);
+        }
+        localStorage.setItem('brosky_main_listings', JSON.stringify(MY_LISTINGS));
+        return MY_LISTINGS;
     }
 
-    function saveFavorites(favoritesIds) {
-        localStorage.setItem('favoritesIds', JSON.stringify(favoritesIds));
+    let listings = getMainListings();
+    let currentFilteredListings = [...listings];
+
+    // ИЗБРАННОЕ
+    function getCurrentUser() {
+        try {
+            const user = localStorage.getItem('brosky_current_user');
+            return user ? JSON.parse(user) : null;
+        } catch(e) { return null; }
+    }
+
+    function getFavorites() {
+        const currentUser = getCurrentUser();
+        if (!currentUser) return [];
+        const key = `favorites_${currentUser.id}`;
+        const fav = localStorage.getItem(key);
+        return fav ? JSON.parse(fav) : [];
+    }
+
+    function saveFavorites(favorites) {
+        const currentUser = getCurrentUser();
+        if (!currentUser) return;
+        const key = `favorites_${currentUser.id}`;
+        localStorage.setItem(key, JSON.stringify(favorites));
+    }
+
+    function isFavorite(listingId) {
+        return getFavorites().includes(listingId);
     }
 
     function addToFavorites(listingId) {
@@ -255,7 +448,7 @@
         if (!favorites.includes(listingId)) {
             favorites.push(listingId);
             saveFavorites(favorites);
-            showNotification('Добавлено в избранное! ❤️');
+            showToast('Добавлено в избранное! ❤️');
             renderListings(currentFilteredListings);
         }
     }
@@ -264,12 +457,8 @@
         let favorites = getFavorites();
         favorites = favorites.filter(id => id !== listingId);
         saveFavorites(favorites);
-        showNotification('Удалено из избранного 💔');
+        showToast('Удалено из избранного 💔');
         renderListings(currentFilteredListings);
-    }
-
-    function isFavorite(listingId) {
-        return getFavorites().includes(listingId);
     }
 
     function toggleFavorite(listingId, event) {
@@ -281,30 +470,16 @@
         }
     }
 
-    function showNotification(message) {
-        const notification = document.createElement('div');
-        notification.textContent = message;
-        notification.style.cssText = `
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #2c3e44;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 48px;
-            font-weight: 500;
-            z-index: 1000;
-            animation: slideIn 0.3s ease;
-        `;
-        document.body.appendChild(notification);
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
+        document.body.appendChild(toast);
         setTimeout(() => {
-            notification.style.animation = 'slideOut 0.3s ease';
-            setTimeout(() => notification.remove(), 300);
+            toast.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => toast.remove(), 300);
         }, 2000);
     }
-
-    // ОТОБРАЖЕНИЕ
-    let currentFilteredListings = [...listings];
 
     function renderListings(filteredListings) {
         const grid = document.getElementById('listingsGrid');
@@ -312,7 +487,7 @@
 
         grid.innerHTML = '';
 
-        if (!filteredListings || filteredListings.length === 0) {
+        if (filteredListings.length === 0) {
             grid.innerHTML = '<div style="text-align: center; padding: 60px; background: white; border-radius: 28px;">Ничего не найдено 😔</div>';
             return;
         }
@@ -321,22 +496,18 @@
             const card = document.createElement('a');
             card.className = 'listing-card';
             card.href = `listing-detail.html?id=${listing.id}`;
-
             const isFav = isFavorite(listing.id);
 
             card.innerHTML = `
                 <div class="card-image">
-                    <img src="${listing.image}"
-                         alt="${listing.imageAlt}"
-                         loading="lazy"
-                         onerror="this.onerror=null; this.src='https://placehold.co/500x300/2c7da0/white?text=BroSky'">
+                    <img src="${listing.image}" alt="${listing.title}" loading="lazy" onerror="this.src='https://placehold.co/500x300/2c7da0/white?text=BroSky'">
                     <button class="favorite-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite(${listing.id}, event)">
                         <i class="fas fa-heart"></i>
                     </button>
                 </div>
                 <div class="card-content">
                     <div class="card-title">${listing.title}</div>
-                    <div class="card-location"><i class="fas fa-map-marker-alt"></i> ${listing.location}</div>
+                    <div class="card-location"><i class="fas fa-map-marker-alt"></i> ${listing.address || listing.city}</div>
                     <div class="card-price">${listing.price.toLocaleString()} ₽ <span style="font-size: 0.9rem;">/ сутки</span></div>
                     <div class="card-details">
                         <span><i class="fas fa-bed"></i> ${listing.beds} спальни</span>
@@ -355,24 +526,71 @@
         const maxPrice = document.getElementById('priceFilter').value;
 
         let filtered = [...listings];
-
-        if (type !== 'all') {
-            filtered = filtered.filter(l => l.type === type);
-        }
-        if (city !== 'all') {
-            filtered = filtered.filter(l => l.city === city);
-        }
-        if (maxPrice) {
-            filtered = filtered.filter(l => l.price <= parseInt(maxPrice));
-        }
+        if (type !== 'all') filtered = filtered.filter(l => l.type === type);
+        if (city !== 'all') filtered = filtered.filter(l => l.city === city);
+        if (maxPrice) filtered = filtered.filter(l => l.price <= parseInt(maxPrice));
 
         currentFilteredListings = filtered;
         renderListings(filtered);
     }
 
+    // ПОЛЬЗОВАТЕЛЬСКОЕ МЕНЮ
+    function logout() {
+        localStorage.removeItem('brosky_current_user');
+        window.location.href = 'index.html';
+    }
+
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        if (dropdown) dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function updateUserMenu() {
+        const userMenu = document.getElementById('userMenu');
+        if (!userMenu) return;
+        const currentUser = getCurrentUser();
+
+        if (currentUser) {
+            userMenu.innerHTML = `
+                <div class="user-dropdown" style="position: relative; display: inline-block;">
+                    <button class="btn-outline-light" onclick="toggleDropdown()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <i class="fas fa-user-circle"></i> ${currentUser.name}
+                        <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
+                    </button>
+                    <div id="dropdownMenu" style="display: none; position: absolute; right: 0; top: 100%; background: white; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 200px; margin-top: 8px; z-index: 1000;">
+                        <a href="my-bookings.html" style="display: block; padding: 12px 16px; text-decoration: none; color: #2c3e44; border-bottom: 1px solid #eef2f7;"><i class="fas fa-calendar-check"></i> Мои брони</a>
+                        <a href="favorites.html" style="display: block; padding: 12px 16px; text-decoration: none; color: #2c3e44; border-bottom: 1px solid #eef2f7;"><i class="fas fa-heart"></i> Избранное</a>
+                        <a href="javascript:void(0)" onclick="logout()" style="display: block; padding: 12px 16px; text-decoration: none; color: #e74c3c;"><i class="fas fa-sign-out-alt"></i> Выйти</a>
+                    </div>
+                </div>
+            `;
+        } else {
+            userMenu.innerHTML = `<a href="login.html" class="btn-outline-light"><i class="far fa-user"></i> Войти</a>`;
+        }
+    }
+
+    function checkAndShowAdminLink() {
+        const currentUser = getCurrentUser();
+        const adminLink = document.getElementById('adminLink');
+        if (adminLink && currentUser && currentUser.email === 'admin@brosky.ru') {
+            adminLink.style.display = 'inline-block';
+        } else if (adminLink) {
+            adminLink.style.display = 'none';
+        }
+    }
+
+    document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('dropdownMenu');
+        if (dropdown && !event.target.closest('.user-dropdown')) {
+            dropdown.style.display = 'none';
+        }
+    });
+
     window.toggleFavorite = toggleFavorite;
     window.applyFilters = applyFilters;
 
+    updateUserMenu();
+    checkAndShowAdminLink();
     applyFilters();
 </script>
 </body>
