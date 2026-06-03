@@ -131,7 +131,7 @@
             transform: translateY(-2px);
         }
 
-        /* ========== ГЛАВНЫЙ БАННЕР (большой и красивый) ========== */
+        /* ========== ГЛАВНЫЙ БАННЕР ========== */
         .hero {
             padding: 80px 0 60px;
         }
@@ -508,7 +508,184 @@
             background: #fdeaea;
         }
 
-        /* ========== АДАПТИВНОСТЬ ========== */
+        /* ========== МОДАЛЬНЫЕ ОКНА ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 32px;
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+            color: var(--charcoal);
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 14px 16px;
+            margin-bottom: 16px;
+            border: 1px solid #d0dee9;
+            border-radius: 16px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .modal-content input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .modal-content button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 8px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--cool-gray);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--charcoal);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 48px;
+            z-index: 1100;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Сетка объявлений */
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 32px;
+            margin: 40px 0;
+        }
+
+        .listing-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .listing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-image {
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #d4e6f1, #b8d4e8);
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .listing-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--charcoal);
+        }
+
+        .card-location {
+            color: var(--cool-gray);
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+
+        .card-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin: 12px 0;
+        }
+
+        .card-details {
+            display: flex;
+            gap: 16px;
+            color: var(--cool-gray);
+            font-size: 0.85rem;
+        }
+
+        .book-btn {
+            width: 100%;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 48px;
+            font-weight: 600;
+            margin-top: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .book-btn:hover {
+            background: #236e8a;
+            transform: translateY(-2px);
+        }
+
         @media (max-width: 992px) {
             .hero-content h1 {
                 font-size: 2.8rem;
@@ -558,7 +735,7 @@
     <div class="container">
         <div class="navbar">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="BroSky" style="height: 50px; width: auto;">
+                <i class="fas fa-cloud"></i>
                 <span>BroSky</span>
             </a>
             <div class="nav-links">
@@ -567,7 +744,6 @@
                 <a href="favorites.html">Избранное</a>
                 <a href="my-bookings.html">Мои брони</a>
                 <a href="contact.html">Контакты</a>
-                <a href="admin-bookings.html" id="adminLink" style="display: none;"><i class="fas fa-chart-line"></i> Админка</a>
                 <div id="userMenu"></div>
             </div>
         </div>
@@ -590,7 +766,7 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="images/logo.png" alt="Светлый интерьер жилья" style="object-fit: cover; width: 100%; border-radius: 48px;">
+                <img src="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?w=600&h=450&fit=crop" alt="Светлый интерьер жилья">
             </div>
         </div>
     </div>
@@ -650,6 +826,12 @@
         </div>
     </div>
 
+    <!-- Список объявлений из базы данных -->
+    <div class="container">
+        <h2 class="section-title">🔥 Популярные объявления</h2>
+        <div id="listingsGrid" class="listings-grid"></div>
+    </div>
+
     <!-- Крупные кнопки переходов -->
     <div class="container bottom-actions">
         <a href="catalog.html" class="big-nav-btn"><i class="fas fa-list-ul"></i> Все объявления</a>
@@ -661,39 +843,241 @@
 
 <footer>
     <div class="container">
-        <p><i class="fas fa-dove"></i> BroSky — аренда без хлопот. © 2026 | Ваше комфортное пространство</p>
+        <p><i class="fas fa-dove"></i> BroSky — аренда без хлопот. © 2025 | Ваше комфортное пространство</p>
     </div>
 </footer>
 
-<script>
-    // ========== РАБОТА С ПОЛЬЗОВАТЕЛЕМ ==========
+<!-- Модальное окно входа -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeModal('loginModal')">&times;</span>
+        <h2><i class="fas fa-sign-in-alt"></i> Вход</h2>
+        <input type="email" id="loginEmail" placeholder="Email">
+        <input type="password" id="loginPassword" placeholder="Пароль">
+        <div id="loginError" style="color: red; font-size: 0.8rem; margin-bottom: 10px;"></div>
+        <button class="btn-primary" onclick="login()">Войти</button>
+        <button class="btn-secondary" style="margin-top: 10px;" onclick="openRegisterModal()">Нет аккаунта? Зарегистрироваться</button>
+    </div>
+</div>
 
-    function getCurrentUser() {
+<!-- Модальное окно регистрации -->
+<div id="registerModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeModal('registerModal')">&times;</span>
+        <h2><i class="fas fa-user-plus"></i> Регистрация</h2>
+        <input type="text" id="regName" placeholder="Имя и фамилия">
+        <input type="email" id="regEmail" placeholder="Email">
+        <input type="password" id="regPassword" placeholder="Пароль (минимум 6 символов)">
+        <input type="password" id="regPasswordConfirm" placeholder="Подтвердите пароль">
+        <div id="registerError" style="color: red; font-size: 0.8rem; margin-bottom: 10px;"></div>
+        <div id="registerSuccess" style="color: green; font-size: 0.8rem; margin-bottom: 10px; display: none;"></div>
+        <button class="btn-primary" onclick="register()">Зарегистрироваться</button>
+    </div>
+</div>
+
+<script>
+    // ========== НАСТРОЙКИ SUPABASE ==========
+    // ⬇️⬇️⬇️ ЗАМЕНИ НА СВОИ ДАННЫЕ ИЗ SUPABASE ⬇️⬇️⬇️
+    const SUPABASE_URL = 'https://eonnlyknrwgmwgqhlxzx.supabase.co';     // ← Вставь свой URL
+    const SUPABASE_KEY = 'ТeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVvbm5seWtucndnbXdncWhseHp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0Nzk2MTgsImV4cCI6MjA5NjA1NTYxOH0.DefLsZmvSiOHfDVSDik_ZbxMOh9mi0G0UqzlXeay7xQ';                       // ← Вставь свой anon key
+
+    // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
+    let currentUser = null;
+
+    // ========== ФУНКЦИИ РАБОТЫ С SUPABASE ==========
+    async function supabaseRequest(table, method = 'GET', data = null, id = null) {
+        let url = `${SUPABASE_URL}/rest/v1/${table}`;
+        const headers = {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`,
+            'Content-Type': 'application/json'
+        };
+
+        let options = { method, headers };
+
+        if (method === 'GET') {
+            if (id) url += `?id=eq.${id}`;
+            options.method = 'GET';
+        } else if (method === 'POST') {
+            options.body = JSON.stringify(data);
+        } else if (method === 'PATCH') {
+            url += `?id=eq.${id}`;
+            options.body = JSON.stringify(data);
+        } else if (method === 'DELETE') {
+            url += `?id=eq.${id}`;
+        }
+
         try {
-            const user = localStorage.getItem('brosky_current_user');
-            return user ? JSON.parse(user) : null;
-        } catch(e) {
+            const response = await fetch(url, options);
+            if (!response.ok) throw new Error(`Ошибка ${response.status}`);
+            if (method === 'GET') return await response.json();
+            return { success: true };
+        } catch (error) {
+            console.error('Ошибка Supabase:', error);
             return null;
         }
     }
 
-    function logout() {
-        localStorage.removeItem('brosky_current_user');
-        window.location.href = 'index.html';
+    async function getListings() {
+        const listings = await supabaseRequest('listings', 'GET');
+        return listings || [];
     }
 
-    function toggleDropdown() {
-        const dropdown = document.getElementById('dropdownMenu');
-        if (dropdown) {
-            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    async function getUsers() {
+        const users = await supabaseRequest('users', 'GET');
+        return users || [];
+    }
+
+    async function addUser(user) {
+        return await supabaseRequest('users', 'POST', user);
+    }
+
+    async function addBooking(booking) {
+        return await supabaseRequest('bookings', 'POST', booking);
+    }
+
+    // ========== ОТОБРАЖЕНИЕ ОБЪЯВЛЕНИЙ ==========
+    async function renderListings() {
+        const listings = await getListings();
+        const container = document.getElementById('listingsGrid');
+
+        if (!listings.length) {
+            container.innerHTML = '<div style="text-align: center; padding: 60px; background: white; border-radius: 28px;">Нет объявлений</div>';
+            return;
+        }
+
+        container.innerHTML = listings.map(listing => `
+            <div class="listing-card">
+                <div class="card-image">
+                    <img src="${listing.image || 'https://placehold.co/500x300/2c7da0/white?text=BroSky'}" alt="${listing.title}">
+                </div>
+                <div class="card-content">
+                    <div class="card-title">${listing.title}</div>
+                    <div class="card-location"><i class="fas fa-map-marker-alt"></i> ${listing.city}</div>
+                    <div class="card-price">${listing.price.toLocaleString()} ₽ <span style="font-size: 0.9rem;">/ сутки</span></div>
+                    <div class="card-details">
+                        <span><i class="fas fa-bed"></i> ${listing.beds || 1} спальни</span>
+                        <span><i class="fas fa-bath"></i> ${listing.baths || 1} ванна</span>
+                        <span><i class="fas fa-users"></i> до ${listing.guests || 4} гостей</span>
+                    </div>
+                    ${currentUser ? `<button class="book-btn" onclick="bookListing(${listing.id})"><i class="fas fa-calendar-check"></i> Забронировать</button>` : '<button class="book-btn" style="background: #ccc; cursor: not-allowed;" disabled>Войдите чтобы бронировать</button>'}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // ========== БРОНИРОВАНИЕ ==========
+    async function bookListing(listingId) {
+        if (!currentUser) {
+            showToast('Войдите в аккаунт');
+            openLoginModal();
+            return;
+        }
+
+        const checkin = prompt('Дата заезда (ГГГГ-ММ-ДД):', new Date().toISOString().split('T')[0]);
+        const checkout = prompt('Дата выезда (ГГГГ-ММ-ДД):', new Date(Date.now() + 3*24*60*60*1000).toISOString().split('T')[0]);
+
+        if (!checkin || !checkout) return;
+
+        const booking = {
+            user_id: currentUser.id,
+            listing_id: listingId,
+            checkin: checkin,
+            checkout: checkout,
+            status: 'pending',
+            created_at: new Date().toISOString()
+        };
+
+        const result = await addBooking(booking);
+        if (result?.success) {
+            showToast('Бронирование оформлено!');
+        } else {
+            showToast('Ошибка при бронировании');
         }
     }
 
+    // ========== АВТОРИЗАЦИЯ ==========
+    async function login() {
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        const users = await getUsers();
+        const user = users.find(u => u.email === email && u.password === password);
+
+        if (user) {
+            currentUser = { id: user.id, name: user.name, email: user.email };
+            localStorage.setItem('brosky_current_user', JSON.stringify(currentUser));
+            closeModal('loginModal');
+            updateUserMenu();
+            renderListings();
+            showToast(`Добро пожаловать, ${user.name}!`);
+        } else {
+            document.getElementById('loginError').innerText = 'Неверный email или пароль';
+        }
+    }
+
+    async function register() {
+        const name = document.getElementById('regName').value;
+        const email = document.getElementById('regEmail').value;
+        const password = document.getElementById('regPassword').value;
+        const confirm = document.getElementById('regPasswordConfirm').value;
+
+        document.getElementById('registerError').innerText = '';
+
+        if (name.length < 2) {
+            document.getElementById('registerError').innerText = 'Введите корректное имя';
+            return;
+        }
+        if (!email.includes('@')) {
+            document.getElementById('registerError').innerText = 'Введите корректный email';
+            return;
+        }
+        if (password.length < 6) {
+            document.getElementById('registerError').innerText = 'Пароль должен быть минимум 6 символов';
+            return;
+        }
+        if (password !== confirm) {
+            document.getElementById('registerError').innerText = 'Пароли не совпадают';
+            return;
+        }
+
+        const users = await getUsers();
+        if (users.some(u => u.email === email)) {
+            document.getElementById('registerError').innerText = 'Email уже используется';
+            return;
+        }
+
+        const newUser = {
+            name: name,
+            email: email,
+            password: password,
+            created_at: new Date().toISOString()
+        };
+
+        const result = await addUser(newUser);
+        if (result?.success) {
+            document.getElementById('registerSuccess').style.display = 'block';
+            document.getElementById('registerSuccess').innerText = 'Регистрация успешна! Теперь войдите.';
+            setTimeout(() => {
+                closeModal('registerModal');
+                openLoginModal();
+            }, 1500);
+        } else {
+            document.getElementById('registerError').innerText = 'Ошибка регистрации';
+        }
+    }
+
+    function logout() {
+        currentUser = null;
+        localStorage.removeItem('brosky_current_user');
+        updateUserMenu();
+        renderListings();
+        showToast('Вы вышли из аккаунта');
+    }
+
+    // ========== UI УПРАВЛЕНИЕ ==========
     function updateUserMenu() {
         const userMenu = document.getElementById('userMenu');
         if (!userMenu) return;
-
-        const currentUser = getCurrentUser();
 
         if (currentUser) {
             userMenu.innerHTML = `
@@ -705,25 +1089,62 @@
                     <div class="dropdown-menu" id="dropdownMenu" style="display: none;">
                         <a href="my-bookings.html"><i class="fas fa-calendar-check"></i> Мои брони</a>
                         <a href="favorites.html"><i class="fas fa-heart"></i> Избранное</a>
-                        <a href="javascript:void(0)" onclick="logout()" class="logout"><i class="fas fa-sign-out-alt"></i> Выйти</a>
+                        <a href="#" onclick="logout()" class="logout"><i class="fas fa-sign-out-alt"></i> Выйти</a>
                     </div>
                 </div>
             `;
         } else {
-            userMenu.innerHTML = `<a href="login.html" class="btn-outline-light"><i class="far fa-user"></i> Войти</a>`;
+            userMenu.innerHTML = `<button class="btn-outline-light" onclick="openLoginModal()"><i class="far fa-user"></i> Войти</button>`;
         }
     }
 
-    function checkAndShowAdminLink() {
-        const currentUser = getCurrentUser();
-        const adminLink = document.getElementById('adminLink');
-        if (adminLink && currentUser && currentUser.email === 'admin@brosky.ru') {
-            adminLink.style.display = 'inline-block';
-        } else if (adminLink) {
-            adminLink.style.display = 'none';
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        if (dropdown) {
+            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
         }
     }
 
+    function openLoginModal() {
+        document.getElementById('loginModal').classList.add('active');
+        document.getElementById('loginError').innerText = '';
+        document.getElementById('loginEmail').value = '';
+        document.getElementById('loginPassword').value = '';
+    }
+
+    function openRegisterModal() {
+        closeModal('loginModal');
+        document.getElementById('registerModal').classList.add('active');
+        document.getElementById('registerError').innerText = '';
+        document.getElementById('registerSuccess').style.display = 'none';
+        document.getElementById('regName').value = '';
+        document.getElementById('regEmail').value = '';
+        document.getElementById('regPassword').value = '';
+        document.getElementById('regPasswordConfirm').value = '';
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.remove('active');
+    }
+
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = message;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+
+    // ========== ЗАКРЫТИЕ МОДАЛЬНЫХ ОКОН ПРИ КЛИКЕ ВНЕ ==========
+    document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    });
+
+    // Закрытие дропдауна
     document.addEventListener('click', function(event) {
         const dropdown = document.getElementById('dropdownMenu');
         if (dropdown && !event.target.closest('.user-dropdown')) {
@@ -731,8 +1152,28 @@
         }
     });
 
-    updateUserMenu();
-    checkAndShowAdminLink();
+    // ========== ЗАГРУЗКА ДАННЫХ ==========
+    async function loadData() {
+        const savedUser = localStorage.getItem('brosky_current_user');
+        if (savedUser) {
+            currentUser = JSON.parse(savedUser);
+        }
+        updateUserMenu();
+        await renderListings();
+    }
+
+    // Делаем функции глобальными
+    window.login = login;
+    window.register = register;
+    window.logout = logout;
+    window.bookListing = bookListing;
+    window.openLoginModal = openLoginModal;
+    window.openRegisterModal = openRegisterModal;
+    window.closeModal = closeModal;
+    window.toggleDropdown = toggleDropdown;
+
+    loadData();
 </script>
+
 </body>
 </html>
