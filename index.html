@@ -23,12 +23,14 @@
 
         :root {
             --primary-blue: #2c7da0;
+            --accent-teal: #3DCFB6;
+            --accent-purple: #5B56E0;
+            --accent-coral: #FF6B6B;
             --soft-blue: #d4e6f1;
             --light-slate: #eef2f7;
             --pure-white: #ffffff;
             --cool-gray: #5a6e7c;
             --charcoal: #2c3e44;
-            --accent-teal: #3b8db0;
             --shadow-sm: 0 12px 28px rgba(0, 32, 64, 0.08);
             --shadow-hover: 0 20px 32px rgba(27, 65, 92, 0.12);
             --transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
@@ -67,11 +69,17 @@
             font-weight: 700;
             color: var(--charcoal);
             text-decoration: none;
+            transition: var(--transition);
         }
 
         .logo i {
-            color: var(--primary-blue);
+            color: var(--accent-teal);
             font-size: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover i {
+            transform: scale(1.05) rotate(-2deg);
         }
 
         .nav-links {
@@ -97,7 +105,7 @@
             left: 0;
             width: 0%;
             height: 2px;
-            background: var(--primary-blue);
+            background: var(--accent-purple);
             transition: width 0.25s;
             border-radius: 2px;
         }
@@ -111,11 +119,11 @@
         }
 
         .btn-outline-light {
-            border: 1.5px solid var(--primary-blue);
+            border: 1.5px solid var(--accent-purple);
             background: transparent;
             padding: 8px 20px;
             border-radius: 40px;
-            color: var(--primary-blue);
+            color: var(--accent-purple);
             font-weight: 600;
             transition: var(--transition);
             text-decoration: none;
@@ -126,7 +134,7 @@
         }
 
         .btn-outline-light:hover {
-            background: var(--primary-blue);
+            background: var(--accent-purple);
             color: white;
             transform: translateY(-2px);
         }
@@ -149,13 +157,13 @@
         }
 
         .hero-content .badge {
-            background: rgba(44, 125, 160, 0.12);
+            background: rgba(61, 207, 182, 0.15);
             display: inline-block;
             padding: 8px 18px;
             border-radius: 60px;
             font-size: 0.85rem;
             font-weight: 600;
-            color: var(--primary-blue);
+            color: var(--accent-teal);
             margin-bottom: 24px;
         }
 
@@ -169,7 +177,7 @@
         }
 
         .hero-content h1 span {
-            color: var(--primary-blue);
+            color: var(--accent-purple);
             position: relative;
             display: inline-block;
         }
@@ -189,7 +197,7 @@
         }
 
         .btn-primary {
-            background: var(--primary-blue);
+            background: var(--accent-teal);
             color: white;
             border: none;
             padding: 14px 36px;
@@ -198,7 +206,7 @@
             font-size: 1rem;
             cursor: pointer;
             transition: var(--transition);
-            box-shadow: 0 8px 16px -6px rgba(44, 125, 160, 0.3);
+            box-shadow: 0 8px 16px -6px rgba(61, 207, 182, 0.3);
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -210,9 +218,9 @@
         }
 
         .btn-primary:hover {
-            background: #236e8a;
+            background: #2cb89f;
             transform: translateY(-4px);
-            box-shadow: 0 18px 28px -10px rgba(44, 125, 160, 0.4);
+            box-shadow: 0 18px 28px -10px rgba(61, 207, 182, 0.4);
         }
 
         .btn-primary:hover i {
@@ -222,7 +230,7 @@
         .btn-secondary {
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(4px);
-            border: 1px solid rgba(44, 125, 160, 0.3);
+            border: 1px solid rgba(91, 86, 224, 0.3);
             padding: 14px 32px;
             border-radius: 48px;
             font-weight: 600;
@@ -237,7 +245,7 @@
 
         .btn-secondary:hover {
             background: white;
-            border-color: var(--primary-blue);
+            border-color: var(--accent-purple);
             transform: translateY(-3px);
         }
 
@@ -301,12 +309,12 @@
         .card:hover {
             transform: translateY(-12px);
             box-shadow: var(--shadow-hover);
-            border-color: rgba(44, 125, 160, 0.4);
+            border-color: rgba(91, 86, 224, 0.4);
         }
 
         .card-icon {
             font-size: 3.2rem;
-            color: var(--primary-blue);
+            color: var(--accent-purple);
             margin-bottom: 20px;
         }
 
@@ -324,7 +332,7 @@
         }
 
         .card-btn {
-            color: var(--primary-blue);
+            color: var(--accent-teal);
             font-weight: 600;
             display: inline-flex;
             align-items: center;
@@ -338,7 +346,7 @@
 
         /* ========== ПОПУЛЯРНЫЕ НАПРАВЛЕНИЯ ========== */
         .showcase {
-            background: rgba(212, 230, 241, 0.5);
+            background: rgba(61, 207, 182, 0.08);
             border-radius: 48px;
             padding: 48px 40px;
             margin: 50px 0;
@@ -369,7 +377,7 @@
 
         .preview-item i {
             font-size: 2.2rem;
-            color: var(--primary-blue);
+            color: var(--accent-purple);
             margin-bottom: 16px;
         }
 
@@ -391,210 +399,7 @@
             box-shadow: var(--shadow-hover);
         }
 
-        /* ========== КНОПКИ ПЕРЕХОДОВ ========== */
-        .bottom-actions {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin: 40px 0 70px;
-        }
-
-        .big-nav-btn {
-            background: white;
-            padding: 16px 38px;
-            border-radius: 70px;
-            box-shadow: var(--shadow-sm);
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 700;
-            font-size: 1.05rem;
-            color: var(--charcoal);
-            transition: var(--transition);
-            border: 1px solid rgba(44, 125, 160, 0.2);
-            text-decoration: none;
-        }
-
-        .big-nav-btn i {
-            color: var(--primary-blue);
-            font-size: 1.2rem;
-        }
-
-        .big-nav-btn:hover {
-            background: var(--primary-blue);
-            color: white;
-            transform: translateY(-5px);
-        }
-
-        .big-nav-btn:hover i {
-            color: white;
-        }
-
-        /* ========== ПОДВАЛ ========== */
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            border-top: 1px solid rgba(44, 125, 160, 0.2);
-            color: var(--cool-gray);
-            font-size: 0.85rem;
-        }
-
-        /* ========== АНИМАЦИИ ========== */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeScale {
-            from {
-                opacity: 0;
-                transform: scale(0.96);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* ========== ВЫПАДАЮЩЕЕ МЕНЮ ========== */
-        .user-dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            right: 0;
-            top: 100%;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            min-width: 200px;
-            margin-top: 8px;
-            z-index: 1000;
-            overflow: hidden;
-        }
-
-        .dropdown-menu a {
-            display: block;
-            padding: 12px 16px;
-            text-decoration: none;
-            color: #2c3e44;
-            transition: background 0.2s;
-            border-bottom: 1px solid #eef2f7;
-        }
-
-        .dropdown-menu a:last-child {
-            border-bottom: none;
-        }
-
-        .dropdown-menu a:hover {
-            background: #f0f6ff;
-        }
-
-        .dropdown-menu .logout {
-            color: #e74c3c;
-        }
-
-        .dropdown-menu .logout:hover {
-            background: #fdeaea;
-        }
-
-        /* ========== МОДАЛЬНЫЕ ОКНА ========== */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 32px;
-            padding: 40px;
-            max-width: 450px;
-            width: 90%;
-            position: relative;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .modal-content h2 {
-            font-size: 1.8rem;
-            margin-bottom: 24px;
-            color: var(--charcoal);
-        }
-
-        .modal-content input {
-            width: 100%;
-            padding: 14px 16px;
-            margin-bottom: 16px;
-            border: 1px solid #d0dee9;
-            border-radius: 16px;
-            font-family: inherit;
-            font-size: 1rem;
-        }
-
-        .modal-content input:focus {
-            outline: none;
-            border-color: var(--primary-blue);
-        }
-
-        .modal-content button {
-            width: 100%;
-            padding: 14px;
-            margin-top: 8px;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 24px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--cool-gray);
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--charcoal);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 48px;
-            z-index: 1100;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        /* Сетка объявлений */
+        /* ========== СЕТКА ОБЪЯВЛЕНИЙ ========== */
         .listings-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -637,6 +442,40 @@
             transform: scale(1.05);
         }
 
+        .favorite-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 10;
+        }
+
+        .favorite-btn i {
+            font-size: 1.2rem;
+        }
+
+        .favorite-btn.active {
+            background: var(--accent-coral);
+        }
+
+        .favorite-btn.active i {
+            color: white;
+        }
+
+        .favorite-btn:not(.active) i {
+            color: var(--accent-coral);
+        }
+
         .card-content {
             padding: 20px;
         }
@@ -670,7 +509,7 @@
 
         .book-btn {
             width: 100%;
-            background: var(--primary-blue);
+            background: var(--accent-teal);
             color: white;
             border: none;
             padding: 12px;
@@ -682,10 +521,227 @@
         }
 
         .book-btn:hover {
-            background: #236e8a;
+            background: #2cb89f;
             transform: translateY(-2px);
         }
 
+        /* ========== КНОПКИ ПЕРЕХОДОВ ========== */
+        .bottom-actions {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 40px 0 70px;
+        }
+
+        .big-nav-btn {
+            background: white;
+            padding: 16px 38px;
+            border-radius: 70px;
+            box-shadow: var(--shadow-sm);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--charcoal);
+            transition: var(--transition);
+            border: 1px solid rgba(44, 125, 160, 0.2);
+            text-decoration: none;
+        }
+
+        .big-nav-btn i {
+            color: var(--accent-purple);
+            font-size: 1.2rem;
+        }
+
+        .big-nav-btn:hover {
+            background: var(--accent-purple);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .big-nav-btn:hover i {
+            color: white;
+        }
+
+        /* ========== ПОДВАЛ ========== */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(44, 125, 160, 0.2);
+            color: var(--cool-gray);
+            font-size: 0.85rem;
+        }
+
+        /* ========== АНИМАЦИИ ========== */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeScale {
+            from {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* ========== ВЫПАДАЮЩЕЕ МЕНЮ ПОЛЬЗОВАТЕЛЯ ========== */
+        .user-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            min-width: 200px;
+            margin-top: 8px;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 16px;
+            text-decoration: none;
+            color: #2c3e44;
+            transition: background 0.2s;
+            border-bottom: 1px solid #eef2f7;
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover {
+            background: #f0f6ff;
+        }
+
+        .dropdown-menu .logout {
+            color: var(--accent-coral);
+        }
+
+        .dropdown-menu .logout:hover {
+            background: #fdeaea;
+        }
+
+        /* ========== МОДАЛЬНЫЕ ОКНА ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 32px;
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+            color: var(--charcoal);
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 14px 16px;
+            margin-bottom: 16px;
+            border: 1px solid #d0dee9;
+            border-radius: 16px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .modal-content input:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+        }
+
+        .modal-content button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 8px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--cool-gray);
+        }
+
+        /* ========== УВЕДОМЛЕНИЯ ========== */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--charcoal);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 48px;
+            z-index: 1100;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* ========== АДАПТИВНОСТЬ ========== */
         @media (max-width: 992px) {
             .hero-content h1 {
                 font-size: 2.8rem;
@@ -735,7 +791,7 @@
     <div class="container">
         <div class="navbar">
             <a href="index.html" class="logo">
-                <i class="fas fa-cloud"></i>
+                <img src="images/logo.png" alt="BroSky" style="height: 40px;">
                 <span>BroSky</span>
             </a>
             <div class="nav-links">
@@ -744,6 +800,7 @@
                 <a href="favorites.html">Избранное</a>
                 <a href="my-bookings.html">Мои брони</a>
                 <a href="contact.html">Контакты</a>
+                <a href="admin-bookings.html" id="adminLink" style="display: none;"><i class="fas fa-chart-line"></i> Админка</a>
                 <div id="userMenu"></div>
             </div>
         </div>
@@ -751,7 +808,7 @@
 </header>
 
 <main>
-    <!-- Hero секция — большой баннер -->
+    <!-- Hero секция -->
     <div class="container hero">
         <div class="hero-grid">
             <div class="hero-content">
@@ -766,7 +823,7 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?w=600&h=450&fit=crop" alt="Светлый интерьер жилья">
+                <img src="images/logo.png" alt="BroSky">
             </div>
         </div>
     </div>
@@ -854,7 +911,7 @@
         <h2><i class="fas fa-sign-in-alt"></i> Вход</h2>
         <input type="email" id="loginEmail" placeholder="Email">
         <input type="password" id="loginPassword" placeholder="Пароль">
-        <div id="loginError" style="color: red; font-size: 0.8rem; margin-bottom: 10px;"></div>
+        <div id="loginError" style="color: var(--accent-coral); font-size: 0.8rem; margin-bottom: 10px;"></div>
         <button class="btn-primary" onclick="login()">Войти</button>
         <button class="btn-secondary" style="margin-top: 10px;" onclick="openRegisterModal()">Нет аккаунта? Зарегистрироваться</button>
     </div>
@@ -869,8 +926,8 @@
         <input type="email" id="regEmail" placeholder="Email">
         <input type="password" id="regPassword" placeholder="Пароль (минимум 6 символов)">
         <input type="password" id="regPasswordConfirm" placeholder="Подтвердите пароль">
-        <div id="registerError" style="color: red; font-size: 0.8rem; margin-bottom: 10px;"></div>
-        <div id="registerSuccess" style="color: green; font-size: 0.8rem; margin-bottom: 10px; display: none;"></div>
+        <div id="registerError" style="color: var(--accent-coral); font-size: 0.8rem; margin-bottom: 10px;"></div>
+        <div id="registerSuccess" style="color: var(--accent-teal); font-size: 0.8rem; margin-bottom: 10px; display: none;"></div>
         <button class="btn-primary" onclick="register()">Зарегистрироваться</button>
     </div>
 </div>
@@ -878,8 +935,8 @@
 <script>
     // ========== НАСТРОЙКИ SUPABASE ==========
     // ⬇️⬇️⬇️ ЗАМЕНИ НА СВОИ ДАННЫЕ ИЗ SUPABASE ⬇️⬇️⬇️
-    const SUPABASE_URL = 'https://eonnlyknrwgmwgqhlxzx.supabase.co';     // ← Вставь свой URL
-    const SUPABASE_KEY = 'ТeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVvbm5seWtucndnbXdncWhseHp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0Nzk2MTgsImV4cCI6MjA5NjA1NTYxOH0.DefLsZmvSiOHfDVSDik_ZbxMOh9mi0G0UqzlXeay7xQ';                       // ← Вставь свой anon key
+    const SUPABASE_URL = 'https://bgyjgzzvoxyvpysywvlb.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJneWpnenp2b3h5dnB5c3l3dmxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2Mzk3NjQsImV4cCI6MjA5NjIxNTc2NH0.Yz91MvAXo45Z3hq-76V5yBD4aB_2dFgpjXDBDWG9FHM';
 
     // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
     let currentUser = null;
@@ -947,7 +1004,7 @@
         }
 
         container.innerHTML = listings.map(listing => `
-            <div class="listing-card">
+            <div class="listing-card" onclick="window.location.href='listing-detail.html?id=${listing.id}'">
                 <div class="card-image">
                     <img src="${listing.image || 'https://placehold.co/500x300/2c7da0/white?text=BroSky'}" alt="${listing.title}">
                 </div>
@@ -960,7 +1017,7 @@
                         <span><i class="fas fa-bath"></i> ${listing.baths || 1} ванна</span>
                         <span><i class="fas fa-users"></i> до ${listing.guests || 4} гостей</span>
                     </div>
-                    ${currentUser ? `<button class="book-btn" onclick="bookListing(${listing.id})"><i class="fas fa-calendar-check"></i> Забронировать</button>` : '<button class="book-btn" style="background: #ccc; cursor: not-allowed;" disabled>Войдите чтобы бронировать</button>'}
+                    ${currentUser ? `<button class="book-btn" onclick="event.stopPropagation(); bookListing(${listing.id})"><i class="fas fa-calendar-check"></i> Забронировать</button>` : '<button class="book-btn" style="background: #ccc; cursor: not-allowed;" disabled>Войдите чтобы бронировать</button>'}
                 </div>
             </div>
         `).join('');
@@ -979,18 +1036,26 @@
 
         if (!checkin || !checkout) return;
 
+        const listings = await getListings();
+        const listing = listings.find(l => l.id === listingId);
+        const days = Math.max(1, Math.ceil((new Date(checkout) - new Date(checkin)) / (1000 * 60 * 60 * 24)));
+        const totalPrice = listing.price * days;
+
         const booking = {
             user_id: currentUser.id,
             listing_id: listingId,
             checkin: checkin,
             checkout: checkout,
+            guests: 2,
+            days: days,
+            total_price: totalPrice,
             status: 'pending',
             created_at: new Date().toISOString()
         };
 
         const result = await addBooking(booking);
         if (result?.success) {
-            showToast('Бронирование оформлено!');
+            showToast(`Бронирование оформлено! ${totalPrice.toLocaleString()} ₽`);
         } else {
             showToast('Ошибка при бронировании');
         }
@@ -1135,6 +1200,16 @@
         setTimeout(() => toast.remove(), 3000);
     }
 
+    // Показать ссылку на админку
+    function checkAndShowAdminLink() {
+        const adminLink = document.getElementById('adminLink');
+        if (adminLink && currentUser && currentUser.email === 'admin@brosky.ru') {
+            adminLink.style.display = 'inline-block';
+        } else if (adminLink) {
+            adminLink.style.display = 'none';
+        }
+    }
+
     // ========== ЗАКРЫТИЕ МОДАЛЬНЫХ ОКОН ПРИ КЛИКЕ ВНЕ ==========
     document.querySelectorAll('.modal').forEach(modal => {
         modal.addEventListener('click', (e) => {
@@ -1159,6 +1234,7 @@
             currentUser = JSON.parse(savedUser);
         }
         updateUserMenu();
+        checkAndShowAdminLink();
         await renderListings();
     }
 

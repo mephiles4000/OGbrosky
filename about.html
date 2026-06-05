@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>О нас | BroSky</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -21,6 +21,9 @@
 
         :root {
             --primary-blue: #2c7da0;
+            --accent-teal: #3DCFB6;
+            --accent-purple: #5B56E0;
+            --accent-coral: #FF6B6B;
             --soft-blue: #d4e6f1;
             --light-slate: #eef2f7;
             --pure-white: #ffffff;
@@ -37,6 +40,7 @@
             padding: 0 32px;
         }
 
+        /* ========== ШАПКА ========== */
         header {
             padding: 24px 0 16px;
             backdrop-filter: blur(8px);
@@ -63,16 +67,16 @@
             font-weight: 700;
             color: var(--charcoal);
             text-decoration: none;
-            transition: var(--transition);
         }
 
         .logo i {
-            color: var(--primary-blue);
+            color: var(--accent-teal);
             font-size: 2rem;
+            transition: transform 0.3s ease;
         }
 
-        .logo:hover {
-            transform: scale(1.02);
+        .logo:hover i {
+            transform: scale(1.05) rotate(-2deg);
         }
 
         .nav-links {
@@ -87,6 +91,7 @@
             font-weight: 500;
             color: var(--cool-gray);
             transition: var(--transition);
+            font-size: 1rem;
             position: relative;
         }
 
@@ -97,83 +102,65 @@
             left: 0;
             width: 0%;
             height: 2px;
-            background: var(--primary-blue);
+            background: var(--accent-purple);
             transition: width 0.25s;
-            border-radius: 2px;
         }
 
-        .nav-links a:hover:after, .nav-links a.active:after {
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a:hover:after {
             width: 100%;
         }
 
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--primary-blue);
-        }
-
         .btn-outline-light {
-            border: 1.5px solid var(--primary-blue);
+            border: 1.5px solid var(--accent-purple);
             background: transparent;
             padding: 8px 20px;
             border-radius: 40px;
-            color: var(--primary-blue);
+            color: var(--accent-purple);
             font-weight: 600;
             text-decoration: none;
-            transition: var(--transition);
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
         }
 
         .btn-outline-light:hover {
-            background: var(--primary-blue);
+            background: var(--accent-purple);
             color: white;
             transform: translateY(-2px);
         }
 
-        .btn-primary {
-            background: var(--primary-blue);
-            color: white;
-            border: none;
-            padding: 14px 32px;
-            border-radius: 48px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary:hover {
-            background: #236e8a;
-            transform: translateY(-4px);
-            box-shadow: 0 18px 28px -10px rgba(44, 125, 160, 0.4);
-        }
-
-        /* About specific styles */
-        .about-hero {
+        /* ========== ЗАГОЛОВОК СТРАНИЦЫ ========== */
+        .page-header {
             text-align: center;
-            padding: 60px 0 40px;
+            margin: 48px 0 32px;
         }
 
-        .about-hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
+        .page-header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
             color: var(--charcoal);
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
-        .about-hero p {
-            font-size: 1.2rem;
+        .page-header p {
+            font-size: 1.1rem;
             color: var(--cool-gray);
-            max-width: 700px;
+            max-width: 600px;
             margin: 0 auto;
         }
 
+        /* ========== ОСНОВНОЙ КОНТЕНТ ========== */
         .about-content {
             background: white;
             border-radius: 32px;
             padding: 48px;
-            margin: 40px 0;
             box-shadow: var(--shadow-sm);
+            margin-bottom: 40px;
         }
 
         .about-text {
@@ -183,6 +170,11 @@
             margin-bottom: 24px;
         }
 
+        .about-text strong {
+            color: var(--accent-teal);
+        }
+
+        /* ========== СТАТИСТИКА ========== */
         .stats {
             display: flex;
             justify-content: space-around;
@@ -195,8 +187,8 @@
             text-align: center;
             flex: 1;
             min-width: 150px;
-            padding: 24px;
-            background: linear-gradient(135deg, #f8fbfe, var(--light-slate));
+            padding: 28px 20px;
+            background: linear-gradient(135deg, #f8fbfe, #eef2f7);
             border-radius: 28px;
             transition: var(--transition);
         }
@@ -208,16 +200,18 @@
 
         .stat-number {
             font-size: 2.8rem;
-            font-weight: 700;
-            color: var(--primary-blue);
+            font-weight: 800;
+            color: var(--accent-purple);
             margin-bottom: 8px;
         }
 
         .stat-label {
             color: var(--charcoal);
             font-weight: 500;
+            font-size: 0.9rem;
         }
 
+        /* ========== ПРЕИМУЩЕСТВА ========== */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -227,22 +221,22 @@
 
         .feature {
             text-align: center;
-            padding: 32px 20px;
-            background: var(--light-slate);
+            padding: 32px 24px;
+            background: var(--pure-white);
             border-radius: 28px;
             transition: var(--transition);
+            box-shadow: var(--shadow-sm);
         }
 
         .feature:hover {
             transform: translateY(-5px);
-            background: white;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-hover);
         }
 
         .feature i {
             font-size: 2.5rem;
-            color: var(--primary-blue);
-            margin-bottom: 16px;
+            color: var(--accent-teal);
+            margin-bottom: 20px;
         }
 
         .feature h3 {
@@ -254,35 +248,47 @@
         .feature p {
             color: var(--cool-gray);
             font-size: 0.9rem;
+            line-height: 1.5;
         }
 
+        /* ========== КОМАНДА ========== */
         .team-section {
             margin: 48px 0;
-            text-align: center;
         }
 
         .team-section h2 {
-            font-size: 2rem;
-            margin-bottom: 32px;
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 40px;
             color: var(--charcoal);
         }
 
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 32px;
         }
 
         .team-member {
             text-align: center;
+            background: white;
+            border-radius: 28px;
+            padding: 32px 24px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
         }
 
         .member-avatar {
             width: 120px;
             height: 120px;
-            background: linear-gradient(135deg, var(--primary-blue), #5fa3c2);
+            background: linear-gradient(135deg, var(--accent-teal), var(--accent-purple));
             border-radius: 50%;
-            margin: 0 auto 16px;
+            margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -290,8 +296,20 @@
             color: white;
         }
 
+        .team-member h3 {
+            font-size: 1.2rem;
+            margin-bottom: 6px;
+            color: var(--charcoal);
+        }
+
+        .team-member p {
+            color: var(--cool-gray);
+            font-size: 0.85rem;
+        }
+
+        /* ========== CTA-БЛОК ========== */
         .cta-section {
-            background: linear-gradient(135deg, var(--primary-blue), #3b8db0);
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal));
             border-radius: 32px;
             padding: 60px 40px;
             text-align: center;
@@ -307,30 +325,75 @@
         .cta-section p {
             margin-bottom: 32px;
             opacity: 0.95;
+            font-size: 1.1rem;
         }
 
         .btn-white {
             background: white;
-            color: var(--primary-blue);
+            color: var(--accent-purple);
             padding: 14px 32px;
             border-radius: 48px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             transition: var(--transition);
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .btn-white:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         }
 
+        /* ========== ПОДВАЛ ========== */
         footer {
             text-align: center;
-            padding: 30px 0;
+            padding: 40px 0;
             border-top: 1px solid rgba(44, 125, 160, 0.2);
             color: var(--cool-gray);
-            margin-top: 40px;
+            font-size: 0.85rem;
+        }
+
+        /* ========== ВЫПАДАЮЩЕЕ МЕНЮ ========== */
+        .user-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            min-width: 200px;
+            margin-top: 8px;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 16px;
+            text-decoration: none;
+            color: #2c3e44;
+            transition: background 0.2s;
+            border-bottom: 1px solid #eef2f7;
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover {
+            background: #f0f6ff;
+        }
+
+        .dropdown-menu .logout {
+            color: var(--accent-coral);
         }
 
         @media (max-width: 768px) {
@@ -340,11 +403,23 @@
             .navbar {
                 flex-direction: column;
             }
-            .about-hero h1 {
+            .nav-links {
+                justify-content: center;
+            }
+            .page-header h1 {
                 font-size: 2rem;
             }
             .about-content {
                 padding: 24px;
+            }
+            .stats {
+                flex-direction: column;
+            }
+            .cta-section {
+                padding: 40px 24px;
+            }
+            .cta-section h2 {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -355,16 +430,17 @@
     <div class="container">
         <div class="navbar">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="BroSky" style="height: 60px; width: auto;">
+                <img src="images/logo.png" alt="BroSky" style="height: 40px;">
                 <span>BroSky</span>
             </a>
             <div class="nav-links">
                 <a href="index.html">Главная</a>
                 <a href="catalog.html">Жильё</a>
                 <a href="favorites.html">Избранное</a>
-                <a href="about.html" class="active">О нас</a>
+                <a href="my-bookings.html">Мои брони</a>
                 <a href="contact.html">Контакты</a>
-                <a href="login.html" class="btn-outline-light"><i class="far fa-user"></i> Войти</a>
+                <a href="admin-bookings.html" id="adminLink" style="display: none;"><i class="fas fa-chart-line"></i> Админка</a>
+                <div id="userMenu"></div>
             </div>
         </div>
     </div>
@@ -372,14 +448,14 @@
 
 <main>
     <div class="container">
-        <div class="about-hero">
-            <h1>О сервисе BroSky</h1>
+        <div class="page-header">
+            <h1><i class="fas fa-info-circle"></i> О сервисе BroSky</h1>
             <p>Мы создаём комфортное пространство для путешественников и владельцев жилья</p>
         </div>
 
         <div class="about-content">
             <p class="about-text">
-                <strong>BroSky</strong> — это современная платформа для аренды жилья, основанная в 2026 году.
+                <strong>BroSky</strong> — это современная платформа для аренды жилья, основанная в 2025 году.
                 Мы объединяем владельцев уютных квартир, домов и лофтов с теми, кто ищет идеальное место
                 для временного проживания. Наша команда верит, что поиск жилья должен быть простым,
                 быстрым и приятным.
@@ -389,7 +465,13 @@
                 в качестве предлагаемого жилья. Мы предоставляем безопасную систему бронирования,
                 круглосуточную поддержку и гарантию возврата средств в случае непредвиденных ситуаций.
             </p>
+            <p class="about-text">
+                За время работы мы помогли более <strong>15 000 гостей</strong> найти идеальное жильё,
+                а владельцам — получить дополнительный доход от сдачи недвижимости. Мы постоянно
+                развиваемся и добавляем новые функции, чтобы сделать ваш опыт максимально комфортным.
+            </p>
 
+            <!-- Статистика -->
             <div class="stats">
                 <div class="stat-item">
                     <div class="stat-number">500+</div>
@@ -410,62 +492,145 @@
             </div>
         </div>
 
+        <!-- Преимущества -->
         <div class="features-grid">
             <div class="feature">
                 <i class="fas fa-shield-alt"></i>
                 <h3>Безопасность</h3>
-                <p>Проверенные объявления и защита платежей</p>
+                <p>Проверенные объявления и защита платежей. Каждое жильё проходит ручную модерацию.</p>
             </div>
             <div class="feature">
                 <i class="fas fa-headset"></i>
                 <h3>Поддержка 24/7</h3>
-                <p>Поможем в любое время суток</p>
+                <p>Наша служба поддержки готова помочь вам в любое время суток. Мы на связи всегда!</p>
             </div>
             <div class="feature">
                 <i class="fas fa-undo-alt"></i>
                 <h3>Возврат средств</h3>
-                <p>Гарантия возврата при отмене</p>
+                <p>Гарантия возврата при отмене бронирования. Ваши деньги в безопасности.</p>
             </div>
             <div class="feature">
                 <i class="fas fa-map-marked-alt"></i>
                 <h3>Широкий выбор</h3>
-                <p>Жильё в 50+ городах России</p>
+                <p>Жильё в 50+ городах России. От уютных студий до роскошных вилл.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-clock"></i>
+                <h3>Мгновенное бронирование</h3>
+                <p>Бронируйте жильё в несколько кликов. Без лишних звонков и согласований.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-credit-card"></i>
+                <h3>Разные способы оплаты</h3>
+                <p>Оплачивайте бронирование картой, онлайн-кошельком или наличными при заселении.</p>
             </div>
         </div>
 
+        <!-- Команда -->
         <div class="team-section">
             <h2><i class="fas fa-users"></i> Наша команда</h2>
             <div class="team-grid">
                 <div class="team-member">
-                    <div class="member-avatar"><i class="fas fa-user"></i></div>
+                    <div class="member-avatar"><i class="fas fa-user-tie"></i></div>
                     <h3>Анна Петрова</h3>
                     <p>Основатель и CEO</p>
                 </div>
                 <div class="team-member">
-                    <div class="member-avatar"><i class="fas fa-user"></i></div>
+                    <div class="member-avatar"><i class="fas fa-chart-line"></i></div>
                     <h3>Михаил Соколов</h3>
                     <p>Руководитель отдела качества</p>
                 </div>
                 <div class="team-member">
-                    <div class="member-avatar"><i class="fas fa-user"></i></div>
+                    <div class="member-avatar"><i class="fas fa-headset"></i></div>
                     <h3>Елена Волкова</h3>
                     <p>Клиентский сервис</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar"><i class="fas fa-code"></i></div>
+                    <h3>Дмитрий Морозов</h3>
+                    <p>Технический директор</p>
                 </div>
             </div>
         </div>
 
+        <!-- CTA-блок -->
         <div class="cta-section">
             <h2>Готовы найти своё идеальное жильё?</h2>
             <p>Присоединяйтесь к сообществу BroSky уже сегодня</p>
-            <a href="catalog.html" class="btn-white"><i class="fas fa-search"></i> Начать поиск</a>
+            <a href="catalog.html" class="btn-white">
+                <i class="fas fa-search"></i> Начать поиск
+            </a>
         </div>
     </div>
 </main>
 
 <footer>
     <div class="container">
-        <p><i class="fas fa-dove"></i> BroSky — аренда без хлопот. © 2026 | Ваше комфортное пространство</p>
+        <p><i class="fas fa-dove"></i> BroSky — аренда без хлопот. © 2025 | Ваше комфортное пространство</p>
     </div>
 </footer>
+
+<script>
+    // ========== ПОЛЬЗОВАТЕЛЬ ==========
+    function getCurrentUser() {
+        try {
+            const user = localStorage.getItem('brosky_current_user');
+            return user ? JSON.parse(user) : null;
+        } catch(e) { return null; }
+    }
+
+    function logout() {
+        localStorage.removeItem('brosky_current_user');
+        window.location.href = 'index.html';
+    }
+
+    function toggleDropdown() {
+        const d = document.getElementById('dropdownMenu');
+        if (d) d.style.display = d.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function updateUserMenu() {
+        const userMenu = document.getElementById('userMenu');
+        if (!userMenu) return;
+
+        const currentUser = getCurrentUser();
+
+        if (currentUser) {
+            userMenu.innerHTML = `
+                <div class="user-dropdown">
+                    <button class="btn-outline-light" onclick="toggleDropdown()">
+                        <i class="fas fa-user-circle"></i> ${currentUser.name}
+                        <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
+                    </button>
+                    <div class="dropdown-menu" id="dropdownMenu" style="display: none;">
+                        <a href="my-bookings.html"><i class="fas fa-calendar-check"></i> Мои брони</a>
+                        <a href="favorites.html"><i class="fas fa-heart"></i> Избранное</a>
+                        <a href="#" onclick="logout()" class="logout"><i class="fas fa-sign-out-alt"></i> Выйти</a>
+                    </div>
+                </div>
+            `;
+        } else {
+            userMenu.innerHTML = `<button class="btn-outline-light" onclick="window.location.href='login.html'"><i class="far fa-user"></i> Войти</button>`;
+        }
+    }
+
+    function checkAndShowAdminLink() {
+        const adminLink = document.getElementById('adminLink');
+        const currentUser = getCurrentUser();
+        if (adminLink && currentUser && currentUser.email === 'admin@brosky.ru') {
+            adminLink.style.display = 'inline-block';
+        } else if (adminLink) {
+            adminLink.style.display = 'none';
+        }
+    }
+
+    document.addEventListener('click', function(e) {
+        const d = document.getElementById('dropdownMenu');
+        if (d && !e.target.closest('.user-dropdown')) d.style.display = 'none';
+    });
+
+    updateUserMenu();
+    checkAndShowAdminLink();
+</script>
 </body>
 </html>

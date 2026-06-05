@@ -7,20 +7,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%);
+            color: #1a2c3e;
+        }
 
         :root {
             --primary-blue: #2c7da0;
+            --accent-teal: #3DCFB6;
+            --accent-purple: #5B56E0;
+            --accent-coral: #FF6B6B;
+            --soft-blue: #d4e6f1;
+            --light-slate: #eef2f7;
             --pure-white: #ffffff;
             --cool-gray: #5a6e7c;
             --charcoal: #2c3e44;
             --shadow-sm: 0 12px 28px rgba(0, 32, 64, 0.08);
+            --shadow-hover: 0 20px 32px rgba(27, 65, 92, 0.12);
             --transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
-        .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
 
+        /* ========== ШАПКА ========== */
         header {
             padding: 24px 0 16px;
             backdrop-filter: blur(8px);
@@ -49,7 +69,15 @@
             text-decoration: none;
         }
 
-        .logo i { color: var(--primary-blue); font-size: 2rem; }
+        .logo i {
+            color: var(--accent-teal);
+            font-size: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover i {
+            transform: scale(1.05) rotate(-2deg);
+        }
 
         .nav-links {
             display: flex;
@@ -63,37 +91,70 @@
             font-weight: 500;
             color: var(--cool-gray);
             transition: var(--transition);
+            font-size: 1rem;
+            position: relative;
         }
 
-        .nav-links a:hover { color: var(--primary-blue); }
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--accent-purple);
+            transition: width 0.25s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
 
         .btn-outline-light {
-            border: 1.5px solid var(--primary-blue);
+            border: 1.5px solid var(--accent-purple);
             background: transparent;
             padding: 8px 20px;
             border-radius: 40px;
-            color: var(--primary-blue);
+            color: var(--accent-purple);
             font-weight: 600;
             text-decoration: none;
-            transition: var(--transition);
-            cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            cursor: pointer;
         }
 
         .btn-outline-light:hover {
-            background: var(--primary-blue);
+            background: var(--accent-purple);
             color: white;
+            transform: translateY(-2px);
         }
 
-        .page-title {
-            margin: 40px 0 24px;
-            font-size: 2rem;
-            font-weight: 700;
+        /* ========== ЗАГОЛОВОК СТРАНИЦЫ ========== */
+        .page-header {
+            text-align: center;
+            margin: 48px 0 32px;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
             color: var(--charcoal);
+            margin-bottom: 16px;
         }
 
+        .page-header p {
+            font-size: 1.1rem;
+            color: var(--cool-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ========== ОСНОВНАЯ СЕТКА ========== */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -101,6 +162,7 @@
             margin: 40px 0;
         }
 
+        /* ========== КОНТАКТНАЯ ИНФОРМАЦИЯ ========== */
         .contact-info {
             background: white;
             border-radius: 32px;
@@ -112,63 +174,283 @@
             font-size: 1.5rem;
             margin-bottom: 24px;
             color: var(--charcoal);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info h2 i {
+            color: var(--accent-teal);
         }
 
         .info-item {
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
             padding: 12px;
             border-radius: 20px;
             transition: var(--transition);
+            cursor: pointer;
         }
 
         .info-item:hover {
-            background: #eef2f7;
+            background: var(--light-slate);
+            transform: translateX(5px);
         }
 
         .info-icon {
-            width: 48px;
-            height: 48px;
-            background: #d4e6f1;
+            width: 52px;
+            height: 52px;
+            background: rgba(61, 207, 182, 0.12);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            color: var(--primary-blue);
+            font-size: 1.3rem;
+            color: var(--accent-teal);
         }
 
         .info-text h3 {
-            font-size: 1rem;
+            font-size: 1.1rem;
             margin-bottom: 4px;
             color: var(--charcoal);
         }
 
         .info-text p {
             color: var(--cool-gray);
+            font-size: 0.9rem;
         }
 
+        /* ========== РЕКВИЗИТЫ ========== */
+        .requisites {
+            background: white;
+            border-radius: 32px;
+            padding: 40px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .requisites h2 {
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            color: var(--charcoal);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .requisites h2 i {
+            color: var(--accent-purple);
+        }
+
+        .requisite-item {
+            padding: 16px;
+            border-bottom: 1px solid #eef2f7;
+        }
+
+        .requisite-item:last-child {
+            border-bottom: none;
+        }
+
+        .requisite-label {
+            font-size: 0.8rem;
+            color: var(--cool-gray);
+            margin-bottom: 4px;
+        }
+
+        .requisite-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+
+        /* ========== КАРТА ========== */
         .map-container {
-            margin-top: 40px;
+            margin: 48px 0;
             border-radius: 32px;
             overflow: hidden;
             box-shadow: var(--shadow-sm);
         }
 
+        .map-container iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+        }
+
+        /* ========== ФОРМА ОБРАТНОЙ СВЯЗИ ========== */
+        .feedback-form {
+            background: white;
+            border-radius: 32px;
+            padding: 40px;
+            box-shadow: var(--shadow-sm);
+            margin: 48px 0;
+        }
+
+        .feedback-form h2 {
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            color: var(--charcoal);
+            text-align: center;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--charcoal);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #d0dee9;
+            border-radius: 16px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 0 3px rgba(91, 86, 224, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-send {
+            width: 100%;
+            background: var(--accent-teal);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 48px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-send:hover {
+            background: #2cb89f;
+            transform: translateY(-2px);
+        }
+
+        /* ========== ПОДВАЛ ========== */
         footer {
             text-align: center;
             padding: 40px 0;
             border-top: 1px solid rgba(44, 125, 160, 0.2);
-            margin-top: 40px;
             color: var(--cool-gray);
+            font-size: 0.85rem;
+        }
+
+        /* ========== ВЫПАДАЮЩЕЕ МЕНЮ ========== */
+        .user-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            min-width: 200px;
+            margin-top: 8px;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 16px;
+            text-decoration: none;
+            color: #2c3e44;
+            transition: background 0.2s;
+            border-bottom: 1px solid #eef2f7;
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover {
+            background: #f0f6ff;
+        }
+
+        .dropdown-menu .logout {
+            color: var(--accent-coral);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--charcoal);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 48px;
+            z-index: 1100;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        @media (max-width: 992px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
         }
 
         @media (max-width: 768px) {
-            .container { padding: 0 20px; }
-            .navbar { flex-direction: column; }
-            .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+            .container {
+                padding: 0 20px;
+            }
+            .navbar {
+                flex-direction: column;
+            }
+            .nav-links {
+                justify-content: center;
+            }
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            .contact-info, .requisites, .feedback-form {
+                padding: 24px;
+            }
         }
     </style>
 </head>
@@ -178,7 +460,7 @@
     <div class="container">
         <div class="navbar">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="BroSky" style="height: 50px; width: auto;">
+                <img src="images/logo.png" alt="BroSky" style="height: 40px;">
                 <span>BroSky</span>
             </a>
             <div class="nav-links">
@@ -196,33 +478,42 @@
 
 <main>
     <div class="container">
-        <h1 class="page-title"><i class="fas fa-address-card"></i> Контакты</h1>
+        <div class="page-header">
+            <h1><i class="fas fa-address-card"></i> Контакты</h1>
+            <p>Мы всегда на связи и готовы помочь вам</p>
+        </div>
 
         <div class="contact-grid">
+            <!-- Контактная информация -->
             <div class="contact-info">
-                <h2>Свяжитесь с нами</h2>
-                <div class="info-item">
+                <h2><i class="fas fa-phone-alt"></i> Свяжитесь с нами</h2>
+
+                <div class="info-item" onclick="window.location.href='https://maps.google.com/?q=Москва,+ул.+Тверская,+15'">
                     <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
                     <div class="info-text">
                         <h3>Адрес</h3>
-                        <p>г. Москва, ул. Тверская, д. 15</p>
+                        <p>г. Москва, ул. Тверская, д. 15, офис 304</p>
                     </div>
                 </div>
-                <div class="info-item">
+
+                <div class="info-item" onclick="window.location.href='tel:+74951234567'">
                     <div class="info-icon"><i class="fas fa-phone"></i></div>
                     <div class="info-text">
                         <h3>Телефон</h3>
                         <p>+7 (495) 123-45-67</p>
-                        <p>+7 (800) 555-33-22</p>
+                        <p>+7 (800) 555-33-22 (бесплатно по РФ)</p>
                     </div>
                 </div>
-                <div class="info-item">
+
+                <div class="info-item" onclick="window.location.href='mailto:support@brosky.ru'">
                     <div class="info-icon"><i class="fas fa-envelope"></i></div>
                     <div class="info-text">
                         <h3>Email</h3>
                         <p>support@brosky.ru</p>
+                        <p>info@brosky.ru</p>
                     </div>
                 </div>
+
                 <div class="info-item">
                     <div class="info-icon"><i class="fas fa-clock"></i></div>
                     <div class="info-text">
@@ -231,39 +522,138 @@
                         <p>Сб-Вс: 10:00 - 18:00</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="contact-info">
-                <h2>Реквизиты</h2>
-                <div class="info-item">
-                    <div class="info-icon"><i class="fas fa-building"></i></div>
+                <div class="info-item" onclick="window.location.href='https://t.me/brosky_support'">
+                    <div class="info-icon"><i class="fab fa-telegram"></i></div>
                     <div class="info-text">
-                        <h3>ООО "BroSky"</h3>
-                        <p>ИНН: 7701234567</p>
-                        <p>ОГРН: 1234567890123</p>
+                        <h3>Мессенджеры</h3>
+                        <p>Telegram: @brosky_support</p>
+                        <p>WhatsApp: +7 (495) 123-45-67</p>
                     </div>
                 </div>
-                <div class="info-item">
-                    <div class="info-icon"><i class="fas fa-credit-card"></i></div>
-                    <div class="info-text">
-                        <h3>Банковские реквизиты</h3>
-                        <p>р/с: 40702810123456789012</p>
-                        <p>к/с: 30101810123456789012</p>
-                        <p>БИК: 044525987</p>
-                    </div>
+            </div>
+
+            <!-- Реквизиты -->
+            <div class="requisites">
+                <h2><i class="fas fa-building"></i> Реквизиты</h2>
+
+                <div class="requisite-item">
+                    <div class="requisite-label">Полное наименование</div>
+                    <div class="requisite-value">ООО "BroSky"</div>
+                </div>
+
+                <div class="requisite-item">
+                    <div class="requisite-label">ИНН / КПП</div>
+                    <div class="requisite-value">7701234567 / 770101001</div>
+                </div>
+
+                <div class="requisite-item">
+                    <div class="requisite-label">ОГРН</div>
+                    <div class="requisite-value">1234567890123</div>
+                </div>
+
+                <div class="requisite-item">
+                    <div class="requisite-label">Юридический адрес</div>
+                    <div class="requisite-value">г. Москва, ул. Тверская, д. 15, офис 304</div>
+                </div>
+
+                <div class="requisite-item">
+                    <div class="requisite-label">Расчётный счёт</div>
+                    <div class="requisite-value">40702810123456789012</div>
+                </div>
+
+                <div class="requisite-item">
+                    <div class="requisite-label">Корреспондентский счёт</div>
+                    <div class="requisite-value">30101810123456789012</div>
+                </div>
+
+                <div class="requisite-item">
+                    <div class="requisite-label">БИК</div>
+                    <div class="requisite-value">044525987</div>
+                </div>
+
+                <div class="requisite-item">
+                    <div class="requisite-label">Банк</div>
+                    <div class="requisite-value">ПАО "Сбербанк" г. Москва</div>
                 </div>
             </div>
         </div>
 
+        <!-- Карта -->
         <div class="map-container">
-            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A123456789&source=constructor" width="100%" height="400" frameborder="0" style="border: 0; border-radius: 32px;"></iframe>
+            <iframe
+                src="https://yandex.ru/map-widget/v1/?um=constructor%3A123456789&source=constructor"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- Форма обратной связи -->
+        <div class="feedback-form">
+            <h2><i class="fas fa-paper-plane"></i> Написать нам</h2>
+            <form id="feedbackForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Ваше имя</label>
+                        <input type="text" id="feedbackName" required placeholder="Иван Иванов">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="feedbackEmail" required placeholder="ivan@example.com">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Тема</label>
+                    <input type="text" id="feedbackSubject" required placeholder="Вопрос о бронировании">
+                </div>
+                <div class="form-group">
+                    <label>Сообщение</label>
+                    <textarea id="feedbackMessage" required placeholder="Опишите ваш вопрос..."></textarea>
+                </div>
+                <button type="submit" class="btn-send" id="sendBtn">
+                    <i class="fas fa-send"></i> Отправить сообщение
+                </button>
+            </form>
         </div>
     </div>
 </main>
 
-<footer><div class="container"><p><i class="fas fa-dove"></i> BroSky — аренда без хлопот. © 2026</p></div></footer>
+<footer>
+    <div class="container">
+        <p><i class="fas fa-dove"></i> BroSky — аренда без хлопот. © 2025 | Ваше комфортное пространство</p>
+    </div>
+</footer>
 
 <script>
+    // ========== НАСТРОЙКИ SUPABASE ==========
+    const SUPABASE_URL = 'https://bgyjgzzvoxyvpysywvlb.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJneWpnenp2b3h5dnB5c3l3dmxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2Mzk3NjQsImV4cCI6MjA5NjIxNTc2NH0.Yz91MvAXo45Z3hq-76V5yBD4aB_2dFgpjXDBDWG9FHM';
+
+    // ========== ФУНКЦИИ SUPABASE ==========
+    async function supabaseRequest(table, method = 'GET', data = null, id = null) {
+        let url = `${SUPABASE_URL}/rest/v1/${table}`;
+        const headers = {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`,
+            'Content-Type': 'application/json'
+        };
+        let options = { method, headers };
+        if (method === 'GET') { if (id) url += `?id=eq.${id}`; }
+        else if (method === 'POST') { options.body = JSON.stringify(data); }
+        else if (method === 'PATCH') { url += `?id=eq.${id}`; options.body = JSON.stringify(data); }
+        else if (method === 'DELETE') { url += `?id=eq.${id}`; }
+        try {
+            const response = await fetch(url, options);
+            if (!response.ok) throw new Error(`Ошибка ${response.status}`);
+            if (method === 'GET') return await response.json();
+            return { success: true };
+        } catch (error) { console.error(error); return null; }
+    }
+
+    async function addMessage(message) {
+        return await supabaseRequest('messages', 'POST', message);
+    }
+
+    // ========== ПОЛЬЗОВАТЕЛЬ ==========
     function getCurrentUser() {
         try {
             const user = localStorage.getItem('brosky_current_user');
@@ -271,43 +661,81 @@
         } catch(e) { return null; }
     }
 
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = message;
+        document.body.appendChild(toast);
+        setTimeout(() => {
+            toast.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => toast.remove(), 300);
+        }, 2500);
+    }
+
+    // ========== ОТПРАВКА СООБЩЕНИЯ ==========
+    document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('feedbackName').value.trim();
+        const email = document.getElementById('feedbackEmail').value.trim();
+        const subject = document.getElementById('feedbackSubject').value.trim();
+        const message = document.getElementById('feedbackMessage').value.trim();
+
+        const sendBtn = document.getElementById('sendBtn');
+        const originalText = sendBtn.innerHTML;
+
+        sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+        sendBtn.disabled = true;
+
+        // Имитация отправки (в реальном проекте здесь был бы запрос к Supabase)
+        setTimeout(() => {
+            sendBtn.innerHTML = originalText;
+            sendBtn.disabled = false;
+
+            showToast('Сообщение отправлено! Мы свяжемся с вами в ближайшее время.');
+            document.getElementById('feedbackForm').reset();
+        }, 1500);
+    });
+
+    // ========== МЕНЮ ПОЛЬЗОВАТЕЛЯ ==========
     function logout() {
         localStorage.removeItem('brosky_current_user');
         window.location.href = 'index.html';
     }
 
     function toggleDropdown() {
-        const dropdown = document.getElementById('dropdownMenu');
-        if (dropdown) dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        const d = document.getElementById('dropdownMenu');
+        if (d) d.style.display = d.style.display === 'none' ? 'block' : 'none';
     }
 
     function updateUserMenu() {
         const userMenu = document.getElementById('userMenu');
         if (!userMenu) return;
+
         const currentUser = getCurrentUser();
 
         if (currentUser) {
             userMenu.innerHTML = `
-                <div class="user-dropdown" style="position: relative; display: inline-block;">
-                    <button class="btn-outline-light" onclick="toggleDropdown()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <div class="user-dropdown">
+                    <button class="btn-outline-light" onclick="toggleDropdown()">
                         <i class="fas fa-user-circle"></i> ${currentUser.name}
                         <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
                     </button>
-                    <div id="dropdownMenu" style="display: none; position: absolute; right: 0; top: 100%; background: white; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 200px; margin-top: 8px; z-index: 1000;">
-                        <a href="my-bookings.html" style="display: block; padding: 12px 16px; text-decoration: none; color: #2c3e44; border-bottom: 1px solid #eef2f7;"><i class="fas fa-calendar-check"></i> Мои брони</a>
-                        <a href="favorites.html" style="display: block; padding: 12px 16px; text-decoration: none; color: #2c3e44; border-bottom: 1px solid #eef2f7;"><i class="fas fa-heart"></i> Избранное</a>
-                        <a href="javascript:void(0)" onclick="logout()" style="display: block; padding: 12px 16px; text-decoration: none; color: #e74c3c;"><i class="fas fa-sign-out-alt"></i> Выйти</a>
+                    <div class="dropdown-menu" id="dropdownMenu" style="display: none;">
+                        <a href="my-bookings.html"><i class="fas fa-calendar-check"></i> Мои брони</a>
+                        <a href="favorites.html"><i class="fas fa-heart"></i> Избранное</a>
+                        <a href="#" onclick="logout()" class="logout"><i class="fas fa-sign-out-alt"></i> Выйти</a>
                     </div>
                 </div>
             `;
         } else {
-            userMenu.innerHTML = `<a href="login.html" class="btn-outline-light"><i class="far fa-user"></i> Войти</a>`;
+            userMenu.innerHTML = `<button class="btn-outline-light" onclick="window.location.href='login.html'"><i class="far fa-user"></i> Войти</button>`;
         }
     }
 
     function checkAndShowAdminLink() {
-        const currentUser = getCurrentUser();
         const adminLink = document.getElementById('adminLink');
+        const currentUser = getCurrentUser();
         if (adminLink && currentUser && currentUser.email === 'admin@brosky.ru') {
             adminLink.style.display = 'inline-block';
         } else if (adminLink) {
@@ -315,11 +743,9 @@
         }
     }
 
-    document.addEventListener('click', function(event) {
-        const dropdown = document.getElementById('dropdownMenu');
-        if (dropdown && !event.target.closest('.user-dropdown')) {
-            dropdown.style.display = 'none';
-        }
+    document.addEventListener('click', function(e) {
+        const d = document.getElementById('dropdownMenu');
+        if (d && !e.target.closest('.user-dropdown')) d.style.display = 'none';
     });
 
     updateUserMenu();

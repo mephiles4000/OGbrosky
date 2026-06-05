@@ -3,15 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Каталог | BroSky</title>
+    <title>Каталог жилья | BroSky</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%);
+            color: #1a2c3e;
+            scroll-behavior: smooth;
+        }
 
         :root {
             --primary-blue: #2c7da0;
+            --accent-teal: #3DCFB6;
+            --accent-purple: #5B56E0;
+            --accent-coral: #FF6B6B;
+            --soft-blue: #d4e6f1;
+            --light-slate: #eef2f7;
             --pure-white: #ffffff;
             --cool-gray: #5a6e7c;
             --charcoal: #2c3e44;
@@ -20,8 +35,13 @@
             --transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
-        .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
 
+        /* ========== ШАПКА ========== */
         header {
             padding: 24px 0 16px;
             backdrop-filter: blur(8px);
@@ -48,9 +68,18 @@
             font-weight: 700;
             color: var(--charcoal);
             text-decoration: none;
+            transition: var(--transition);
         }
 
-        .logo i { color: var(--primary-blue); font-size: 2rem; }
+        .logo i {
+            color: var(--accent-teal);
+            font-size: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover i {
+            transform: scale(1.05) rotate(-2deg);
+        }
 
         .nav-links {
             display: flex;
@@ -64,48 +93,105 @@
             font-weight: 500;
             color: var(--cool-gray);
             transition: var(--transition);
+            font-size: 1rem;
+            position: relative;
         }
 
-        .nav-links a:hover { color: var(--primary-blue); }
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--accent-purple);
+            transition: width 0.25s;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
 
         .btn-outline-light {
-            border: 1.5px solid var(--primary-blue);
+            border: 1.5px solid var(--accent-purple);
             background: transparent;
             padding: 8px 20px;
             border-radius: 40px;
-            color: var(--primary-blue);
+            color: var(--accent-purple);
             font-weight: 600;
-            text-decoration: none;
             transition: var(--transition);
-            cursor: pointer;
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            cursor: pointer;
         }
 
         .btn-outline-light:hover {
-            background: var(--primary-blue);
+            background: var(--accent-purple);
             color: white;
+            transform: translateY(-2px);
         }
 
-        .filters {
+        /* ========== ЗАГОЛОВОК СТРАНИЦЫ ========== */
+        .page-header {
+            text-align: center;
+            margin: 48px 0 32px;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--charcoal);
+            margin-bottom: 16px;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: var(--cool-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ========== ФИЛЬТРЫ ========== */
+        .filters-section {
             background: white;
-            border-radius: 24px;
-            padding: 24px;
-            margin: 32px 0;
+            border-radius: 28px;
+            padding: 28px 32px;
+            margin-bottom: 48px;
             box-shadow: var(--shadow-sm);
+        }
+
+        .filters-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            font-weight: 600;
+            color: var(--charcoal);
+            font-size: 1.1rem;
+        }
+
+        .filters-title i {
+            color: var(--accent-purple);
+            font-size: 1.3rem;
         }
 
         .filters-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 24px;
             align-items: flex-end;
         }
 
         .filter-group {
             flex: 1;
-            min-width: 150px;
+            min-width: 180px;
         }
 
         .filter-group label {
@@ -116,29 +202,86 @@
             color: var(--charcoal);
         }
 
-        .filter-group select, .filter-group input {
+        .filter-group select,
+        .filter-group input {
             width: 100%;
-            padding: 10px 14px;
+            padding: 12px 16px;
             border: 1px solid #d0dee9;
             border-radius: 16px;
             font-family: inherit;
+            font-size: 0.95rem;
+            background: white;
+            transition: var(--transition);
+        }
+
+        .filter-group select:focus,
+        .filter-group input:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 0 3px rgba(91, 86, 224, 0.1);
         }
 
         .btn-filter {
-            background: var(--primary-blue);
+            background: var(--accent-purple);
             color: white;
             border: none;
-            padding: 10px 24px;
-            border-radius: 20px;
+            padding: 12px 28px;
+            border-radius: 40px;
             cursor: pointer;
             font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-filter:hover {
+            background: #4a45c4;
+            transform: translateY(-2px);
+        }
+
+        .btn-reset {
+            background: transparent;
+            border: 1px solid #d0dee9;
+            color: var(--cool-gray);
+            padding: 12px 28px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-reset:hover {
+            border-color: var(--accent-coral);
+            color: var(--accent-coral);
+        }
+
+        /* ========== СЕТКА ОБЪЯВЛЕНИЙ ========== */
+        .listings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .listings-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--charcoal);
+        }
+
+        .listings-count {
+            color: var(--cool-gray);
+            font-size: 0.9rem;
         }
 
         .listings-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 32px;
-            margin: 40px 0;
+            margin-bottom: 60px;
         }
 
         .listing-card {
@@ -151,6 +294,7 @@
             text-decoration: none;
             display: block;
             color: inherit;
+            position: relative;
         }
 
         .listing-card:hover {
@@ -176,6 +320,19 @@
             transform: scale(1.05);
         }
 
+        .card-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: var(--accent-teal);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            z-index: 5;
+        }
+
         .favorite-btn {
             position: absolute;
             top: 16px;
@@ -190,53 +347,277 @@
             cursor: pointer;
             transition: var(--transition);
             border: none;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             z-index: 10;
         }
 
-        .favorite-btn i { font-size: 1.2rem; }
-        .favorite-btn.active { background: #ff6b6b; }
-        .favorite-btn.active i { color: white; }
-        .favorite-btn:not(.active) i { color: #ff6b6b; }
+        .favorite-btn i {
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
 
-        .card-content { padding: 20px; }
-        .card-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: var(--charcoal); }
-        .card-location { color: var(--cool-gray); font-size: 0.85rem; margin-bottom: 12px; }
-        .card-price { font-size: 1.5rem; font-weight: 800; color: var(--primary-blue); margin: 12px 0; }
-        .card-details { display: flex; gap: 16px; color: var(--cool-gray); font-size: 0.85rem; }
+        .favorite-btn.active {
+            background: var(--accent-coral);
+        }
 
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            border-top: 1px solid rgba(44, 125, 160, 0.2);
-            margin-top: 40px;
+        .favorite-btn.active i {
+            color: white;
+        }
+
+        .favorite-btn:not(.active) i {
+            color: var(--accent-coral);
+        }
+
+        .favorite-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--charcoal);
+            line-height: 1.3;
+        }
+
+        .card-location {
+            color: var(--cool-gray);
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-location i {
+            font-size: 0.75rem;
+        }
+
+        .card-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .stars {
+            color: #f5a623;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .reviews {
+            color: var(--cool-gray);
+            font-size: 0.7rem;
+        }
+
+        .card-price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin: 12px 0;
+        }
+
+        .card-price small {
+            font-size: 0.8rem;
+            font-weight: 400;
             color: var(--cool-gray);
         }
 
+        .card-details {
+            display: flex;
+            gap: 16px;
+            color: var(--cool-gray);
+            font-size: 0.8rem;
+            padding-top: 12px;
+            border-top: 1px solid #eef2f7;
+        }
+
+        .card-details span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            background: white;
+            border-radius: 28px;
+            margin: 40px 0;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--charcoal);
+        }
+
+        .empty-state p {
+            color: var(--cool-gray);
+            margin-bottom: 24px;
+        }
+
+        /* ========== ПАГИНАЦИЯ ========== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 40px 0 60px;
+            flex-wrap: wrap;
+        }
+
+        .pagination button {
+            background: white;
+            border: 1px solid #d0dee9;
+            padding: 10px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .pagination button:hover {
+            border-color: var(--accent-purple);
+            color: var(--accent-purple);
+        }
+
+        .pagination button.active {
+            background: var(--accent-purple);
+            color: white;
+            border-color: var(--accent-purple);
+        }
+
+        /* ========== ПОДВАЛ ========== */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(44, 125, 160, 0.2);
+            color: var(--cool-gray);
+            font-size: 0.85rem;
+        }
+
+        /* ========== ВЫПАДАЮЩЕЕ МЕНЮ ПОЛЬЗОВАТЕЛЯ ========== */
+        .user-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            min-width: 200px;
+            margin-top: 8px;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 16px;
+            text-decoration: none;
+            color: #2c3e44;
+            transition: background 0.2s;
+            border-bottom: 1px solid #eef2f7;
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover {
+            background: #f0f6ff;
+        }
+
+        .dropdown-menu .logout {
+            color: var(--accent-coral);
+        }
+
+        .dropdown-menu .logout:hover {
+            background: #fdeaea;
+        }
+
+        /* ========== УВЕДОМЛЕНИЯ ========== */
         .toast {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #2c3e44;
+            background: var(--charcoal);
             color: white;
             padding: 12px 24px;
             border-radius: 48px;
-            z-index: 1000;
+            z-index: 1100;
             animation: slideIn 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
+
         @keyframes slideOut {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        /* ========== АДАПТИВНОСТЬ ========== */
+        @media (max-width: 992px) {
+            .filters-grid {
+                flex-direction: column;
+            }
+            .filter-group {
+                width: 100%;
+            }
+            .btn-filter, .btn-reset {
+                width: 100%;
+                justify-content: center;
+            }
         }
 
         @media (max-width: 768px) {
-            .container { padding: 0 20px; }
-            .navbar { flex-direction: column; }
+            .container {
+                padding: 0 20px;
+            }
+            .navbar {
+                flex-direction: column;
+            }
+            .nav-links {
+                justify-content: center;
+            }
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            .listings-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -246,7 +627,7 @@
     <div class="container">
         <div class="navbar">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="BroSky" style="height: 50px; width: auto;">
+                <img src="images/logo.png" alt="BroSky" style="height: 40px;">
                 <span>BroSky</span>
             </a>
             <div class="nav-links">
@@ -264,159 +645,134 @@
 
 <main>
     <div class="container">
-        <h1 style="margin: 40px 0 20px; font-size: 2.5rem;">Найдите идеальное жильё</h1>
+        <!-- Заголовок страницы -->
+        <div class="page-header">
+            <h1>Найдите идеальное жильё</h1>
+            <p>Более 500+ объявлений по всей России. От уютных студий до роскошных вилл</p>
+        </div>
 
-        <div class="filters">
+        <!-- Фильтры -->
+        <div class="filters-section">
+            <div class="filters-title">
+                <i class="fas fa-sliders-h"></i>
+                <span>Фильтры поиска</span>
+            </div>
             <div class="filters-grid">
                 <div class="filter-group">
-                    <label>Тип жилья</label>
-                    <select id="typeFilter">
-                        <option value="all">Все</option>
-                        <option value="apartment">Квартира</option>
-                        <option value="house">Дом</option>
-                        <option value="loft">Loft</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>Город</label>
+                    <label>📍 Город</label>
                     <select id="cityFilter">
                         <option value="all">Все города</option>
                         <option value="Москва">Москва</option>
                         <option value="СПб">Санкт-Петербург</option>
                         <option value="Сочи">Сочи</option>
                         <option value="Казань">Казань</option>
+                        <option value="Екатеринбург">Екатеринбург</option>
+                        <option value="Новосибирск">Новосибирск</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label>Цена до (₽)</label>
+                    <label>🏠 Тип жилья</label>
+                    <select id="typeFilter">
+                        <option value="all">Любой тип</option>
+                        <option value="apartment">Квартира</option>
+                        <option value="house">Дом</option>
+                        <option value="loft">Loft</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>💰 Цена за сутки (₽)</label>
                     <input type="number" id="priceFilter" placeholder="Любая">
                 </div>
                 <div class="filter-group">
-                    <button class="btn-filter" onclick="applyFilters()">Применить фильтр</button>
+                    <label>🛏 Количество спален</label>
+                    <select id="bedsFilter">
+                        <option value="0">Любое</option>
+                        <option value="1">1 спальня</option>
+                        <option value="2">2 спальни</option>
+                        <option value="3">3+ спальни</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <button class="btn-filter" onclick="applyFilters()"><i class="fas fa-search"></i> Найти</button>
+                </div>
+                <div class="filter-group">
+                    <button class="btn-reset" onclick="resetFilters()"><i class="fas fa-undo-alt"></i> Сбросить</button>
                 </div>
             </div>
         </div>
 
-        <div class="listings-grid" id="listingsGrid"></div>
+        <!-- Результаты -->
+        <div class="listings-header">
+            <h2>🔥 Доступное жильё</h2>
+            <div class="listings-count" id="listingsCount">Загрузка...</div>
+        </div>
+
+        <div id="listingsGrid" class="listings-grid"></div>
+
+        <!-- Пагинация -->
+        <div id="pagination" class="pagination"></div>
     </div>
 </main>
 
 <footer>
-    <div class="container"><p><i class="fas fa-dove"></i> BroSky — аренда без хлопот. © 2026</p></div>
+    <div class="container">
+        <p><i class="fas fa-dove"></i> BroSky — аренда без хлопот. © 2025 | Ваше комфортное пространство</p>
+    </div>
 </footer>
 
 <script>
-    // ==================== НАСТРОЙКА ОБЪЯВЛЕНИЙ ====================
-    // ⬇️⬇️⬇️ ЗДЕСЬ ТЫ ВСТАВЛЯЕШЬ СВОИ ФОТО ⬇️⬇️⬇️
-    //
-    // 1. Положи свои фото в папку images (например: images/photo1.jpg)
-    // 2. В поле "image" укажи путь к фото: "images/photo1.jpg"
-    // 3. Меняй названия, цены, описания как хочешь
-    // =============================================================
+    // ========== НАСТРОЙКИ SUPABASE ==========
+    // ⬇️⬇️⬇️ ЗАМЕНИ НА СВОИ ДАННЫЕ ИЗ SUPABASE ⬇️⬇️⬇️
+    const SUPABASE_URL = 'https://bgyjgzzvoxyvpysywvlb.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJneWpnenp2b3h5dnB5c3l3dmxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2Mzk3NjQsImV4cCI6MjA5NjIxNTc2NH0.Yz91MvAXo45Z3hq-76V5yBD4aB_2dFgpjXDBDWG9FHM';
 
-    const MY_LISTINGS = [
-        {
-            id: 1,
-            title: "Светлая студия в центре",
-            city: "Москва",
-            type: "apartment",
-            address: "Москва, ул. Тверская",
-            price: 4500,
-            beds: 1,
-            baths: 1,
-            guests: 2,
-            description: "Просторная светлая студия в самом центре Москвы.",
-            amenities: ["Wi-Fi", "Кухня", "Телевизор", "Кондиционер"],
-            image: "images/apartments/apartment-2.jpg"   // ← СЮДА ПУТЬ К ТВОЕМУ ФОТО
-        },
-        {
-            id: 2,
-            title: "Дизайнерский лофт",
-            city: "СПб",
-            type: "loft",
-            address: "СПб, Невский пр.",
-            price: 6800,
-            beds: 2,
-            baths: 1,
-            guests: 4,
-            description: "Стильный лофт с высокими потолками.",
-            amenities: ["Wi-Fi", "Кухня", "Телевизор", "Кондиционер"],
-            image: "images/dloft/dloft-2.jpg"        // ← СЮДА ПУТЬ К ТВОЕМУ ФОТО
-        },
-        {
-            id: 3,
-            title: "Коттедж с садом",
-            city: "Сочи",
-            type: "house",
-            address: "Сочи, Адлерский р-н",
-            price: 12000,
-            beds: 3,
-            baths: 2,
-            guests: 6,
-            description: "Уютный коттедж с собственным садом.",
-            amenities: ["Wi-Fi", "Кухня", "Сауна", "Мангал"],
-            image: "images/kotteg/kotteg-2.jpg"       // ← СЮДА ПУТЬ К ТВОЕМУ ФОТО
-        },
-        {
-            id: 4,
-            title: "Уютная двушка",
-            city: "Казань",
-            type: "apartment",
-            address: "Казань, ул. Баумана",
-            price: 3200,
-            beds: 2,
-            baths: 1,
-            guests: 4,
-            description: "Уютная квартира в центре Казани.",
-            amenities: ["Wi-Fi", "Кухня", "Телевизор"],
-            image: "images/uyutnaya2/uyutnaya2-2.jpg"   // ← СЮДА ПУТЬ К ТВОЕМУ ФОТО
-        },
-        {
-            id: 5,
-            title: "Loft с панорамным видом",
-            city: "Москва",
-            type: "loft",
-            address: "Москва, Москва-Сити",
-            price: 9500,
-            beds: 2,
-            baths: 2,
-            guests: 4,
-            description: "Лофт с панорамным видом на город.",
-            amenities: ["Wi-Fi", "Умный дом", "Джакузи"],
-            image: "images/loftp/loftp-3.jpg"        // ← СЮДА ПУТЬ К ТВОЕМУ ФОТО
-        },
-        {
-            id: 6,
-            title: "Дом у моря",
-            city: "Сочи",
-            type: "house",
-            address: "Сочи, Лазаревское",
-            price: 15000,
-            beds: 4,
-            baths: 2,
-            guests: 8,
-            description: "Вилла с выходом к морю.",
-            amenities: ["Wi-Fi", "Камин", "Барбекю"],
-            image: "images/domumorya/domumorya-2.jpg"       // ← СЮДА ПУТЬ К ТВОЕМУ ФОТО
+    // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
+    let allListings = [];
+    let filteredListings = [];
+    let currentUser = null;
+    let currentPage = 1;
+    const itemsPerPage = 6;
+
+    // ========== ФУНКЦИИ РАБОТЫ С SUPABASE ==========
+    async function supabaseRequest(table, method = 'GET', data = null, id = null) {
+        let url = `${SUPABASE_URL}/rest/v1/${table}`;
+        const headers = {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`,
+            'Content-Type': 'application/json'
+        };
+
+        let options = { method, headers };
+
+        if (method === 'GET') {
+            if (id) url += `?id=eq.${id}`;
+            options.method = 'GET';
+        } else if (method === 'POST') {
+            options.body = JSON.stringify(data);
+        } else if (method === 'PATCH') {
+            url += `?id=eq.${id}`;
+            options.body = JSON.stringify(data);
+        } else if (method === 'DELETE') {
+            url += `?id=eq.${id}`;
         }
-    ];
 
-    // ==================== КОД НИЖЕ НЕ ТРОГАЙ ====================
-
-    // Получение объявлений из localStorage или использование MY_LISTINGS
-    function getMainListings() {
-        const listings = localStorage.getItem('brosky_main_listings');
-        if (listings) {
-            return JSON.parse(listings);
+        try {
+            const response = await fetch(url, options);
+            if (!response.ok) throw new Error(`Ошибка ${response.status}`);
+            if (method === 'GET') return await response.json();
+            return { success: true };
+        } catch (error) {
+            console.error('Ошибка Supabase:', error);
+            return null;
         }
-        localStorage.setItem('brosky_main_listings', JSON.stringify(MY_LISTINGS));
-        return MY_LISTINGS;
     }
 
-    let listings = getMainListings();
-    let currentFilteredListings = [...listings];
+    async function getListings() {
+        const listings = await supabaseRequest('listings', 'GET');
+        return listings || [];
+    }
 
-    // ИЗБРАННОЕ
+    // ========== ИЗБРАННОЕ ==========
     function getCurrentUser() {
         try {
             const user = localStorage.getItem('brosky_current_user');
@@ -425,18 +781,11 @@
     }
 
     function getFavorites() {
-        const currentUser = getCurrentUser();
-        if (!currentUser) return [];
-        const key = `favorites_${currentUser.id}`;
+        const user = getCurrentUser();
+        if (!user) return [];
+        const key = `favorites_${user.id}`;
         const fav = localStorage.getItem(key);
         return fav ? JSON.parse(fav) : [];
-    }
-
-    function saveFavorites(favorites) {
-        const currentUser = getCurrentUser();
-        if (!currentUser) return;
-        const key = `favorites_${currentUser.id}`;
-        localStorage.setItem(key, JSON.stringify(favorites));
     }
 
     function isFavorite(listingId) {
@@ -447,18 +796,20 @@
         let favorites = getFavorites();
         if (!favorites.includes(listingId)) {
             favorites.push(listingId);
-            saveFavorites(favorites);
+            const user = getCurrentUser();
+            if (user) localStorage.setItem(`favorites_${user.id}`, JSON.stringify(favorites));
             showToast('Добавлено в избранное! ❤️');
-            renderListings(currentFilteredListings);
+            renderListings();
         }
     }
 
     function removeFromFavorites(listingId) {
         let favorites = getFavorites();
         favorites = favorites.filter(id => id !== listingId);
-        saveFavorites(favorites);
+        const user = getCurrentUser();
+        if (user) localStorage.setItem(`favorites_${user.id}`, JSON.stringify(favorites));
         showToast('Удалено из избранного 💔');
-        renderListings(currentFilteredListings);
+        renderListings();
     }
 
     function toggleFavorite(listingId, event) {
@@ -473,7 +824,7 @@
     function showToast(message) {
         const toast = document.createElement('div');
         toast.className = 'toast';
-        toast.textContent = message;
+        toast.innerHTML = message;
         document.body.appendChild(toast);
         setTimeout(() => {
             toast.style.animation = 'slideOut 0.3s ease';
@@ -481,60 +832,158 @@
         }, 2000);
     }
 
-    function renderListings(filteredListings) {
-        const grid = document.getElementById('listingsGrid');
-        if (!grid) return;
+    // ========== ФИЛЬТРАЦИЯ ==========
+    function applyFilters() {
+        const city = document.getElementById('cityFilter').value;
+        const type = document.getElementById('typeFilter').value;
+        const maxPrice = document.getElementById('priceFilter').value;
+        const minBeds = parseInt(document.getElementById('bedsFilter').value);
 
-        grid.innerHTML = '';
+        filteredListings = [...allListings];
 
+        if (city !== 'all') {
+            filteredListings = filteredListings.filter(l => l.city === city);
+        }
+        if (type !== 'all') {
+            filteredListings = filteredListings.filter(l => l.type === type);
+        }
+        if (maxPrice) {
+            filteredListings = filteredListings.filter(l => l.price <= parseInt(maxPrice));
+        }
+        if (minBeds > 0) {
+            filteredListings = filteredListings.filter(l => (l.beds || 1) >= minBeds);
+        }
+
+        currentPage = 1;
+        renderListings();
+        renderPagination();
+        updateListingsCount();
+    }
+
+    function resetFilters() {
+        document.getElementById('cityFilter').value = 'all';
+        document.getElementById('typeFilter').value = 'all';
+        document.getElementById('priceFilter').value = '';
+        document.getElementById('bedsFilter').value = '0';
+        applyFilters();
+    }
+
+    function updateListingsCount() {
+        const countSpan = document.getElementById('listingsCount');
         if (filteredListings.length === 0) {
-            grid.innerHTML = '<div style="text-align: center; padding: 60px; background: white; border-radius: 28px;">Ничего не найдено 😔</div>';
+            countSpan.innerHTML = 'Ничего не найдено 😔';
+        } else {
+            const start = (currentPage - 1) * itemsPerPage + 1;
+            const end = Math.min(currentPage * itemsPerPage, filteredListings.length);
+            countSpan.innerHTML = `Показано ${start}-${end} из ${filteredListings.length} объявлений`;
+        }
+    }
+
+    // ========== ПАГИНАЦИЯ ==========
+    function renderPagination() {
+        const totalPages = Math.ceil(filteredListings.length / itemsPerPage);
+        const paginationDiv = document.getElementById('pagination');
+
+        if (totalPages <= 1) {
+            paginationDiv.innerHTML = '';
             return;
         }
 
-        filteredListings.forEach(listing => {
-            const card = document.createElement('a');
-            card.className = 'listing-card';
-            card.href = `listing-detail.html?id=${listing.id}`;
-            const isFav = isFavorite(listing.id);
+        let html = '';
+        if (currentPage > 1) {
+            html += `<button onclick="goToPage(${currentPage - 1})"><i class="fas fa-chevron-left"></i></button>`;
+        }
 
-            card.innerHTML = `
-                <div class="card-image">
-                    <img src="${listing.image}" alt="${listing.title}" loading="lazy" onerror="this.src='https://placehold.co/500x300/2c7da0/white?text=BroSky'">
-                    <button class="favorite-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite(${listing.id}, event)">
-                        <i class="fas fa-heart"></i>
-                    </button>
+        for (let i = 1; i <= totalPages; i++) {
+            if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                html += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+            } else if (i === currentPage - 2 || i === currentPage + 2) {
+                html += `<span>...</span>`;
+            }
+        }
+
+        if (currentPage < totalPages) {
+            html += `<button onclick="goToPage(${currentPage + 1})"><i class="fas fa-chevron-right"></i></button>`;
+        }
+
+        paginationDiv.innerHTML = html;
+    }
+
+    function goToPage(page) {
+        currentPage = page;
+        renderListings();
+        renderPagination();
+        updateListingsCount();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ========== ОТОБРАЖЕНИЕ КАРТОЧЕК ==========
+    function generateStars(rating) {
+        const fullStars = Math.floor(rating);
+        const hasHalf = rating % 1 >= 0.5;
+        let stars = '★'.repeat(fullStars);
+        if (hasHalf) stars += '½';
+        stars += '☆'.repeat(5 - Math.ceil(rating));
+        return stars;
+    }
+
+    function renderListings() {
+        const container = document.getElementById('listingsGrid');
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const pageListings = filteredListings.slice(start, end);
+
+        if (pageListings.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-home"></i>
+                    <h3>Ничего не найдено</h3>
+                    <p>Попробуйте изменить параметры поиска</p>
+                    <button class="btn-outline-light" onclick="resetFilters()">Сбросить фильтры</button>
                 </div>
-                <div class="card-content">
-                    <div class="card-title">${listing.title}</div>
-                    <div class="card-location"><i class="fas fa-map-marker-alt"></i> ${listing.address || listing.city}</div>
-                    <div class="card-price">${listing.price.toLocaleString()} ₽ <span style="font-size: 0.9rem;">/ сутки</span></div>
-                    <div class="card-details">
-                        <span><i class="fas fa-bed"></i> ${listing.beds} спальни</span>
-                        <span><i class="fas fa-bath"></i> ${listing.baths} ванна</span>
-                        <span><i class="fas fa-users"></i> до ${listing.guests} гостей</span>
+            `;
+            return;
+        }
+
+        container.innerHTML = pageListings.map(listing => {
+            const isFav = isFavorite(listing.id);
+            const rating = listing.rating || 4.5;
+            const reviews = listing.reviews || Math.floor(Math.random() * 100) + 10;
+            const typeName = listing.type === 'apartment' ? 'Квартира' : (listing.type === 'house' ? 'Дом' : 'Loft');
+
+            return `
+                <div class="listing-card" onclick="window.location.href='listing-detail.html?id=${listing.id}'">
+                    <div class="card-image">
+                        <img src="${listing.image || 'https://placehold.co/500x300/2c7da0/white?text=BroSky'}" alt="${listing.title}">
+                        <div class="card-badge">${typeName}</div>
+                        <button class="favorite-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite(${listing.id}, event)">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">${listing.title}</div>
+                        <div class="card-location">
+                            <i class="fas fa-map-marker-alt"></i> ${listing.city}, ${listing.address || 'центр'}
+                        </div>
+                        <div class="card-rating">
+                            <div class="stars">${generateStars(rating)}</div>
+                            <div class="reviews">${reviews} отзывов</div>
+                        </div>
+                        <div class="card-price">
+                            ${listing.price.toLocaleString()} ₽ <small>/ сутки</small>
+                        </div>
+                        <div class="card-details">
+                            <span><i class="fas fa-bed"></i> ${listing.beds || 1} спальни</span>
+                            <span><i class="fas fa-bath"></i> ${listing.baths || 1} ванна</span>
+                            <span><i class="fas fa-users"></i> до ${listing.guests || 4} гостей</span>
+                        </div>
                     </div>
                 </div>
             `;
-            grid.appendChild(card);
-        });
+        }).join('');
     }
 
-    function applyFilters() {
-        const type = document.getElementById('typeFilter').value;
-        const city = document.getElementById('cityFilter').value;
-        const maxPrice = document.getElementById('priceFilter').value;
-
-        let filtered = [...listings];
-        if (type !== 'all') filtered = filtered.filter(l => l.type === type);
-        if (city !== 'all') filtered = filtered.filter(l => l.city === city);
-        if (maxPrice) filtered = filtered.filter(l => l.price <= parseInt(maxPrice));
-
-        currentFilteredListings = filtered;
-        renderListings(filtered);
-    }
-
-    // ПОЛЬЗОВАТЕЛЬСКОЕ МЕНЮ
+    // ========== ПОЛЬЗОВАТЕЛЬСКОЕ МЕНЮ ==========
     function logout() {
         localStorage.removeItem('brosky_current_user');
         window.location.href = 'index.html';
@@ -542,35 +991,37 @@
 
     function toggleDropdown() {
         const dropdown = document.getElementById('dropdownMenu');
-        if (dropdown) dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        if (dropdown) {
+            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        }
     }
 
     function updateUserMenu() {
         const userMenu = document.getElementById('userMenu');
         if (!userMenu) return;
-        const currentUser = getCurrentUser();
+
+        currentUser = getCurrentUser();
 
         if (currentUser) {
             userMenu.innerHTML = `
-                <div class="user-dropdown" style="position: relative; display: inline-block;">
-                    <button class="btn-outline-light" onclick="toggleDropdown()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <div class="user-dropdown">
+                    <button class="btn-outline-light" onclick="toggleDropdown()">
                         <i class="fas fa-user-circle"></i> ${currentUser.name}
                         <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
                     </button>
-                    <div id="dropdownMenu" style="display: none; position: absolute; right: 0; top: 100%; background: white; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 200px; margin-top: 8px; z-index: 1000;">
-                        <a href="my-bookings.html" style="display: block; padding: 12px 16px; text-decoration: none; color: #2c3e44; border-bottom: 1px solid #eef2f7;"><i class="fas fa-calendar-check"></i> Мои брони</a>
-                        <a href="favorites.html" style="display: block; padding: 12px 16px; text-decoration: none; color: #2c3e44; border-bottom: 1px solid #eef2f7;"><i class="fas fa-heart"></i> Избранное</a>
-                        <a href="javascript:void(0)" onclick="logout()" style="display: block; padding: 12px 16px; text-decoration: none; color: #e74c3c;"><i class="fas fa-sign-out-alt"></i> Выйти</a>
+                    <div class="dropdown-menu" id="dropdownMenu" style="display: none;">
+                        <a href="my-bookings.html"><i class="fas fa-calendar-check"></i> Мои брони</a>
+                        <a href="favorites.html"><i class="fas fa-heart"></i> Избранное</a>
+                        <a href="#" onclick="logout()" class="logout"><i class="fas fa-sign-out-alt"></i> Выйти</a>
                     </div>
                 </div>
             `;
         } else {
-            userMenu.innerHTML = `<a href="login.html" class="btn-outline-light"><i class="far fa-user"></i> Войти</a>`;
+            userMenu.innerHTML = `<button class="btn-outline-light" onclick="window.location.href='login.html'"><i class="far fa-user"></i> Войти</button>`;
         }
     }
 
     function checkAndShowAdminLink() {
-        const currentUser = getCurrentUser();
         const adminLink = document.getElementById('adminLink');
         if (adminLink && currentUser && currentUser.email === 'admin@brosky.ru') {
             adminLink.style.display = 'inline-block';
@@ -579,6 +1030,7 @@
         }
     }
 
+    // Закрытие дропдауна при клике вне
     document.addEventListener('click', function(event) {
         const dropdown = document.getElementById('dropdownMenu');
         if (dropdown && !event.target.closest('.user-dropdown')) {
@@ -586,12 +1038,27 @@
         }
     });
 
-    window.toggleFavorite = toggleFavorite;
-    window.applyFilters = applyFilters;
+    // ========== ЗАГРУЗКА ДАННЫХ ==========
+    async function loadData() {
+        allListings = await getListings();
+        filteredListings = [...allListings];
+        updateUserMenu();
+        checkAndShowAdminLink();
+        renderListings();
+        renderPagination();
+        updateListingsCount();
+    }
 
-    updateUserMenu();
-    checkAndShowAdminLink();
-    applyFilters();
+    // Делаем функции глобальными
+    window.applyFilters = applyFilters;
+    window.resetFilters = resetFilters;
+    window.goToPage = goToPage;
+    window.toggleFavorite = toggleFavorite;
+    window.toggleDropdown = toggleDropdown;
+    window.logout = logout;
+
+    loadData();
 </script>
+
 </body>
 </html>

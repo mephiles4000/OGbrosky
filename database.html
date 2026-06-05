@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проверка БД | BroSky</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%);
+            color: #1a2c3e;
+            padding: 40px 20px;
+        }
+
+        :root {
+            --primary-blue: #2c7da0;
+            --accent-teal: #3DCFB6;
+            --accent-purple: #5B56E0;
+            --accent-coral: #FF6B6B;
+            --soft-blue: #d4e6f1;
+            --light-slate: #eef2f7;
+            --pure-white: #ffffff;
+            --cool-gray: #5a6e7c;
+            --charcoal: #2c3e44;
+            --shadow-sm: 0 12px 28px rgba(0, 32, 64, 0.08);
+            --shadow-hover: 0 20px 32px rgba(27, 65, 92, 0.12);
+            --transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* ========== ЗАГОЛОВОК ========== */
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--charcoal);
+            margin-bottom: 12px;
+        }
+
+        .page-header p {
+            font-size: 1rem;
+            color: var(--cool-gray);
+        }
+
+        /* ========== КАРТОЧКИ ========== */
+        .card {
+            background: white;
+            border-radius: 28px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card h2 i {
+            color: var(--accent-purple);
+        }
+
+        /* ========== НАСТРОЙКИ ========== */
+        .settings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid #eef2f7;
+        }
+
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+
+        .settings-label {
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+
+        .settings-value {
+            font-family: monospace;
+            background: var(--light-slate);
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            color: var(--cool-gray);
+            word-break: break-all;
+        }
+
+        .status-ok {
+            color: var(--accent-teal);
+        }
+
+        .status-error {
+            color: var(--accent-coral);
+        }
+
+        /* ========== КНОПКИ ========== */
+        .btn-check {
+            background: var(--accent-purple);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 48px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-check:hover {
+            background: #4a45c4;
+            transform: translateY(-2px);
+        }
+
+        /* ========== РЕЗУЛЬТАТ ========== */
+        .result-box {
+            background: var(--light-slate);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-success {
+            background: #d4edda;
+            color: #155724;
+            padding: 16px;
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+
+        .result-error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 16px;
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+
+        .result-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 16px;
+            border-radius: 16px;
+        }
+
+        /* ========== SQL КОД ========== */
+        .sql-code {
+            background: #1e1e2e;
+            color: #c9d1d9;
+            padding: 20px;
+            border-radius: 16px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            margin-top: 16px;
+        }
+
+        .sql-code pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .copy-btn {
+            background: var(--accent-teal);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 12px;
+            transition: var(--transition);
+        }
+
+        .copy-btn:hover {
+            background: #2cb89f;
+        }
+
+        /* ========== ПРОГРЕСС ========== */
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #eef2f7;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 16px;
+            display: none;
+        }
+
+        .progress-bar.active {
+            display: block;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: var(--accent-teal);
+            animation: progress 1.5s ease-in-out infinite;
+        }
+
+        @keyframes progress {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+
+        /* ========== ТАБЫ ДЛЯ SQL ========== */
+        .sql-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .sql-tab {
+            background: var(--light-slate);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .sql-tab.active {
+            background: var(--accent-purple);
+            color: white;
+        }
+
+        .sql-content {
+            display: none;
+        }
+
+        .sql-content.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            .card {
+                padding: 24px;
+            }
+            .settings-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .settings-value {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1><i class="fas fa-database"></i> Проверка базы данных BroSky</h1>
+        <p>Настройка подключения и создание таблиц для работы сайта</p>
+    </div>
+
+    <!-- Карточка: Настройки Supabase -->
+    <div class="card">
+        <h2><i class="fas fa-cloud-upload-alt"></i> Настройки Supabase</h2>
+        <div class="settings-item">
+            <span class="settings-label">Project URL:</span>
+            <span class="settings-value" id="urlValue">https://ТВОЙ_ПРОЕКТ.supabase.co</span>
+        </div>
+        <div class="settings-item">
+            <span class="settings-label">Anon Public Key:</span>
+            <span class="settings-value" id="keyValue">ТВОЙ_ANON_KEY</span>
+        </div>
+        <div class="settings-item">
+            <span class="settings-label">Статус:</span>
+            <span id="statusBadge">⚠️ Не настроено</span>
+        </div>
+        <button class="btn-check" onclick="testConnection()">
+            <i class="fas fa-plug"></i> Проверить подключение
+        </button>
+        <div class="progress-bar" id="progressBar">
+            <div class="progress-fill"></div>
+        </div>
+        <div id="resultBox" class="result-box"></div>
+    </div>
+
+    <!-- Карточка: Инструкция -->
+    <div class="card">
+        <h2><i class="fas fa-info-circle"></i> Инструкция по настройке</h2>
+        <div style="margin-bottom: 16px;">
+            <p style="color: var(--cool-gray); line-height: 1.6;">1. Зарегистрируйтесь на <a href="https://supabase.com" target="_blank" style="color: var(--accent-purple);">supabase.com</a></p>
+            <p style="color: var(--cool-gray); line-height: 1.6; margin-top: 8px;">2. Создайте новый проект и запомните пароль</p>
+            <p style="color: var(--cool-gray); line-height: 1.6; margin-top: 8px;">3. В настройках API скопируйте Project URL и anon public key</p>
+            <p style="color: var(--cool-gray); line-height: 1.6; margin-top: 8px;">4. Вставьте их в файлы BroSky (index.html, catalog.html, и т.д.)</p>
+            <p style="color: var(--cool-gray); line-height: 1.6; margin-top: 8px;">5. Выполните SQL код ниже для создания таблиц</p>
+        </div>
+    </div>
+
+    <!-- Карточка: SQL код -->
+    <div class="card">
+        <h2><i class="fas fa-code"></i> SQL код для создания таблиц</h2>
+
+        <div class="sql-tabs">
+            <button class="sql-tab active" onclick="switchSQLTab('all')">Все таблицы</button>
+            <button class="sql-tab" onclick="switchSQLTab('listings')">listings</button>
+            <button class="sql-tab" onclick="switchSQLTab('users')">users</button>
+            <button class="sql-tab" onclick="switchSQLTab('bookings')">bookings</button>
+            <button class="sql-tab" onclick="switchSQLTab('pending')">pending_listings</button>
+        </div>
+
+        <div id="sql-all" class="sql-content active">
+            <div class="sql-code">
+                <pre>-- ============================================
+-- Таблица объявлений (listings)
+-- ============================================
+CREATE TABLE IF NOT EXISTS listings (
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    city TEXT NOT NULL,
+    price INT NOT NULL,
+    beds INT DEFAULT 1,
+    baths INT DEFAULT 1,
+    guests INT DEFAULT 4,
+    type TEXT,
+    description TEXT,
+    image TEXT,
+    rating DECIMAL(3,1) DEFAULT 4.5,
+    reviews INT DEFAULT 42,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- ============================================
+-- Таблица пользователей (users)
+-- ============================================
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    phone TEXT,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- ============================================
+-- Таблица бронирований (bookings)
+-- ============================================
+CREATE TABLE IF NOT EXISTS bookings (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    listing_id INT REFERENCES listings(id) ON DELETE CASCADE,
+    checkin DATE NOT NULL,
+    checkout DATE NOT NULL,
+    guests INT DEFAULT 2,
+    days INT,
+    total_price INT,
+    status TEXT DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- ============================================
+-- Таблица заявок (pending_listings)
+-- ============================================
+CREATE TABLE IF NOT EXISTS pending_listings (
+    id BIGINT PRIMARY KEY,
+    title TEXT NOT NULL,
+    city TEXT NOT NULL,
+    type TEXT,
+    address TEXT,
+    price INT NOT NULL,
+    beds INT,
+    baths INT,
+    guests INT,
+    description TEXT,
+    amenities TEXT,
+    image TEXT,
+    status TEXT DEFAULT 'pending',
+    created_at TIMESTAMP,
+    userId INT,
+    userName TEXT,
+    userEmail TEXT
+);
+
+-- ============================================
+-- Добавляем тестовые объявления
+-- ============================================
+INSERT INTO listings (title, city, price, beds, baths, guests, type, description) VALUES
+('Светлая студия в центре', 'Москва', 4500, 1, 1, 2, 'apartment', 'Просторная студия в центре Москвы'),
+('Дизайнерский лофт', 'СПб', 6800, 2, 1, 4, 'loft', 'Стильный лофт на Невском'),
+('Коттедж с садом', 'Сочи', 12000, 3, 2, 6, 'house', 'Уютный коттедж у моря');
+
+-- ============================================
+-- Включаем RLS и создаём политики
+-- ============================================
+ALTER TABLE listings ENABLE ROW LEVEL SECURITY;
+ALTER TABLE users ENABLE ROW LEVEL SECURITY;
+ALTER TABLE bookings ENABLE ROW LEVEL SECURITY;
+ALTER TABLE pending_listings ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Enable all" ON listings FOR ALL USING (true);
+CREATE POLICY "Enable all" ON users FOR ALL USING (true);
+CREATE POLICY "Enable all" ON bookings FOR ALL USING (true);
+CREATE POLICY "Enable all" ON pending_listings FOR ALL USING (true);</pre>
+            </div>
+            <button class="copy-btn" onclick="copySQL('all')"><i class="fas fa-copy"></i> Копировать весь код</button>
+        </div>
+
+        <div id="sql-listings" class="sql-content">
+            <div class="sql-code">
+                <pre>CREATE TABLE IF NOT EXISTS listings (
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    city TEXT NOT NULL,
+    price INT NOT NULL,
+    beds INT DEFAULT 1,
+    baths INT DEFAULT 1,
+    guests INT DEFAULT 4,
+    type TEXT,
+    description TEXT,
+    image TEXT,
+    rating DECIMAL(3,1) DEFAULT 4.5,
+    reviews INT DEFAULT 42,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+ALTER TABLE listings ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Enable all" ON listings FOR ALL USING (true);
+
+INSERT INTO listings (title, city, price, beds, baths, guests, type) VALUES
+('Светлая студия в центре', 'Москва', 4500, 1, 1, 2, 'apartment'),
+('Дизайнерский лофт', 'СПб', 6800, 2, 1, 4, 'loft'),
+('Коттедж с садом', 'Сочи', 12000, 3, 2, 6, 'house');</pre>
+            </div>
+            <button class="copy-btn" onclick="copySQL('listings')"><i class="fas fa-copy"></i> Копировать код</button>
+        </div>
+
+        <div id="sql-users" class="sql-content">
+            <div class="sql-code">
+                <pre>CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    phone TEXT,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+ALTER TABLE users ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Enable all" ON users FOR ALL USING (true);</pre>
+            </div>
+            <button class="copy-btn" onclick="copySQL('users')"><i class="fas fa-copy"></i> Копировать код</button>
+        </div>
+
+        <div id="sql-bookings" class="sql-content">
+            <div class="sql-code">
+                <pre>CREATE TABLE IF NOT EXISTS bookings (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    listing_id INT REFERENCES listings(id) ON DELETE CASCADE,
+    checkin DATE NOT NULL,
+    checkout DATE NOT NULL,
+    guests INT DEFAULT 2,
+    days INT,
+    total_price INT,
+    status TEXT DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+ALTER TABLE bookings ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Enable all" ON bookings FOR ALL USING (true);</pre>
+            </div>
+            <button class="copy-btn" onclick="copySQL('bookings')"><i class="fas fa-copy"></i> Копировать код</button>
+        </div>
+
+        <div id="sql-pending" class="sql-content">
+            <div class="sql-code">
+                <pre>CREATE TABLE IF NOT EXISTS pending_listings (
+    id BIGINT PRIMARY KEY,
+    title TEXT NOT NULL,
+    city TEXT NOT NULL,
+    type TEXT,
+    address TEXT,
+    price INT NOT NULL,
+    beds INT,
+    baths INT,
+    guests INT,
+    description TEXT,
+    amenities TEXT,
+    image TEXT,
+    status TEXT DEFAULT 'pending',
+    created_at TIMESTAMP,
+    userId INT,
+    userName TEXT,
+    userEmail TEXT
+);
+
+ALTER TABLE pending_listings ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Enable all" ON pending_listings FOR ALL USING (true);</pre>
+            </div>
+            <button class="copy-btn" onclick="copySQL('pending')"><i class="fas fa-copy"></i> Копировать код</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ========== НАСТРОЙКИ (ЗАМЕНИ НА СВОИ) ==========
+    let SUPABASE_URL = 'https://bgyjgzzvoxyvpysywvlb.supabase.co';
+    let SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJneWpnenp2b3h5dnB5c3l3dmxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2Mzk3NjQsImV4cCI6MjA5NjIxNTc2NH0.Yz91MvAXo45Z3hq-76V5yBD4aB_2dFgpjXDBDWG9FHM';
+
+    // ========== ОТОБРАЖЕНИЕ НАСТРОЕК ==========
+    function updateSettingsDisplay() {
+        const urlSpan = document.getElementById('urlValue');
+        const keySpan = document.getElementById('keyValue');
+        const statusSpan = document.getElementById('statusBadge');
+
+        if (SUPABASE_URL !== 'https://ТВОЙ_ПРОЕКТ.supabase.co') {
+            urlSpan.innerHTML = SUPABASE_URL;
+            urlSpan.classList.add('status-ok');
+        } else {
+            urlSpan.innerHTML = '❌ Не указан (замени в коде)';
+            urlSpan.classList.add('status-error');
+        }
+
+        if (SUPABASE_KEY !== 'ТВОЙ_ANON_KEY') {
+            keySpan.innerHTML = SUPABASE_KEY.substring(0, 40) + '...';
+            keySpan.classList.add('status-ok');
+        } else {
+            keySpan.innerHTML = '❌ Не указан (замени в коде)';
+            keySpan.classList.add('status-error');
+        }
+
+        if (SUPABASE_URL !== 'https://ТВОЙ_ПРОЕКТ.supabase.co' && SUPABASE_KEY !== 'ТВОЙ_ANON_KEY') {
+            statusSpan.innerHTML = '✅ Настроено';
+            statusSpan.style.color = 'var(--accent-teal)';
+        } else {
+            statusSpan.innerHTML = '⚠️ Не настроено';
+            statusSpan.style.color = 'var(--accent-coral)';
+        }
+    }
+
+    // ========== ПРОВЕРКА ПОДКЛЮЧЕНИЯ ==========
+    async function testConnection() {
+        const resultBox = document.getElementById('resultBox');
+        const progressBar = document.getElementById('progressBar');
+
+        resultBox.innerHTML = '';
+        progressBar.classList.add('active');
+        resultBox.classList.add('show');
+
+        try {
+            // Проверяем таблицу listings
+            const response = await fetch(`${SUPABASE_URL}/rest/v1/listings?select=*&limit=1`, {
+                headers: {
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': `Bearer ${SUPABASE_KEY}`
+                }
+            });
+
+            progressBar.classList.remove('active');
+
+            if (response.ok) {
+                const data = await response.json();
+                resultBox.innerHTML = `
+                    <div class="result-success">
+                        <i class="fas fa-check-circle"></i> <strong>Подключение успешно!</strong>
+                    </div>
+                    <div class="result-success">
+                        <i class="fas fa-table"></i> Таблица "listings" доступна
+                    </div>
+                    <div class="result-info">
+                        <i class="fas fa-chart-bar"></i> Найдено объявлений: ${data.length}
+                    </div>
+                    <div class="result-success" style="margin-top: 12px;">
+                        <i class="fas fa-check"></i> База данных работает корректно! Можете переходить на главную страницу.
+                    </div>
+                `;
+            } else {
+                const error = await response.text();
+                resultBox.innerHTML = `
+                    <div class="result-error">
+                        <i class="fas fa-exclamation-triangle"></i> <strong>Ошибка подключения: ${response.status}</strong>
+                    </div>
+                    <div class="result-error">
+                        Проверьте Project URL и anon public key в настройках Supabase
+                    </div>
+                    <div class="result-info">
+                        <pre style="font-size: 0.7rem; overflow-x: auto;">${error}</pre>
+                    </div>
+                `;
+            }
+        } catch (error) {
+            progressBar.classList.remove('active');
+            resultBox.innerHTML = `
+                <div class="result-error">
+                    <i class="fas fa-exclamation-triangle"></i> <strong>Ошибка: ${error.message}</strong>
+                </div>
+                <div class="result-error">
+                    Проверьте интернет-соединение и настройки Supabase
+                </div>
+            `;
+        }
+    }
+
+    // ========== ПЕРЕКЛЮЧЕНИЕ ТАБОВ SQL ==========
+    function switchSQLTab(tab) {
+        const tabs = ['all', 'listings', 'users', 'bookings', 'pending'];
+        tabs.forEach(t => {
+            const content = document.getElementById(`sql-${t}`);
+            const btn = document.querySelector(`.sql-tab[onclick="switchSQLTab('${t}')"]`);
+            if (t === tab) {
+                content.classList.add('active');
+                btn.classList.add('active');
+            } else {
+                content.classList.remove('active');
+                btn.classList.remove('active');
+            }
+        });
+    }
+
+    // ========== КОПИРОВАНИЕ SQL ==========
+    function copySQL(type) {
+        let text = '';
+        if (type === 'all') {
+            text = document.querySelector('#sql-all .sql-code pre').innerText;
+        } else if (type === 'listings') {
+            text = document.querySelector('#sql-listings .sql-code pre').innerText;
+        } else if (type === 'users') {
+            text = document.querySelector('#sql-users .sql-code pre').innerText;
+        } else if (type === 'bookings') {
+            text = document.querySelector('#sql-bookings .sql-code pre').innerText;
+        } else if (type === 'pending') {
+            text = document.querySelector('#sql-pending .sql-code pre').innerText;
+        }
+
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+            }, 2000);
+        });
+    }
+
+    // ========== ИНИЦИАЛИЗАЦИЯ ==========
+    updateSettingsDisplay();
+
+    // Делаем функции глобальными
+    window.testConnection = testConnection;
+    window.switchSQLTab = switchSQLTab;
+    window.copySQL = copySQL;
+</script>
+</body>
+</html>

@@ -7,11 +7,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%);
+            color: #1a2c3e;
+        }
 
         :root {
             --primary-blue: #2c7da0;
+            --accent-teal: #3DCFB6;
+            --accent-purple: #5B56E0;
+            --accent-coral: #FF6B6B;
+            --soft-blue: #d4e6f1;
+            --light-slate: #eef2f7;
             --pure-white: #ffffff;
             --cool-gray: #5a6e7c;
             --charcoal: #2c3e44;
@@ -20,8 +34,13 @@
             --transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
-        .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
 
+        /* ========== ШАПКА (как на других страницах) ========== */
         header {
             padding: 24px 0 16px;
             backdrop-filter: blur(8px);
@@ -50,7 +69,15 @@
             text-decoration: none;
         }
 
-        .logo i { color: var(--primary-blue); font-size: 2rem; }
+        .logo i {
+            color: var(--accent-teal);
+            font-size: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover i {
+            transform: scale(1.05) rotate(-2deg);
+        }
 
         .nav-links {
             display: flex;
@@ -64,37 +91,106 @@
             font-weight: 500;
             color: var(--cool-gray);
             transition: var(--transition);
+            font-size: 1rem;
+            position: relative;
         }
 
-        .nav-links a:hover { color: var(--primary-blue); }
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--accent-purple);
+            transition: width 0.25s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
 
         .btn-outline-light {
-            border: 1.5px solid var(--primary-blue);
+            border: 1.5px solid var(--accent-purple);
             background: transparent;
             padding: 8px 20px;
             border-radius: 40px;
-            color: var(--primary-blue);
+            color: var(--accent-purple);
             font-weight: 600;
             text-decoration: none;
-            transition: var(--transition);
-            cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            cursor: pointer;
         }
 
         .btn-outline-light:hover {
-            background: var(--primary-blue);
+            background: var(--accent-purple);
             color: white;
+            transform: translateY(-2px);
         }
 
-        .page-title {
-            margin: 40px 0 24px;
-            font-size: 2rem;
-            font-weight: 700;
+        /* ========== ЗАГОЛОВОК ========== */
+        .page-header {
+            text-align: center;
+            margin: 48px 0 32px;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
             color: var(--charcoal);
+            margin-bottom: 16px;
         }
 
+        .page-header p {
+            font-size: 1.1rem;
+            color: var(--cool-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ========== ТАБЫ ========== */
+        .tabs {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+            border-bottom: 2px solid #eef2f7;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--cool-gray);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .tab:hover {
+            color: var(--accent-purple);
+        }
+
+        .tab.active {
+            color: var(--accent-purple);
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-purple);
+        }
+
+        /* ========== СЕТКА БРОНИРОВАНИЙ ========== */
         .bookings-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -118,12 +214,39 @@
         .booking-image {
             height: 180px;
             overflow: hidden;
+            position: relative;
         }
 
         .booking-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .booking-card:hover .booking-image img {
+            transform: scale(1.05);
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            z-index: 5;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
         }
 
         .booking-info {
@@ -141,10 +264,13 @@
             color: var(--cool-gray);
             font-size: 0.85rem;
             margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .booking-dates {
-            background: #eef2f7;
+            background: var(--light-slate);
             padding: 12px;
             border-radius: 16px;
             margin: 12px 0;
@@ -154,6 +280,11 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 6px;
+            font-size: 0.85rem;
+        }
+
+        .booking-dates p:last-child {
+            margin-bottom: 0;
         }
 
         .booking-price {
@@ -163,40 +294,47 @@
             margin-top: 12px;
         }
 
-        .status-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .status-pending {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .status-confirmed {
-            background: #d4edda;
-            color: #155724;
+        .booking-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
         }
 
         .btn-cancel {
+            flex: 1;
             background: none;
-            border: 1px solid #e74c3c;
-            color: #e74c3c;
-            padding: 8px 16px;
+            border: 1px solid var(--accent-coral);
+            color: var(--accent-coral);
+            padding: 10px;
             border-radius: 30px;
             cursor: pointer;
-            margin-top: 12px;
-            width: 100%;
             font-weight: 600;
             transition: var(--transition);
         }
 
         .btn-cancel:hover {
-            background: #e74c3c;
+            background: var(--accent-coral);
             color: white;
+        }
+
+        .btn-rebook {
+            flex: 1;
+            background: var(--accent-teal);
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .btn-rebook:hover {
+            background: #2cb89f;
+            transform: translateY(-2px);
         }
 
         .empty-state {
@@ -207,25 +345,85 @@
             margin: 40px 0;
         }
 
+        .empty-state i {
+            font-size: 4rem;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--charcoal);
+        }
+
+        .empty-state p {
+            color: var(--cool-gray);
+            margin-bottom: 24px;
+        }
+
+        /* ========== ПОДВАЛ ========== */
         footer {
             text-align: center;
-            padding: 30px 0;
+            padding: 40px 0;
             border-top: 1px solid rgba(44, 125, 160, 0.2);
-            margin-top: 40px;
             color: var(--cool-gray);
+            font-size: 0.85rem;
+        }
+
+        /* ========== ВЫПАДАЮЩЕЕ МЕНЮ ========== */
+        .user-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            min-width: 200px;
+            margin-top: 8px;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 16px;
+            text-decoration: none;
+            color: #2c3e44;
+            transition: background 0.2s;
+            border-bottom: 1px solid #eef2f7;
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover {
+            background: #f0f6ff;
+        }
+
+        .dropdown-menu .logout {
+            color: var(--accent-coral);
         }
 
         .toast {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #2c3e44;
+            background: var(--charcoal);
             color: white;
             padding: 12px 24px;
             border-radius: 48px;
-            z-index: 1000;
+            z-index: 1100;
             animation: slideIn 0.3s ease;
         }
+
         @keyframes slideIn {
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
@@ -236,8 +434,24 @@
         }
 
         @media (max-width: 768px) {
-            .container { padding: 0 20px; }
-            .navbar { flex-direction: column; }
+            .container {
+                padding: 0 20px;
+            }
+            .navbar {
+                flex-direction: column;
+            }
+            .nav-links {
+                justify-content: center;
+            }
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            .bookings-grid {
+                grid-template-columns: 1fr;
+            }
+            .tabs {
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -247,7 +461,7 @@
     <div class="container">
         <div class="navbar">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="BroSky" style="height: 50px; width: auto;">
+                <img src="images/logo.png" alt="BroSky" style="height: 40px;">
                 <span>BroSky</span>
             </a>
             <div class="nav-links">
@@ -265,34 +479,80 @@
 
 <main>
     <div class="container">
-        <h1 class="page-title"><i class="fas fa-calendar-check"></i> Мои бронирования</h1>
+        <div class="page-header">
+            <h1><i class="fas fa-calendar-check"></i> Мои бронирования</h1>
+            <p>Управляйте своими бронями и отслеживайте статус</p>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" data-tab="all">Все</div>
+            <div class="tab" data-tab="pending">Ожидают</div>
+            <div class="tab" data-tab="confirmed">Подтверждены</div>
+        </div>
+
         <div id="bookingsList" class="bookings-grid"></div>
     </div>
 </main>
 
-<footer><div class="container"><p><i class="fas fa-dove"></i> BroSky — аренда без хлопот. © 2026</p></div></footer>
+<footer>
+    <div class="container">
+        <p><i class="fas fa-dove"></i> BroSky — аренда без хлопот. © 2025 | Ваше комфортное пространство</p>
+    </div>
+</footer>
 
 <script>
-    function getCurrentUser() {
+    // ========== НАСТРОЙКИ SUPABASE ==========
+    const SUPABASE_URL = 'https://bgyjgzzvoxyvpysywvlb.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJneWpnenp2b3h5dnB5c3l3dmxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2Mzk3NjQsImV4cCI6MjA5NjIxNTc2NH0.Yz91MvAXo45Z3hq-76V5yBD4aB_2dFgpjXDBDWG9FHM';
+
+    // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
+    let currentUser = null;
+    let allBookings = [];
+    let currentTab = 'all';
+
+    // ========== ФУНКЦИИ SUPABASE ==========
+    async function supabaseRequest(table, method = 'GET', data = null, id = null) {
+        let url = `${SUPABASE_URL}/rest/v1/${table}`;
+        const headers = {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`,
+            'Content-Type': 'application/json'
+        };
+        let options = { method, headers };
+        if (method === 'GET') { if (id) url += `?id=eq.${id}`; }
+        else if (method === 'POST') { options.body = JSON.stringify(data); }
+        else if (method === 'PATCH') { url += `?id=eq.${id}`; options.body = JSON.stringify(data); }
+        else if (method === 'DELETE') { url += `?id=eq.${id}`; }
         try {
-            const user = localStorage.getItem('brosky_current_user');
-            return user ? JSON.parse(user) : null;
-        } catch(e) { return null; }
+            const response = await fetch(url, options);
+            if (!response.ok) throw new Error(`Ошибка ${response.status}`);
+            if (method === 'GET') return await response.json();
+            return { success: true };
+        } catch (error) { console.error(error); return null; }
     }
 
-    function getBookings() {
-        const bookings = localStorage.getItem('brosky_bookings');
-        return bookings ? JSON.parse(bookings) : [];
+    async function getBookings() {
+        return (await supabaseRequest('bookings', 'GET')) || [];
     }
 
-    function saveBookings(bookings) {
-        localStorage.setItem('brosky_bookings', JSON.stringify(bookings));
+    async function getListings() {
+        return (await supabaseRequest('listings', 'GET')) || [];
+    }
+
+    async function deleteBooking(id) {
+        return await supabaseRequest('bookings', 'DELETE', null, id);
+    }
+
+    // ========== ПОЛЬЗОВАТЕЛЬ ==========
+    function getCurrentUser() {
+        try { const user = localStorage.getItem('brosky_current_user'); return user ? JSON.parse(user) : null; }
+        catch(e) { return null; }
     }
 
     function showToast(message) {
         const toast = document.createElement('div');
         toast.className = 'toast';
-        toast.textContent = message;
+        toast.innerHTML = message;
         document.body.appendChild(toast);
         setTimeout(() => {
             toast.style.animation = 'slideOut 0.3s ease';
@@ -300,96 +560,150 @@
         }, 2500);
     }
 
-    function cancelBooking(bookingId) {
-        if (confirm('Отменить бронирование?')) {
-            let bookings = getBookings();
-            bookings = bookings.filter(b => b.id !== bookingId);
-            saveBookings(bookings);
-            renderBookings();
-            showToast('Бронирование отменено');
-        }
-    }
-
     function formatDate(dateStr) {
         const date = new Date(dateStr);
         return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
     }
 
-    function renderBookings() {
-        const currentUser = getCurrentUser();
-        const container = document.getElementById('bookingsList');
-
-        if (!currentUser) {
-            container.innerHTML = `<div class="empty-state"><i class="fas fa-lock" style="font-size: 3rem; color: #ccc;"></i><h3 style="margin: 20px 0;">Войдите в аккаунт</h3><p>Чтобы увидеть свои бронирования</p><a href="login.html" class="btn-outline-light" style="display: inline-block; margin-top: 20px;">Войти</a></div>`;
-            return;
+    // ========== БРОНИРОВАНИЯ ==========
+    async function cancelBooking(bookingId) {
+        if (confirm('Отменить бронирование?')) {
+            const result = await deleteBooking(bookingId);
+            if (result?.success) {
+                showToast('Бронирование отменено');
+                await loadBookings();
+                renderBookings();
+            } else {
+                showToast('Ошибка при отмене');
+            }
         }
-
-        const allBookings = getBookings();
-        const myBookings = allBookings.filter(b => b.userId === currentUser.id);
-
-        if (myBookings.length === 0) {
-            container.innerHTML = `<div class="empty-state"><i class="fas fa-calendar-times" style="font-size: 3rem; color: #ccc;"></i><h3 style="margin: 20px 0;">У вас пока нет бронирований</h3><p>Перейдите в каталог и забронируйте жильё</p><a href="catalog.html" class="btn-outline-light" style="display: inline-block; margin-top: 20px;">Перейти в каталог</a></div>`;
-            return;
-        }
-
-        container.innerHTML = myBookings.map(booking => `
-            <div class="booking-card">
-                <div class="booking-image">
-                    <img src="${booking.listingImage}" alt="${booking.listingTitle}" onerror="this.src='https://placehold.co/400x200/2c7da0/white?text=BroSky'">
-                </div>
-                <div class="booking-info">
-                    <div class="booking-title">${booking.listingTitle}</div>
-                    <div class="booking-location"><i class="fas fa-map-marker-alt"></i> ${booking.listingLocation}</div>
-                    <div class="booking-dates">
-                        <p><span>📅 Заезд:</span> <strong>${formatDate(booking.checkin)}</strong></p>
-                        <p><span>📅 Выезд:</span> <strong>${formatDate(booking.checkout)}</strong></p>
-                        <p><span>👥 Гостей:</span> <strong>${booking.guests}</strong></p>
-                        <p><span>🌙 Ночей:</span> <strong>${booking.days}</strong></p>
-                    </div>
-                    <div class="booking-price">${booking.totalPrice.toLocaleString()} ₽</div>
-                    <button class="btn-cancel" onclick="cancelBooking(${booking.id})"><i class="fas fa-times"></i> Отменить бронь</button>
-                </div>
-            </div>
-        `).join('');
     }
 
-    // ========== ПОЛЬЗОВАТЕЛЬСКОЕ МЕНЮ ==========
+    function getStatusText(status) {
+        return status === 'pending' ? 'Ожидает подтверждения' : 'Подтверждено';
+    }
+
+    async function renderBookings() {
+        const container = document.getElementById('bookingsList');
+
+        currentUser = getCurrentUser();
+
+        if (!currentUser) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-lock"></i>
+                    <h3>Войдите в аккаунт</h3>
+                    <p>Чтобы увидеть свои бронирования, пожалуйста, войдите</p>
+                    <button class="btn-outline-light" onclick="window.location.href='login.html'">Войти</button>
+                </div>
+            `;
+            return;
+        }
+
+        let filteredBookings = allBookings.filter(b => b.user_id === currentUser.id);
+
+        if (currentTab === 'pending') {
+            filteredBookings = filteredBookings.filter(b => b.status === 'pending');
+        } else if (currentTab === 'confirmed') {
+            filteredBookings = filteredBookings.filter(b => b.status === 'confirmed');
+        }
+
+        if (filteredBookings.length === 0) {
+            let message = '';
+            if (currentTab === 'pending') message = 'Нет бронирований в ожидании';
+            else if (currentTab === 'confirmed') message = 'Нет подтверждённых бронирований';
+            else message = 'У вас пока нет бронирований';
+
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-calendar-times"></i>
+                    <h3>${message}</h3>
+                    <p>Перейдите в каталог и забронируйте жильё</p>
+                    <button class="btn-outline-light" onclick="window.location.href='catalog.html'">Перейти в каталог</button>
+                </div>
+            `;
+            return;
+        }
+
+        const listings = await getListings();
+
+        container.innerHTML = filteredBookings.map(booking => {
+            const listing = listings.find(l => l.id === booking.listing_id);
+            return `
+                <div class="booking-card">
+                    <div class="booking-image">
+                        <img src="${listing?.image || 'https://placehold.co/400x200/2c7da0/white?text=BroSky'}" alt="${listing?.title}">
+                        <span class="status-badge status-${booking.status}">${getStatusText(booking.status)}</span>
+                    </div>
+                    <div class="booking-info">
+                        <div class="booking-title">${listing?.title || 'Объявление удалено'}</div>
+                        <div class="booking-location"><i class="fas fa-map-marker-alt"></i> ${listing?.city || '—'}</div>
+                        <div class="booking-dates">
+                            <p><span>📅 Заезд:</span> <strong>${formatDate(booking.checkin)}</strong></p>
+                            <p><span>📅 Выезд:</span> <strong>${formatDate(booking.checkout)}</strong></p>
+                            <p><span>👥 Гостей:</span> <strong>${booking.guests || 2}</strong></p>
+                            <p><span>🌙 Ночей:</span> <strong>${booking.days || 1}</strong></p>
+                        </div>
+                        <div class="booking-price">${(booking.total_price || listing?.price * (booking.days || 1)).toLocaleString()} ₽</div>
+                        <div class="booking-actions">
+                            <button class="btn-cancel" onclick="cancelBooking(${booking.id})"><i class="fas fa-times"></i> Отменить</button>
+                            <a href="listing-detail.html?id=${booking.listing_id}" class="btn-rebook"><i class="fas fa-redo-alt"></i> Забронировать снова</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    async function loadBookings() {
+        allBookings = await getBookings();
+    }
+
+    // ========== ТАБЫ ==========
+    function switchTab(tab) {
+        currentTab = tab;
+        document.querySelectorAll('.tab').forEach(t => {
+            if (t.dataset.tab === tab) t.classList.add('active');
+            else t.classList.remove('active');
+        });
+        renderBookings();
+    }
+
+    // ========== МЕНЮ ПОЛЬЗОВАТЕЛЯ ==========
     function logout() {
         localStorage.removeItem('brosky_current_user');
         window.location.href = 'index.html';
     }
 
     function toggleDropdown() {
-        const dropdown = document.getElementById('dropdownMenu');
-        if (dropdown) dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        const d = document.getElementById('dropdownMenu');
+        if (d) d.style.display = d.style.display === 'none' ? 'block' : 'none';
     }
 
     function updateUserMenu() {
         const userMenu = document.getElementById('userMenu');
         if (!userMenu) return;
-        const currentUser = getCurrentUser();
-
+        currentUser = getCurrentUser();
         if (currentUser) {
             userMenu.innerHTML = `
-                <div class="user-dropdown" style="position: relative; display: inline-block;">
-                    <button class="btn-outline-light" onclick="toggleDropdown()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <div class="user-dropdown">
+                    <button class="btn-outline-light" onclick="toggleDropdown()">
                         <i class="fas fa-user-circle"></i> ${currentUser.name}
                         <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
                     </button>
-                    <div id="dropdownMenu" style="display: none; position: absolute; right: 0; top: 100%; background: white; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 200px; margin-top: 8px; z-index: 1000;">
-                        <a href="my-bookings.html" style="display: block; padding: 12px 16px; text-decoration: none; color: #2c3e44; border-bottom: 1px solid #eef2f7;"><i class="fas fa-calendar-check"></i> Мои брони</a>
-                        <a href="favorites.html" style="display: block; padding: 12px 16px; text-decoration: none; color: #2c3e44; border-bottom: 1px solid #eef2f7;"><i class="fas fa-heart"></i> Избранное</a>
-                        <a href="javascript:void(0)" onclick="logout()" style="display: block; padding: 12px 16px; text-decoration: none; color: #e74c3c;"><i class="fas fa-sign-out-alt"></i> Выйти</a>
+                    <div class="dropdown-menu" id="dropdownMenu" style="display: none;">
+                        <a href="my-bookings.html"><i class="fas fa-calendar-check"></i> Мои брони</a>
+                        <a href="favorites.html"><i class="fas fa-heart"></i> Избранное</a>
+                        <a href="#" onclick="logout()" class="logout"><i class="fas fa-sign-out-alt"></i> Выйти</a>
                     </div>
                 </div>
             `;
         } else {
-            userMenu.innerHTML = `<a href="login.html" class="btn-outline-light"><i class="far fa-user"></i> Войти</a>`;
+            userMenu.innerHTML = `<button class="btn-outline-light" onclick="window.location.href='login.html'"><i class="far fa-user"></i> Войти</button>`;
         }
     }
 
     function checkAndShowAdminLink() {
-        const currentUser = getCurrentUser();
         const adminLink = document.getElementById('adminLink');
         if (adminLink && currentUser && currentUser.email === 'admin@brosky.ru') {
             adminLink.style.display = 'inline-block';
@@ -398,18 +712,26 @@
         }
     }
 
-    document.addEventListener('click', function(event) {
-        const dropdown = document.getElementById('dropdownMenu');
-        if (dropdown && !event.target.closest('.user-dropdown')) {
-            dropdown.style.display = 'none';
-        }
+    document.addEventListener('click', function(e) {
+        const d = document.getElementById('dropdownMenu');
+        if (d && !e.target.closest('.user-dropdown')) d.style.display = 'none';
     });
 
     window.cancelBooking = cancelBooking;
+    window.switchTab = switchTab;
 
-    renderBookings();
-    updateUserMenu();
-    checkAndShowAdminLink();
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+    });
+
+    async function init() {
+        updateUserMenu();
+        checkAndShowAdminLink();
+        await loadBookings();
+        await renderBookings();
+    }
+
+    init();
 </script>
 </body>
 </html>

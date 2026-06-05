@@ -7,11 +7,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%);
+        }
 
         :root {
             --primary-blue: #2c7da0;
+            --accent-teal: #3DCFB6;
+            --accent-purple: #5B56E0;
+            --accent-coral: #FF6B6B;
+            --soft-blue: #d4e6f1;
+            --light-slate: #eef2f7;
             --pure-white: #ffffff;
             --cool-gray: #5a6e7c;
             --charcoal: #2c3e44;
@@ -19,8 +32,13 @@
             --transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 32px; }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
 
+        /* ========== ШАПКА ========== */
         header {
             padding: 24px 0 16px;
             backdrop-filter: blur(8px);
@@ -49,14 +67,17 @@
             text-decoration: none;
         }
 
-        .logo i { color: var(--primary-blue); font-size: 2rem; }
+        .logo i {
+            color: var(--accent-teal);
+            font-size: 2rem;
+        }
 
         .btn-outline-light {
-            border: 1.5px solid var(--primary-blue);
+            border: 1.5px solid var(--accent-purple);
             background: transparent;
             padding: 8px 20px;
             border-radius: 40px;
-            color: var(--primary-blue);
+            color: var(--accent-purple);
             font-weight: 600;
             text-decoration: none;
             transition: var(--transition);
@@ -67,15 +88,28 @@
         }
 
         .btn-outline-light:hover {
-            background: var(--primary-blue);
+            background: var(--accent-purple);
             color: white;
         }
 
+        /* ========== ЗАГОЛОВОК ========== */
+        .page-header {
+            margin: 30px 0 20px;
+        }
+
+        .page-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--charcoal);
+        }
+
+        /* ========== ТАБЫ ========== */
         .admin-tabs {
             display: flex;
             gap: 16px;
-            margin: 30px 0 24px;
+            margin-bottom: 24px;
             border-bottom: 2px solid #eef2f7;
+            flex-wrap: wrap;
         }
 
         .admin-tab {
@@ -87,15 +121,16 @@
             border-bottom: 2px solid transparent;
         }
 
-        .admin-tab:hover { color: var(--primary-blue); }
-        .admin-tab.active {
+        .admin-tab:hover {
             color: var(--primary-blue);
-            border-bottom-color: var(--primary-blue);
         }
 
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        .admin-tab.active {
+            color: var(--accent-purple);
+            border-bottom-color: var(--accent-purple);
+        }
 
+        /* ========== СТАТИСТИКА ========== */
         .stats {
             display: flex;
             gap: 24px;
@@ -110,15 +145,28 @@
             box-shadow: var(--shadow-sm);
             flex: 1;
             min-width: 150px;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
         }
 
         .stat-number {
             font-size: 2rem;
             font-weight: 800;
-            color: var(--primary-blue);
+            color: var(--accent-purple);
         }
 
-        .listings-table, .bookings-table {
+        .stat-label {
+            color: var(--cool-gray);
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        /* ========== ТАБЛИЦЫ ========== */
+        .table-wrapper {
             background: white;
             border-radius: 24px;
             overflow-x: auto;
@@ -140,13 +188,19 @@
             background: #f8fafc;
             font-weight: 600;
             color: var(--charcoal);
+            font-size: 0.9rem;
         }
 
+        td {
+            font-size: 0.85rem;
+        }
+
+        /* ========== СТАТУСЫ ========== */
         .status-badge {
             display: inline-block;
             padding: 4px 12px;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
         }
 
@@ -155,71 +209,81 @@
             color: #856404;
         }
 
-        .status-approved {
+        .status-confirmed {
             background: #d4edda;
             color: #155724;
         }
 
-        .status-rejected {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
+        /* ========== КНОПКИ ДЕЙСТВИЙ ========== */
         .btn-approve {
-            background: #27ae60;
+            background: var(--accent-teal);
             color: white;
             border: none;
-            padding: 6px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
             cursor: pointer;
             margin-right: 6px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-approve:hover {
+            background: #2cb89f;
+            transform: translateY(-1px);
         }
 
         .btn-reject {
-            background: #e74c3c;
+            background: var(--accent-coral);
             color: white;
             border: none;
-            padding: 6px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
             cursor: pointer;
-            margin-right: 6px;
+            font-weight: 500;
+            transition: var(--transition);
         }
 
-        .btn-view {
-            background: var(--primary-blue);
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 20px;
-            cursor: pointer;
+        .btn-reject:hover {
+            background: #e55a5a;
+            transform: translateY(-1px);
         }
 
         .listing-image-preview {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             object-fit: cover;
             border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
         }
 
+        .listing-image-preview:hover {
+            transform: scale(1.05);
+        }
+
+        /* ========== ПУСТЫЕ СОСТОЯНИЯ ========== */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--cool-gray);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        /* ========== ПОДВАЛ ========== */
         footer {
             text-align: center;
             padding: 30px 0;
             margin-top: 40px;
             color: var(--cool-gray);
+            border-top: 1px solid rgba(44, 125, 160, 0.2);
         }
 
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #2c3e44;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 48px;
-            z-index: 1000;
-            animation: slideIn 0.3s ease;
-        }
-
+        /* ========== МОДАЛЬНОЕ ОКНО ДЛЯ ФОТО ========== */
         .modal {
             display: none;
             position: fixed;
@@ -227,10 +291,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 2000;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
         }
 
         .modal.active {
@@ -238,24 +303,36 @@
         }
 
         .modal-content {
-            background: white;
-            border-radius: 24px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            padding: 24px;
+            max-width: 90%;
+            max-height: 90%;
         }
 
         .modal-content img {
             width: 100%;
+            height: auto;
             border-radius: 16px;
         }
 
         .modal-close {
-            float: right;
-            font-size: 1.5rem;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2rem;
+            color: white;
             cursor: pointer;
+        }
+
+        /* ========== УВЕДОМЛЕНИЯ ========== */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--charcoal);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 48px;
+            z-index: 1100;
+            animation: slideIn 0.3s ease;
         }
 
         @keyframes slideIn {
@@ -264,8 +341,19 @@
         }
 
         @media (max-width: 768px) {
-            .container { padding: 0 20px; }
-            th, td { padding: 8px; font-size: 0.75rem; }
+            .container {
+                padding: 0 20px;
+            }
+            th, td {
+                padding: 10px;
+                font-size: 0.75rem;
+            }
+            .stat-card {
+                padding: 12px 16px;
+            }
+            .stat-number {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -275,11 +363,11 @@
     <div class="container">
         <div class="navbar">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="BroSky" style="height: 50px; width: auto;">
+                <img src="images/logo.png" alt="BroSky" style="height: 40px;">
                 <span>BroSky</span>
             </a>
             <div>
-                <a href="index.html" class="btn-outline-light">На сайт</a>
+                <a href="index.html" class="btn-outline-light"><i class="fas fa-home"></i> На сайт</a>
             </div>
         </div>
     </div>
@@ -287,20 +375,30 @@
 
 <main>
     <div class="container">
-        <h1 style="margin: 30px 0 20px; font-size: 1.8rem;"><i class="fas fa-chart-line"></i> Панель управления</h1>
+        <div class="page-header">
+            <h1><i class="fas fa-chart-line"></i> Панель управления</h1>
+        </div>
 
         <div class="admin-tabs">
-            <div class="admin-tab active" data-tab="bookings">Бронирования</div>
-            <div class="admin-tab" data-tab="listings">Заявки на жильё</div>
+            <div class="admin-tab active" data-tab="bookings">📋 Бронирования</div>
+            <div class="admin-tab" data-tab="listings">🏠 Заявки на жильё</div>
         </div>
 
         <!-- Вкладка: Бронирования -->
         <div id="bookingsTab" class="tab-content active">
             <div class="stats" id="bookingsStats"></div>
-            <div class="bookings-table">
+            <div class="table-wrapper">
                 <table>
                     <thead>
-                        <tr><th>ID</th><th>Пользователь</th><th>Объявление</th><th>Даты</th><th>Сумма</th><th>Статус</th><th>Действия</th></tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Пользователь</th>
+                            <th>Объявление</th>
+                            <th>Даты</th>
+                            <th>Сумма</th>
+                            <th>Статус</th>
+                            <th>Действия</th>
+                        </tr>
                     </thead>
                     <tbody id="bookingsTableBody"></tbody>
                 </table>
@@ -308,12 +406,21 @@
         </div>
 
         <!-- Вкладка: Заявки на жильё -->
-        <div id="listingsTab" class="tab-content">
+        <div id="listingsTab" class="tab-content" style="display: none;">
             <div class="stats" id="listingsStats"></div>
-            <div class="listings-table">
+            <div class="table-wrapper">
                 <table>
                     <thead>
-                        <tr><th>ID</th><th>От кого</th><th>Название</th><th>Город</th><th>Цена</th><th>Фото</th><th>Статус</th><th>Действия</th></tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>От кого</th>
+                            <th>Название</th>
+                            <th>Город</th>
+                            <th>Цена</th>
+                            <th>Фото</th>
+                            <th>Статус</th>
+                            <th>Действия</th>
+                        </tr>
                     </thead>
                     <tbody id="listingsTableBody"></tbody>
                 </table>
@@ -322,159 +429,68 @@
     </div>
 </main>
 
-<footer><div class="container"><p><i class="fas fa-dove"></i> BroSky — Административная панель</p></div></footer>
+<footer>
+    <div class="container">
+        <p><i class="fas fa-dove"></i> BroSky — Административная панель</p>
+    </div>
+</footer>
 
 <!-- Модальное окно для просмотра фото -->
 <div id="imageModal" class="modal" onclick="closeModal()">
+    <span class="modal-close" onclick="closeModal()">&times;</span>
     <div class="modal-content" onclick="event.stopPropagation()">
-        <span class="modal-close" onclick="closeModal()">&times;</span>
-        <img id="modalImage" src="">
-        <h3 id="modalTitle" style="margin-top: 16px;"></h3>
-        <p id="modalDesc"></p>
+        <img id="modalImage" src="" alt="">
     </div>
 </div>
 
 <script>
+    // ========== НАСТРОЙКИ SUPABASE ==========
+    const SUPABASE_URL = 'https://bgyjgzzvoxyvpysywvlb.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJneWpnenp2b3h5dnB5c3l3dmxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2Mzk3NjQsImV4cCI6MjA5NjIxNTc2NH0.Yz91MvAXo45Z3hq-76V5yBD4aB_2dFgpjXDBDWG9FHM';
     const ADMIN_EMAIL = 'admin@brosky.ru';
 
-    function getCurrentUser() {
+    // ========== ФУНКЦИИ SUPABASE ==========
+    async function supabaseRequest(table, method = 'GET', data = null, id = null) {
+        let url = `${SUPABASE_URL}/rest/v1/${table}`;
+        const headers = {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`,
+            'Content-Type': 'application/json'
+        };
+        let options = { method, headers };
+        if (method === 'GET') { if (id) url += `?id=eq.${id}`; }
+        else if (method === 'POST') { options.body = JSON.stringify(data); }
+        else if (method === 'PATCH') { url += `?id=eq.${id}`; options.body = JSON.stringify(data); }
+        else if (method === 'DELETE') { url += `?id=eq.${id}`; }
         try {
-            const user = localStorage.getItem('brosky_current_user');
-            return user ? JSON.parse(user) : null;
-        } catch(e) { return null; }
+            const response = await fetch(url, options);
+            if (!response.ok) throw new Error(`Ошибка ${response.status}`);
+            if (method === 'GET') return await response.json();
+            return { success: true };
+        } catch (error) { console.error(error); return null; }
     }
 
-    function checkAdminAccess() {
-        const currentUser = getCurrentUser();
-        if (!currentUser || currentUser.email !== ADMIN_EMAIL) {
-            alert('Доступ только для администратора! Войдите как admin@brosky.ru');
-            window.location.href = 'login.html';
-            return false;
-        }
-        return true;
-    }
+    async function getBookings() { return (await supabaseRequest('bookings', 'GET')) || []; }
+    async function getUsers() { return (await supabaseRequest('users', 'GET')) || []; }
+    async function getPendingListings() { return (await supabaseRequest('pending_listings', 'GET')) || []; }
+    async function getMainListings() { return (await supabaseRequest('listings', 'GET')) || []; }
+    async function addMainListing(listing) { return await supabaseRequest('listings', 'POST', listing); }
+    async function deletePendingListing(id) { return await supabaseRequest('pending_listings', 'DELETE', null, id); }
+    async function updateBookingStatus(id, status) { return await supabaseRequest('bookings', 'PATCH', { status }, id); }
+    async function deleteBooking(id) { return await supabaseRequest('bookings', 'DELETE', null, id); }
 
-    // ========== БРОНИРОВАНИЯ ==========
-    function getBookings() {
-        const bookings = localStorage.getItem('brosky_bookings');
-        return bookings ? JSON.parse(bookings) : [];
-    }
-
-    function saveBookings(bookings) {
-        localStorage.setItem('brosky_bookings', JSON.stringify(bookings));
-    }
-
-    // ========== ЗАЯВКИ НА ЖИЛЬЁ ==========
-    function getPendingListings() {
-        const listings = localStorage.getItem('brosky_pending_listings');
-        return listings ? JSON.parse(listings) : [];
-    }
-
-    function savePendingListings(listings) {
-        localStorage.setItem('brosky_pending_listings', JSON.stringify(listings));
-    }
-
-    // ========== ОСНОВНЫЕ ОБЪЯВЛЕНИЯ (каталог) ==========
-    function getMainListings() {
-        const listings = localStorage.getItem('brosky_main_listings');
-        if (listings) return JSON.parse(listings);
-
-        // Дефолтные объявления, если ещё нет
-        const defaultListings = [
-            { id: 1, title: "Светлая студия в центре", city: "Москва", type: "apartment", address: "Москва, ул. Тверская", price: 4500, beds: 1, baths: 1, guests: 2, description: "Просторная светлая студия...", amenities: ["Wi-Fi", "Кухня"], image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500&h=300&fit=crop" },
-            { id: 2, title: "Дизайнерский лофт", city: "СПб", type: "loft", address: "СПб, Невский пр.", price: 6800, beds: 2, baths: 1, guests: 4, description: "Стильный лофт...", amenities: ["Wi-Fi", "Кухня"], image: "https://images.unsplash.com/photo-1536376072261-38c75010e6c9?w=500&h=300&fit=crop" },
-            { id: 3, title: "Коттедж с садом", city: "Сочи", type: "house", address: "Сочи, Адлерский р-н", price: 12000, beds: 3, baths: 2, guests: 6, description: "Уютный коттедж...", amenities: ["Wi-Fi", "Сауна"], image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=500&h=300&fit=crop" },
-            { id: 4, title: "Уютная двушка", city: "Казань", type: "apartment", address: "Казань, ул. Баумана", price: 3200, beds: 2, baths: 1, guests: 4, description: "Уютная квартира...", amenities: ["Wi-Fi"], image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500&h=300&fit=crop" },
-            { id: 5, title: "Loft с панорамным видом", city: "Москва", type: "loft", address: "Москва, Москва-Сити", price: 9500, beds: 2, baths: 2, guests: 4, description: "Лофт с видом...", amenities: ["Wi-Fi", "Джакузи"], image: "https://images.unsplash.com/photo-1567767292278-a4f21aa2d36c?w=500&h=300&fit=crop" },
-            { id: 6, title: "Дом у моря", city: "Сочи", type: "house", address: "Сочи, Лазаревское", price: 15000, beds: 4, baths: 2, guests: 8, description: "Вилла у моря...", amenities: ["Wi-Fi", "Камин"], image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&h=300&fit=crop" }
-        ];
-        localStorage.setItem('brosky_main_listings', JSON.stringify(defaultListings));
-        return defaultListings;
-    }
-
-    function saveMainListings(listings) {
-        localStorage.setItem('brosky_main_listings', JSON.stringify(listings));
+    // ========== ПОЛЬЗОВАТЕЛЬ ==========
+    function getCurrentUser() {
+        try { const user = localStorage.getItem('brosky_current_user'); return user ? JSON.parse(user) : null; }
+        catch(e) { return null; }
     }
 
     function showToast(message) {
         const toast = document.createElement('div');
         toast.className = 'toast';
-        toast.textContent = message;
+        toast.innerHTML = message;
         document.body.appendChild(toast);
         setTimeout(() => toast.remove(), 2500);
-    }
-
-    // ========== ОДОБРЕНИЕ ЗАЯВКИ ==========
-    function approveListing(listingId) {
-        if (!confirm('Подтвердить добавление этого объявления в каталог?')) return;
-
-        const pendingListings = getPendingListings();
-        const listing = pendingListings.find(l => l.id === listingId);
-
-        if (listing) {
-            // Удаляем из заявок
-            const updatedPending = pendingListings.filter(l => l.id !== listingId);
-            savePendingListings(updatedPending);
-
-            // Добавляем в основной каталог
-            const mainListings = getMainListings();
-            const newId = Math.max(...mainListings.map(l => l.id), 0) + 1;
-            const newListing = {
-                id: newId,
-                title: listing.title,
-                city: listing.city,
-                type: listing.type,
-                address: listing.address,
-                price: listing.price,
-                beds: listing.beds,
-                baths: listing.baths,
-                guests: listing.guests,
-                description: listing.description,
-                amenities: listing.amenities,
-                image: listing.image
-            };
-            mainListings.push(newListing);
-            saveMainListings(mainListings);
-
-            showToast(`✅ Объявление "${listing.title}" добавлено в каталог!`);
-        }
-
-        renderListingsTab();
-    }
-
-    // ========== ОТКЛОНЕНИЕ ЗАЯВКИ ==========
-    function rejectListing(listingId) {
-        if (!confirm('Отклонить заявку? Пользователь получит уведомление.')) return;
-
-        const pendingListings = getPendingListings();
-        const updated = pendingListings.filter(l => l.id !== listingId);
-        savePendingListings(updated);
-
-        showToast('❌ Заявка отклонена');
-        renderListingsTab();
-    }
-
-    // ========== УПРАВЛЕНИЕ БРОНИРОВАНИЯМИ ==========
-    function updateBookingStatus(bookingId, newStatus) {
-        let bookings = getBookings();
-        bookings = bookings.map(b => b.id === bookingId ? { ...b, status: newStatus } : b);
-        saveBookings(bookings);
-        renderBookingsTab();
-        showToast(`Статус брони #${bookingId} обновлён`);
-    }
-
-    function deleteBooking(bookingId) {
-        if (!confirm('Удалить бронирование?')) return;
-        let bookings = getBookings();
-        bookings = bookings.filter(b => b.id !== bookingId);
-        saveBookings(bookings);
-        renderBookingsTab();
-        showToast('Бронирование удалено');
-    }
-
-    function getUsers() {
-        const users = localStorage.getItem('brosky_users');
-        return users ? JSON.parse(users) : [];
     }
 
     function formatDate(dateStr) {
@@ -482,88 +498,153 @@
         return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
     }
 
-    // ========== ОТОБРАЖЕНИЕ ВКЛАДКИ С БРОНЯМИ ==========
-    function renderBookingsTab() {
-        const bookings = getBookings();
-        const users = getUsers();
+    // ========== ПРОВЕРКА ДОСТУПА ==========
+    function checkAdminAccess() {
+        const user = getCurrentUser();
+        if (!user || user.email !== ADMIN_EMAIL) {
+            alert('Доступ только для администратора!');
+            window.location.href = 'login.html';
+            return false;
+        }
+        return true;
+    }
+
+    // ========== БРОНИРОВАНИЯ ==========
+    async function renderBookingsTab() {
+        const bookings = await getBookings();
+        const users = await getUsers();
 
         const total = bookings.length;
-        const totalAmount = bookings.reduce((sum, b) => sum + b.totalPrice, 0);
         const pending = bookings.filter(b => b.status === 'pending').length;
+        const confirmed = bookings.filter(b => b.status === 'confirmed').length;
+        const totalAmount = bookings.reduce((sum, b) => sum + (b.total_price || 0), 0);
 
         document.getElementById('bookingsStats').innerHTML = `
-            <div class="stat-card"><div class="stat-number">${total}</div><div>Всего броней</div></div>
-            <div class="stat-card"><div class="stat-number">${pending}</div><div>Ожидают</div></div>
-            <div class="stat-card"><div class="stat-number">${totalAmount.toLocaleString()} ₽</div><div>Общая сумма</div></div>
+            <div class="stat-card"><div class="stat-number">${total}</div><div class="stat-label">Всего броней</div></div>
+            <div class="stat-card"><div class="stat-number">${pending}</div><div class="stat-label">Ожидают</div></div>
+            <div class="stat-card"><div class="stat-number">${confirmed}</div><div class="stat-label">Подтверждены</div></div>
+            <div class="stat-card"><div class="stat-number">${totalAmount.toLocaleString()} ₽</div><div class="stat-label">Общая сумма</div></div>
         `;
 
-        const getUserName = (userId) => {
-            const user = users.find(u => u.id === userId);
-            return user ? user.name : 'Неизвестный';
-        };
-
         if (bookings.length === 0) {
-            document.getElementById('bookingsTableBody').innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 40px;">Нет бронирований</td></tr>';
+            document.getElementById('bookingsTableBody').innerHTML = `
+                <tr><td colspan="7" class="empty-state"><i class="fas fa-calendar-alt"></i><br>Нет бронирований</td></tr>
+            `;
             return;
         }
 
-        document.getElementById('bookingsTableBody').innerHTML = bookings.map(booking => `
+        document.getElementById('bookingsTableBody').innerHTML = bookings.map(b => {
+            const user = users.find(u => u.id === b.user_id);
+            return `
+                <tr>
+                    <td>${b.id}</td>
+                    <td>${user?.name || 'Неизвестный'}<br><small>${user?.email || ''}</small></td>
+                    <td>${b.listing_id}</td>
+                    <td>${formatDate(b.checkin)} - ${formatDate(b.checkout)}<br><small>${b.days || 1} ночей</small></td>
+                    <td><strong>${(b.total_price || 0).toLocaleString()} ₽</strong></td>
+                    <td><span class="status-badge status-${b.status}">${b.status === 'pending' ? 'Ожидает' : 'Подтверждено'}</span></td>
+                    <td>
+                        ${b.status === 'pending' ? `<button class="btn-approve" onclick="updateBookingStatus(${b.id}, 'confirmed')">✓ Подтвердить</button>` : ''}
+                        <button class="btn-reject" onclick="deleteBooking(${b.id})">🗑 Удалить</button>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    async function updateBookingStatusHandler(id, status) {
+        const result = await updateBookingStatus(id, status);
+        if (result?.success) {
+            showToast('Статус обновлён');
+            renderBookingsTab();
+        } else {
+            showToast('Ошибка обновления');
+        }
+    }
+
+    async function deleteBookingHandler(id) {
+        if (confirm('Удалить бронирование?')) {
+            const result = await deleteBooking(id);
+            if (result?.success) {
+                showToast('Бронирование удалено');
+                renderBookingsTab();
+            } else {
+                showToast('Ошибка удаления');
+            }
+        }
+    }
+
+    // ========== ЗАЯВКИ НА ЖИЛЬЁ ==========
+    async function renderListingsTab() {
+        const pending = await getPendingListings();
+
+        document.getElementById('listingsStats').innerHTML = `
+            <div class="stat-card"><div class="stat-number">${pending.length}</div><div class="stat-label">Заявок на рассмотрении</div></div>
+            <div class="stat-card"><div class="stat-number">${pending.filter(l => l.status === 'pending').length}</div><div class="stat-label">Ожидают проверки</div></div>
+        `;
+
+        if (pending.length === 0) {
+            document.getElementById('listingsTableBody').innerHTML = `
+                <tr><td colspan="8" class="empty-state"><i class="fas fa-file-alt"></i><br>Нет заявок</td></tr>
+            `;
+            return;
+        }
+
+        document.getElementById('listingsTableBody').innerHTML = pending.map(l => `
             <tr>
-                <td>${booking.id}</td>
-                <td>${getUserName(booking.userId)}<br><small>${booking.userEmail || ''}</small></td>
-                <td>${booking.listingTitle}</td>
-                <td>${formatDate(booking.checkin)} - ${formatDate(booking.checkout)}<br><small>${booking.days} ночей</small></td>
-                <td><strong>${booking.totalPrice.toLocaleString()} ₽</strong></td>
-                <td><span class="status-badge status-${booking.status}">${booking.status === 'pending' ? 'Ожидает' : 'Подтверждено'}</span></td>
+                <td>${l.id}</td>
+                <td>${l.userName}<br><small>${l.userEmail}</small></td>
+                <td>${l.title}</td>
+                <td>${l.city}</td>
+                <td><strong>${l.price.toLocaleString()} ₽</strong></td>
+                <td><img src="${l.image}" class="listing-image-preview" onclick="viewImage('${l.image}')" onerror="this.src='https://placehold.co/50x50/2c7da0/white?text=No'"></td>
+                <td><span class="status-badge status-pending">На модерации</span></td>
                 <td>
-                    ${booking.status === 'pending' ? `<button class="btn-approve" onclick="updateBookingStatus(${booking.id}, 'confirmed')">✓ Подтвердить</button>` : ''}
-                    <button class="btn-reject" onclick="deleteBooking(${booking.id})">🗑 Удалить</button>
+                    <button class="btn-approve" onclick="approveListing(${l.id})">✅ Одобрить</button>
+                    <button class="btn-reject" onclick="rejectListing(${l.id})">❌ Отклонить</button>
                 </td>
             </tr>
         `).join('');
     }
 
-    // ========== ОТОБРАЖЕНИЕ ВКЛАДКИ С ЗАЯВКАМИ ==========
-    function renderListingsTab() {
-        const pendingListings = getPendingListings();
+    async function approveListing(id) {
+        if (!confirm('Подтвердить добавление объявления?')) return;
 
-        document.getElementById('listingsStats').innerHTML = `
-            <div class="stat-card"><div class="stat-number">${pendingListings.length}</div><div>Заявок на рассмотрении</div></div>
-            <div class="stat-card"><div class="stat-number">${pendingListings.filter(l => l.status === 'pending').length}</div><div>Ожидают проверки</div></div>
-        `;
+        const pending = await getPendingListings();
+        const listing = pending.find(l => l.id === id);
 
-        if (pendingListings.length === 0) {
-            document.getElementById('listingsTableBody').innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 40px;">Нет заявок от хозяев</td></tr>';
-            return;
+        if (listing) {
+            const { id: _, userId, userName, userEmail, status, ...newListing } = listing;
+            newListing.created_at = new Date().toISOString();
+
+            const result = await addMainListing(newListing);
+            if (result?.success) {
+                await deletePendingListing(id);
+                showToast('Объявление добавлено в каталог');
+                renderListingsTab();
+            } else {
+                showToast('Ошибка при добавлении');
+            }
         }
+    }
 
-        document.getElementById('listingsTableBody').innerHTML = pendingListings.map(listing => `
-            <tr>
-                <td>${listing.id}</td>
-                <td>${listing.userName}<br><small>${listing.userEmail}</small></td>
-                <td>${listing.title}</td>
-                <td>${listing.city}</td>
-                <td><strong>${listing.price.toLocaleString()} ₽</strong></td>
-                <td><img src="${listing.image}" class="listing-image-preview" onclick="viewImage('${listing.image}', '${listing.title}', '${listing.description.replace(/'/g, "\\'")}')" style="cursor: pointer;"></td>
-                <td><span class="status-badge status-pending">На модерации</span></td>
-                <td>
-                    <button class="btn-approve" onclick="approveListing(${listing.id})">✅ Одобрить</button>
-                    <button class="btn-reject" onclick="rejectListing(${listing.id})">❌ Отклонить</button>
-                </td>
-            </tr>
-        `).join('');
+    async function rejectListing(id) {
+        if (!confirm('Отклонить заявку?')) return;
+
+        const result = await deletePendingListing(id);
+        if (result?.success) {
+            showToast('Заявка отклонена');
+            renderListingsTab();
+        } else {
+            showToast('Ошибка при отклонении');
+        }
     }
 
     // ========== ПРОСМОТР ФОТО ==========
-    function viewImage(src, title, description) {
+    function viewImage(src) {
         const modal = document.getElementById('imageModal');
         const modalImg = document.getElementById('modalImage');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalDesc = document.getElementById('modalDesc');
-
         modalImg.src = src;
-        modalTitle.textContent = title;
-        modalDesc.textContent = description.substring(0, 200) + (description.length > 200 ? '...' : '');
         modal.classList.add('active');
     }
 
@@ -582,29 +663,29 @@
             tab.classList.add('active');
 
             if (tab.dataset.tab === 'bookings') {
-                bookingsTab.classList.add('active');
-                listingsTab.classList.remove('active');
+                bookingsTab.style.display = 'block';
+                listingsTab.style.display = 'none';
                 renderBookingsTab();
             } else {
-                bookingsTab.classList.remove('active');
-                listingsTab.classList.add('active');
+                bookingsTab.style.display = 'none';
+                listingsTab.style.display = 'block';
                 renderListingsTab();
             }
         });
     });
 
-    // ========== ИНИЦИАЛИЗАЦИЯ ==========
-    if (checkAdminAccess()) {
-        renderBookingsTab();
-        renderListingsTab();
-    }
-
+    // Глобальные функции
+    window.updateBookingStatus = updateBookingStatusHandler;
+    window.deleteBooking = deleteBookingHandler;
     window.approveListing = approveListing;
     window.rejectListing = rejectListing;
-    window.updateBookingStatus = updateBookingStatus;
-    window.deleteBooking = deleteBooking;
     window.viewImage = viewImage;
     window.closeModal = closeModal;
+
+    // Инициализация
+    if (checkAdminAccess()) {
+        renderBookingsTab();
+    }
 </script>
 </body>
 </html>
