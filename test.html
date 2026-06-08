@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Тест Supabase</title>
+</head>
+<body>
+    <h1>Тест подключения к Supabase</h1>
+    <button onclick="test()">Проверить</button>
+    <div id="result"></div>
+
+    <script>
+        // ⬇️⬇️⬇️ ЗАМЕНИ НА СВОИ ДАННЫЕ ⬇️⬇️⬇️
+        const SUPABASE_URL = 'https://bgyjgzzvoxyvpysywvlb.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJneWpnenp2b3h5dnB5c3l3dmxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2Mzk3NjQsImV4cCI6MjA5NjIxNTc2NH0.Yz91MvAXo45Z3hq-76V5yBD4aB_2dFgpjXDBDWG9FHM';
+        // ⬆️⬆️⬆️ ⬆️⬆️⬆️ ⬆️⬆️⬆️
+
+        async function test() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '⏳ Проверка...';
+            
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/listings?limit=1`, {
+                    method: 'GET',
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`
+                    }
+                });
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = '✅ Подключение к Supabase работает!';
+                } else {
+                    resultDiv.innerHTML = `❌ Ошибка: ${response.status}`;
+                }
+            } catch (err) {
+                resultDiv.innerHTML = `❌ Ошибка: ${err.message}<br><br>
+                <strong>Возможные причины:</strong><br>
+                1. Ты открываешь файл как file:// (нужен http://localhost)<br>
+                2. Неправильный URL или KEY<br>
+                3. Нет интернета`;
+            }
+        }
+    </script>
+</body>
+</html>

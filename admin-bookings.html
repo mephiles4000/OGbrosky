@@ -7,21 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%); }
 
         :root {
             --primary-blue: #2c7da0;
-            --accent-teal: #3DCFB6;
-            --accent-purple: #5B56E0;
+            --accent-pink: #FF69B4;
+            --accent-purple: #9B59B6;
             --accent-coral: #FF6B6B;
             --soft-blue: #d4e6f1;
             --light-slate: #eef2f7;
@@ -32,13 +24,8 @@
             --transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 32px;
-        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 32px; }
 
-        /* ========== ШАПКА ========== */
         header {
             padding: 24px 0 16px;
             backdrop-filter: blur(8px);
@@ -67,17 +54,14 @@
             text-decoration: none;
         }
 
-        .logo i {
-            color: var(--accent-teal);
-            font-size: 2rem;
-        }
+        .logo i { color: var(--accent-pink); font-size: 2rem; }
 
         .btn-outline-light {
-            border: 1.5px solid var(--accent-purple);
+            border: 1.5px solid var(--accent-pink);
             background: transparent;
             padding: 8px 20px;
             border-radius: 40px;
-            color: var(--accent-purple);
+            color: var(--accent-pink);
             font-weight: 600;
             text-decoration: none;
             transition: var(--transition);
@@ -87,242 +71,50 @@
             gap: 8px;
         }
 
-        .btn-outline-light:hover {
-            background: var(--accent-purple);
-            color: white;
-        }
+        .btn-outline-light:hover { background: var(--accent-pink); color: white; }
 
-        /* ========== ЗАГОЛОВОК ========== */
-        .page-header {
-            margin: 30px 0 20px;
-        }
+        .admin-tabs { display: flex; gap: 16px; margin: 30px 0 24px; border-bottom: 2px solid #eef2f7; flex-wrap: wrap; }
+        .admin-tab { padding: 12px 24px; cursor: pointer; font-weight: 600; color: var(--cool-gray); transition: var(--transition); border-bottom: 2px solid transparent; }
+        .admin-tab:hover { color: var(--primary-blue); }
+        .admin-tab.active { color: var(--accent-pink); border-bottom-color: var(--accent-pink); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
-        .page-header h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--charcoal);
-        }
+        .stats { display: flex; gap: 24px; margin-bottom: 32px; flex-wrap: wrap; }
+        .stat-card { background: white; border-radius: 24px; padding: 20px 28px; box-shadow: var(--shadow-sm); flex: 1; min-width: 150px; transition: var(--transition); }
+        .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+        .stat-number { font-size: 2rem; font-weight: 800; color: var(--accent-pink); }
+        .stat-label { color: var(--cool-gray); font-size: 0.85rem; margin-top: 4px; }
 
-        /* ========== ТАБЫ ========== */
-        .admin-tabs {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 24px;
-            border-bottom: 2px solid #eef2f7;
-            flex-wrap: wrap;
-        }
+        .table-wrapper { background: white; border-radius: 24px; overflow-x: auto; box-shadow: var(--shadow-sm); }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 16px; text-align: left; border-bottom: 1px solid #eef2f7; }
+        th { background: #f8fafc; font-weight: 600; color: var(--charcoal); font-size: 0.9rem; }
+        td { font-size: 0.85rem; }
 
-        .admin-tab {
-            padding: 12px 24px;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--cool-gray);
-            transition: var(--transition);
-            border-bottom: 2px solid transparent;
-        }
+        .status-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-confirmed { background: #d4edda; color: #155724; }
 
-        .admin-tab:hover {
-            color: var(--primary-blue);
-        }
+        .btn-approve { background: var(--accent-pink); color: white; border: none; padding: 6px 14px; border-radius: 20px; cursor: pointer; margin-right: 6px; font-weight: 500; transition: var(--transition); }
+        .btn-approve:hover { background: #e85da0; transform: translateY(-1px); }
+        .btn-reject { background: var(--accent-coral); color: white; border: none; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-weight: 500; transition: var(--transition); }
+        .btn-reject:hover { background: #e55a5a; transform: translateY(-1px); }
 
-        .admin-tab.active {
-            color: var(--accent-purple);
-            border-bottom-color: var(--accent-purple);
-        }
+        .listing-image-preview { width: 50px; height: 50px; object-fit: cover; border-radius: 8px; cursor: pointer; transition: var(--transition); }
+        .listing-image-preview:hover { transform: scale(1.05); }
 
-        /* ========== СТАТИСТИКА ========== */
-        .stats {
-            display: flex;
-            gap: 24px;
-            margin-bottom: 32px;
-            flex-wrap: wrap;
-        }
+        .empty-state { text-align: center; padding: 60px 20px; color: var(--cool-gray); }
+        .empty-state i { font-size: 3rem; margin-bottom: 16px; opacity: 0.5; }
 
-        .stat-card {
-            background: white;
-            border-radius: 24px;
-            padding: 20px 28px;
-            box-shadow: var(--shadow-sm);
-            flex: 1;
-            min-width: 150px;
-            transition: var(--transition);
-        }
+        footer { text-align: center; padding: 30px 0; margin-top: 40px; color: var(--cool-gray); border-top: 1px solid rgba(44, 125, 160, 0.2); }
 
-        .stat-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
-        }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 2000; justify-content: center; align-items: center; cursor: pointer; }
+        .modal.active { display: flex; }
+        .modal-content { max-width: 90%; max-height: 90%; }
+        .modal-content img { width: 100%; height: auto; border-radius: 16px; }
+        .modal-close { position: absolute; top: 20px; right: 30px; font-size: 2rem; color: white; cursor: pointer; }
 
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--accent-purple);
-        }
-
-        .stat-label {
-            color: var(--cool-gray);
-            font-size: 0.85rem;
-            margin-top: 4px;
-        }
-
-        /* ========== ТАБЛИЦЫ ========== */
-        .table-wrapper {
-            background: white;
-            border-radius: 24px;
-            overflow-x: auto;
-            box-shadow: var(--shadow-sm);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 16px;
-            text-align: left;
-            border-bottom: 1px solid #eef2f7;
-        }
-
-        th {
-            background: #f8fafc;
-            font-weight: 600;
-            color: var(--charcoal);
-            font-size: 0.9rem;
-        }
-
-        td {
-            font-size: 0.85rem;
-        }
-
-        /* ========== СТАТУСЫ ========== */
-        .status-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-
-        .status-pending {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .status-confirmed {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        /* ========== КНОПКИ ДЕЙСТВИЙ ========== */
-        .btn-approve {
-            background: var(--accent-teal);
-            color: white;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 20px;
-            cursor: pointer;
-            margin-right: 6px;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .btn-approve:hover {
-            background: #2cb89f;
-            transform: translateY(-1px);
-        }
-
-        .btn-reject {
-            background: var(--accent-coral);
-            color: white;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .btn-reject:hover {
-            background: #e55a5a;
-            transform: translateY(-1px);
-        }
-
-        .listing-image-preview {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .listing-image-preview:hover {
-            transform: scale(1.05);
-        }
-
-        /* ========== ПУСТЫЕ СОСТОЯНИЯ ========== */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--cool-gray);
-        }
-
-        .empty-state i {
-            font-size: 3rem;
-            margin-bottom: 16px;
-            opacity: 0.5;
-        }
-
-        /* ========== ПОДВАЛ ========== */
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 40px;
-            color: var(--cool-gray);
-            border-top: 1px solid rgba(44, 125, 160, 0.2);
-        }
-
-        /* ========== МОДАЛЬНОЕ ОКНО ДЛЯ ФОТО ========== */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            max-width: 90%;
-            max-height: 90%;
-        }
-
-        .modal-content img {
-            width: 100%;
-            height: auto;
-            border-radius: 16px;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 2rem;
-            color: white;
-            cursor: pointer;
-        }
-
-        /* ========== УВЕДОМЛЕНИЯ ========== */
         .toast {
             position: fixed;
             bottom: 20px;
@@ -334,26 +126,16 @@
             z-index: 1100;
             animation: slideIn 0.3s ease;
         }
-
         @keyframes slideIn {
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 0 20px;
-            }
-            th, td {
-                padding: 10px;
-                font-size: 0.75rem;
-            }
-            .stat-card {
-                padding: 12px 16px;
-            }
-            .stat-number {
-                font-size: 1.5rem;
-            }
+            .container { padding: 0 20px; }
+            th, td { padding: 10px; font-size: 0.75rem; }
+            .stat-card { padding: 12px 16px; }
+            .stat-number { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -362,65 +144,39 @@
 <header>
     <div class="container">
         <div class="navbar">
-            <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="BroSky" style="height: 40px;">
-                <span>BroSky</span>
-            </a>
-            <div>
-                <a href="index.html" class="btn-outline-light"><i class="fas fa-home"></i> На сайт</a>
-            </div>
+            <a href="index.html" class="logo"><i class="fas fa-cloud"></i><span>BroSky Admin</span></a>
+            <div><a href="index.html" class="btn-outline-light"><i class="fas fa-home"></i> На сайт</a></div>
         </div>
     </div>
 </header>
 
 <main>
     <div class="container">
-        <div class="page-header">
-            <h1><i class="fas fa-chart-line"></i> Панель управления</h1>
-        </div>
+        <h1 style="margin: 30px 0 20px; font-size: 1.8rem;"><i class="fas fa-chart-line"></i> Панель управления</h1>
 
         <div class="admin-tabs">
             <div class="admin-tab active" data-tab="bookings">📋 Бронирования</div>
             <div class="admin-tab" data-tab="listings">🏠 Заявки на жильё</div>
         </div>
 
-        <!-- Вкладка: Бронирования -->
         <div id="bookingsTab" class="tab-content active">
             <div class="stats" id="bookingsStats"></div>
             <div class="table-wrapper">
                 <table>
                     <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Пользователь</th>
-                            <th>Объявление</th>
-                            <th>Даты</th>
-                            <th>Сумма</th>
-                            <th>Статус</th>
-                            <th>Действия</th>
-                        </tr>
+                        <tr><th>ID</th><th>Пользователь</th><th>Объявление</th><th>Даты</th><th>Сумма</th><th>Статус</th><th>Действия</th></tr>
                     </thead>
                     <tbody id="bookingsTableBody"></tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Вкладка: Заявки на жильё -->
-        <div id="listingsTab" class="tab-content" style="display: none;">
+        <div id="listingsTab" class="tab-content">
             <div class="stats" id="listingsStats"></div>
             <div class="table-wrapper">
                 <table>
                     <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>От кого</th>
-                            <th>Название</th>
-                            <th>Город</th>
-                            <th>Цена</th>
-                            <th>Фото</th>
-                            <th>Статус</th>
-                            <th>Действия</th>
-                        </tr>
+                        <tr><th>ID</th><th>От кого</th><th>Название</th><th>Город</th><th>Цена</th><th>Фото</th><th>Статус</th><th>Действия</th></tr>
                     </thead>
                     <tbody id="listingsTableBody"></tbody>
                 </table>
@@ -429,13 +185,8 @@
     </div>
 </main>
 
-<footer>
-    <div class="container">
-        <p><i class="fas fa-dove"></i> BroSky — Административная панель</p>
-    </div>
-</footer>
+<footer><div class="container"><p><i class="fas fa-dove"></i> BroSky — Административная панель</p></div></footer>
 
-<!-- Модальное окно для просмотра фото -->
 <div id="imageModal" class="modal" onclick="closeModal()">
     <span class="modal-close" onclick="closeModal()">&times;</span>
     <div class="modal-content" onclick="event.stopPropagation()">
@@ -445,6 +196,7 @@
 
 <script>
     // ========== НАСТРОЙКИ SUPABASE ==========
+    // ⬇️⬇️⬇️ ЗАМЕНИ НА СВОИ ДАННЫЕ ИЗ SUPABASE ⬇️⬇️⬇️
     const SUPABASE_URL = 'https://bgyjgzzvoxyvpysywvlb.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJneWpnenp2b3h5dnB5c3l3dmxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2Mzk3NjQsImV4cCI6MjA5NjIxNTc2NH0.Yz91MvAXo45Z3hq-76V5yBD4aB_2dFgpjXDBDWG9FHM';
     const ADMIN_EMAIL = 'admin@brosky.ru';
@@ -470,19 +222,37 @@
         } catch (error) { console.error(error); return null; }
     }
 
-    async function getBookings() { return (await supabaseRequest('bookings', 'GET')) || []; }
-    async function getUsers() { return (await supabaseRequest('users', 'GET')) || []; }
-    async function getPendingListings() { return (await supabaseRequest('pending_listings', 'GET')) || []; }
-    async function getMainListings() { return (await supabaseRequest('listings', 'GET')) || []; }
-    async function addMainListing(listing) { return await supabaseRequest('listings', 'POST', listing); }
-    async function deletePendingListing(id) { return await supabaseRequest('pending_listings', 'DELETE', null, id); }
-    async function updateBookingStatus(id, status) { return await supabaseRequest('bookings', 'PATCH', { status }, id); }
-    async function deleteBooking(id) { return await supabaseRequest('bookings', 'DELETE', null, id); }
+    async function getBookings() {
+        const result = await supabaseRequest('bookings', 'GET');
+        return result || [];
+    }
+    async function getUsers() {
+        const result = await supabaseRequest('users', 'GET');
+        return result || [];
+    }
+    async function getPendingListings() {
+        const result = await supabaseRequest('pending_listings', 'GET');
+        return result || [];
+    }
+    async function addMainListing(listing) {
+        return await supabaseRequest('listings', 'POST', listing);
+    }
+    async function deletePendingListing(id) {
+        return await supabaseRequest('pending_listings', 'DELETE', null, id);
+    }
+    async function updateBookingStatus(id, status) {
+        return await supabaseRequest('bookings', 'PATCH', { status }, id);
+    }
+    async function deleteBooking(id) {
+        return await supabaseRequest('bookings', 'DELETE', null, id);
+    }
 
     // ========== ПОЛЬЗОВАТЕЛЬ ==========
     function getCurrentUser() {
-        try { const user = localStorage.getItem('brosky_current_user'); return user ? JSON.parse(user) : null; }
-        catch(e) { return null; }
+        try {
+            const user = localStorage.getItem('brosky_current_user');
+            return user ? JSON.parse(user) : null;
+        } catch(e) { return null; }
     }
 
     function showToast(message) {
@@ -494,6 +264,7 @@
     }
 
     function formatDate(dateStr) {
+        if (!dateStr) return '—';
         const d = new Date(dateStr);
         return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
     }
@@ -527,9 +298,7 @@
         `;
 
         if (bookings.length === 0) {
-            document.getElementById('bookingsTableBody').innerHTML = `
-                <tr><td colspan="7" class="empty-state"><i class="fas fa-calendar-alt"></i><br>Нет бронирований</td></tr>
-            `;
+            document.getElementById('bookingsTableBody').innerHTML = '<tr><td colspan="7" class="empty-state"><i class="fas fa-calendar-alt"></i><br>Нет бронирований</td></tr>';
             return;
         }
 
@@ -545,7 +314,7 @@
                     <td><span class="status-badge status-${b.status}">${b.status === 'pending' ? 'Ожидает' : 'Подтверждено'}</span></td>
                     <td>
                         ${b.status === 'pending' ? `<button class="btn-approve" onclick="updateBookingStatus(${b.id}, 'confirmed')">✓ Подтвердить</button>` : ''}
-                        <button class="btn-reject" onclick="deleteBooking(${b.id})">🗑 Удалить</button>
+                        <button class="btn-reject" onclick="deleteBookingHandler(${b.id})">🗑 Удалить</button>
                     </td>
                 </tr>
             `;
@@ -558,7 +327,7 @@
             showToast('Статус обновлён');
             renderBookingsTab();
         } else {
-            showToast('Ошибка обновления');
+            showToast('Ошибка обновления статуса');
         }
     }
 
@@ -580,13 +349,10 @@
 
         document.getElementById('listingsStats').innerHTML = `
             <div class="stat-card"><div class="stat-number">${pending.length}</div><div class="stat-label">Заявок на рассмотрении</div></div>
-            <div class="stat-card"><div class="stat-number">${pending.filter(l => l.status === 'pending').length}</div><div class="stat-label">Ожидают проверки</div></div>
         `;
 
         if (pending.length === 0) {
-            document.getElementById('listingsTableBody').innerHTML = `
-                <tr><td colspan="8" class="empty-state"><i class="fas fa-file-alt"></i><br>Нет заявок</td></tr>
-            `;
+            document.getElementById('listingsTableBody').innerHTML = '<tr><td colspan="8" class="empty-state"><i class="fas fa-file-alt"></i><br>Нет заявок</td></tr>';
             return;
         }
 
@@ -663,12 +429,12 @@
             tab.classList.add('active');
 
             if (tab.dataset.tab === 'bookings') {
-                bookingsTab.style.display = 'block';
-                listingsTab.style.display = 'none';
+                bookingsTab.classList.add('active');
+                listingsTab.classList.remove('active');
                 renderBookingsTab();
             } else {
-                bookingsTab.style.display = 'none';
-                listingsTab.style.display = 'block';
+                bookingsTab.classList.remove('active');
+                listingsTab.classList.add('active');
                 renderListingsTab();
             }
         });
@@ -676,7 +442,7 @@
 
     // Глобальные функции
     window.updateBookingStatus = updateBookingStatusHandler;
-    window.deleteBooking = deleteBookingHandler;
+    window.deleteBookingHandler = deleteBookingHandler;
     window.approveListing = approveListing;
     window.rejectListing = rejectListing;
     window.viewImage = viewImage;
@@ -685,6 +451,7 @@
     // Инициализация
     if (checkAdminAccess()) {
         renderBookingsTab();
+        renderListingsTab();
     }
 </script>
 </body>

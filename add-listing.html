@@ -15,147 +15,38 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%);
-            color: #1a2c3e;
-        }
-
-        :root {
-            --primary-blue: #2c7da0;
-            --accent-teal: #3DCFB6;
-            --accent-purple: #5B56E0;
-            --accent-coral: #FF6B6B;
-            --soft-blue: #d4e6f1;
-            --light-slate: #eef2f7;
-            --pure-white: #ffffff;
-            --cool-gray: #5a6e7c;
-            --charcoal: #2c3e44;
-            --shadow-sm: 0 12px 28px rgba(0, 32, 64, 0.08);
-            --shadow-hover: 0 20px 32px rgba(27, 65, 92, 0.12);
-            --transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
+            min-height: 100vh;
+            padding: 40px;
         }
 
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 0 32px;
         }
 
-        /* ========== ШАПКА ========== */
-        header {
-            padding: 24px 0 16px;
-            backdrop-filter: blur(8px);
-            background: rgba(255, 255, 255, 0.72);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(44, 125, 160, 0.15);
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--charcoal);
-            text-decoration: none;
-        }
-
-        .logo i {
-            color: var(--accent-teal);
-            font-size: 2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover i {
-            transform: scale(1.05) rotate(-2deg);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            font-weight: 500;
-            color: var(--cool-gray);
-            transition: var(--transition);
-            font-size: 1rem;
-            position: relative;
-        }
-
-        .nav-links a:after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: var(--accent-purple);
-            transition: width 0.25s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-blue);
-        }
-
-        .nav-links a:hover:after {
-            width: 100%;
-        }
-
-        .btn-outline-light {
-            border: 1.5px solid var(--accent-purple);
-            background: transparent;
-            padding: 8px 20px;
-            border-radius: 40px;
-            color: var(--accent-purple);
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-        }
-
-        .btn-outline-light:hover {
-            background: var(--accent-purple);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* ========== ФОРМА ========== */
+        /* Карточка формы */
         .form-card {
             background: white;
             border-radius: 32px;
             padding: 48px;
-            box-shadow: var(--shadow-sm);
-            margin: 40px 0;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
         .form-card h1 {
             font-size: 2rem;
             font-weight: 700;
-            color: var(--charcoal);
+            color: #2c3e44;
             margin-bottom: 8px;
         }
 
         .form-card .subtitle {
-            color: var(--cool-gray);
+            color: #5a6e7c;
             margin-bottom: 32px;
             font-size: 0.95rem;
         }
 
+        /* Форма */
         .form-group {
             margin-bottom: 24px;
         }
@@ -164,7 +55,7 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: var(--charcoal);
+            color: #2c3e44;
         }
 
         input, select, textarea {
@@ -174,13 +65,13 @@
             border-radius: 16px;
             font-family: inherit;
             font-size: 1rem;
-            transition: var(--transition);
+            transition: all 0.3s;
         }
 
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: var(--accent-purple);
-            box-shadow: 0 0 0 3px rgba(91, 86, 224, 0.1);
+            border-color: #FF69B4;
+            box-shadow: 0 0 0 3px rgba(255,105,180,0.1);
         }
 
         textarea {
@@ -194,51 +85,46 @@
             gap: 20px;
         }
 
-        /* ========== ЗАГРУЗКА ФОТО ========== */
+        /* Загрузка фото */
         .photo-upload {
             border: 2px dashed #d0dee9;
             border-radius: 16px;
-            padding: 30px;
+            padding: 20px;
             text-align: center;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.3s;
         }
 
         .photo-upload:hover {
-            border-color: var(--accent-purple);
-            background: #f8fafc;
+            border-color: #FF69B4;
+            background: #fff0f5;
         }
 
         .photo-upload i {
-            font-size: 2.5rem;
-            color: var(--accent-purple);
-            margin-bottom: 12px;
-        }
-
-        .photo-upload p {
-            color: var(--cool-gray);
-            font-size: 0.9rem;
+            font-size: 2rem;
+            color: #FF69B4;
+            margin-bottom: 8px;
         }
 
         .photo-preview {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
             margin-top: 16px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         .photo-preview img {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             object-fit: cover;
             border-radius: 12px;
-            border: 2px solid var(--accent-teal);
+            border: 2px solid #FF69B4;
         }
 
-        /* ========== КНОПКА ОТПРАВКИ ========== */
+        /* Кнопка отправки */
         .btn-submit {
             width: 100%;
-            background: var(--accent-teal);
+            background: #FF69B4;
             color: white;
             border: none;
             padding: 16px;
@@ -246,93 +132,21 @@
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.3s;
             margin-top: 16px;
         }
 
         .btn-submit:hover {
-            background: #2cb89f;
+            background: #e85da0;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(61, 207, 182, 0.3);
         }
 
-        /* ========== СООБЩЕНИЯ ========== */
-        .success-message, .error-message {
-            padding: 14px;
-            border-radius: 16px;
-            margin-bottom: 20px;
-            display: none;
-            font-weight: 500;
-        }
-
-        .success-message {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .error-message {
-            background: #f8d7da;
-            color: var(--accent-coral);
-            border: 1px solid #f5c6cb;
-        }
-
-        /* ========== ПОДВАЛ ========== */
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            border-top: 1px solid rgba(44, 125, 160, 0.2);
-            margin-top: 40px;
-            color: var(--cool-gray);
-            font-size: 0.85rem;
-        }
-
-        /* ========== ВЫПАДАЮЩЕЕ МЕНЮ ========== */
-        .user-dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            right: 0;
-            top: 100%;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            min-width: 200px;
-            margin-top: 8px;
-            z-index: 1000;
-            overflow: hidden;
-        }
-
-        .dropdown-menu a {
-            display: block;
-            padding: 12px 16px;
-            text-decoration: none;
-            color: #2c3e44;
-            transition: background 0.2s;
-            border-bottom: 1px solid #eef2f7;
-        }
-
-        .dropdown-menu a:last-child {
-            border-bottom: none;
-        }
-
-        .dropdown-menu a:hover {
-            background: #f0f6ff;
-        }
-
-        .dropdown-menu .logout {
-            color: var(--accent-coral);
-        }
-
+        /* Уведомления (toast) */
         .toast {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: var(--charcoal);
+            background: #2c3e44;
             color: white;
             padding: 12px 24px;
             border-radius: 48px;
@@ -344,28 +158,80 @@
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
-        @keyframes slideOut {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
+
+        /* Шапка */
+        header {
+            margin-bottom: 20px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            background: rgba(255,255,255,0.95);
+            padding: 16px 32px;
+            border-radius: 60px;
+            backdrop-filter: blur(8px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c3e44;
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: #FF69B4;
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #5a6e7c;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #FF69B4;
+        }
+
+        .btn-outline-light {
+            border: 1.5px solid #FF69B4;
+            background: transparent;
+            padding: 6px 16px;
+            border-radius: 40px;
+            color: #FF69B4;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255,255,255,0.8);
+            font-size: 12px;
+            margin-top: 20px;
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 0 20px;
-            }
-            .navbar {
-                flex-direction: column;
-            }
-            .nav-links {
-                justify-content: center;
-            }
-            .form-card {
-                padding: 24px;
-            }
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
+            body { padding: 20px; }
+            .form-card { padding: 24px; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            .navbar { flex-direction: column; }
         }
     </style>
 </head>
@@ -375,7 +241,7 @@
     <div class="container">
         <div class="navbar">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="BroSky" style="height: 40px;">
+                <i class="fas fa-cloud"></i>
                 <span>BroSky</span>
             </a>
             <div class="nav-links">
@@ -384,7 +250,6 @@
                 <a href="favorites.html">Избранное</a>
                 <a href="my-bookings.html">Мои брони</a>
                 <a href="contact.html">Контакты</a>
-                <a href="admin-bookings.html" id="adminLink" style="display: none;"><i class="fas fa-chart-line"></i> Админка</a>
                 <div id="userMenu"></div>
             </div>
         </div>
@@ -394,33 +259,23 @@
 <main>
     <div class="container">
         <div class="form-card">
-            <h1><i class="fas fa-plus-circle" style="color: var(--accent-teal);"></i> Стать хозяином</h1>
-            <p class="subtitle">Заполните форму, чтобы добавить своё жильё в каталог BroSky. После модерации объявление появится на сайте.</p>
-
-            <div id="formSuccess" class="success-message">
-                <i class="fas fa-check-circle"></i> Заявка отправлена! Администратор рассмотрит её в ближайшее время.
-            </div>
-            <div id="formError" class="error-message">
-                <i class="fas fa-exclamation-triangle"></i> Ошибка! Пожалуйста, заполните все обязательные поля.
-            </div>
+            <h1><i class="fas fa-plus-circle" style="color: #FF69B4;"></i> Стать хозяином</h1>
+            <p class="subtitle">Заполните форму, чтобы добавить своё жильё в каталог BroSky</p>
 
             <form id="addListingForm">
                 <div class="form-group">
                     <label>Название объявления *</label>
-                    <input type="text" id="title" required placeholder="Например: Уютная студия в центре">
+                    <input type="text" id="title" placeholder="Например: Уютная студия в центре" required>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label>Город *</label>
                         <select id="city" required>
-                            <option value="">Выберите город</option>
                             <option value="Москва">Москва</option>
                             <option value="СПб">Санкт-Петербург</option>
                             <option value="Сочи">Сочи</option>
                             <option value="Казань">Казань</option>
-                            <option value="Екатеринбург">Екатеринбург</option>
-                            <option value="Новосибирск">Новосибирск</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -435,16 +290,16 @@
 
                 <div class="form-group">
                     <label>Адрес *</label>
-                    <input type="text" id="address" required placeholder="Улица, дом, район">
+                    <input type="text" id="address" placeholder="Улица, дом, район" required>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label>Цена за сутки (₽) *</label>
-                        <input type="number" id="price" required placeholder="3500">
+                        <input type="number" id="price" placeholder="3500" required>
                     </div>
                     <div class="form-group">
-                        <label>Количество спален *</label>
+                        <label>Количество спален</label>
                         <select id="beds">
                             <option value="1">1 спальня</option>
                             <option value="2">2 спальни</option>
@@ -456,7 +311,7 @@
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Количество ванных *</label>
+                        <label>Количество ванных</label>
                         <select id="baths">
                             <option value="1">1 ванная</option>
                             <option value="2">2 ванные</option>
@@ -464,7 +319,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Максимум гостей *</label>
+                        <label>Максимум гостей</label>
                         <select id="guests">
                             <option value="2">2 гостя</option>
                             <option value="4">4 гостя</option>
@@ -476,29 +331,27 @@
 
                 <div class="form-group">
                     <label>Описание *</label>
-                    <textarea id="description" placeholder="Расскажите о преимуществах вашего жилья: расположение, ремонт, удобства, особенности..."></textarea>
+                    <textarea id="description" rows="4" placeholder="Расскажите о преимуществах вашего жилья..." required></textarea>
                 </div>
 
                 <div class="form-group">
                     <label>Удобства (через запятую)</label>
-                    <input type="text" id="amenities" placeholder="Wi-Fi, Кухня, Телевизор, Кондиционер, Стиральная машина">
+                    <input type="text" id="amenities" placeholder="Wi-Fi, Кухня, Телевизор, Кондиционер">
                 </div>
 
                 <div class="form-group">
                     <label>Фотография жилья *</label>
                     <div class="photo-upload" onclick="document.getElementById('photoInput').click()">
                         <i class="fas fa-camera"></i>
-                        <p>Нажмите, чтобы загрузить фото</p>
-                        <p style="font-size: 0.8rem;">Рекомендуемый размер: 800x500px</p>
+                        <p>Нажмите, чтобы выбрать фото</p>
+                        <p style="font-size: 12px; color: #999;">Рекомендуемый размер: 800x500px</p>
                     </div>
-                    <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="previewPhoto(this)">
+                    <input type="file" id="photoInput" accept="image/*" style="display: none;">
                     <div class="photo-preview" id="photoPreview"></div>
                     <input type="hidden" id="photoData" value="">
                 </div>
 
-                <button type="submit" class="btn-submit" id="submitBtn">
-                    <i class="fas fa-paper-plane"></i> Отправить заявку
-                </button>
+                <button type="submit" class="btn-submit">Отправить заявку</button>
             </form>
         </div>
     </div>
@@ -511,83 +364,55 @@
 </footer>
 
 <script>
-    // ========== НАСТРОЙКИ SUPABASE ==========
+    // ================================================
+    // ВСТАВЬТЕ ВАШИ ДАННЫЕ ИЗ SUPABASE
+    // ================================================
     const SUPABASE_URL = 'https://bgyjgzzvoxyvpysywvlb.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJneWpnenp2b3h5dnB5c3l3dmxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2Mzk3NjQsImV4cCI6MjA5NjIxNTc2NH0.Yz91MvAXo45Z3hq-76V5yBD4aB_2dFgpjXDBDWG9FHM';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJneWpnenp2b3h5dnB5c3l3dmxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2Mzk3NjQsImV4cCI6MjA5NjIxNTc2NH0.Yz91MvAXo45Z3hq-76V5yBD4aB_2dFgpjXDBDWG9FHM';   // замените на свой anon public key
+    // ================================================
 
-    // ========== ФУНКЦИИ SUPABASE ==========
-    async function supabaseRequest(table, method = 'GET', data = null, id = null) {
-        let url = `${SUPABASE_URL}/rest/v1/${table}`;
-        const headers = {
-            'apikey': SUPABASE_KEY,
-            'Authorization': `Bearer ${SUPABASE_KEY}`,
-            'Content-Type': 'application/json'
-        };
-        let options = { method, headers };
-        if (method === 'GET') { if (id) url += `?id=eq.${id}`; }
-        else if (method === 'POST') { options.body = JSON.stringify(data); }
-        else if (method === 'PATCH') { url += `?id=eq.${id}`; options.body = JSON.stringify(data); }
-        else if (method === 'DELETE') { url += `?id=eq.${id}`; }
-        try {
-            const response = await fetch(url, options);
-            if (!response.ok) throw new Error(`Ошибка ${response.status}`);
-            if (method === 'GET') return await response.json();
-            return { success: true };
-        } catch (error) { console.error(error); return null; }
-    }
-
-    async function addPendingListing(listing) {
-        return await supabaseRequest('pending_listings', 'POST', listing);
-    }
-
-    // ========== ПОЛЬЗОВАТЕЛЬ ==========
+    // Получение текущего пользователя (из localStorage)
     function getCurrentUser() {
-        try {
-            const user = localStorage.getItem('brosky_current_user');
-            return user ? JSON.parse(user) : null;
-        } catch(e) { return null; }
+        let user = localStorage.getItem('brosky_current_user');
+        if (!user) {
+            // Создаём тестового пользователя для удобства
+            user = { id: Date.now(), name: 'Гость', email: 'guest@example.com' };
+            localStorage.setItem('brosky_current_user', JSON.stringify(user));
+        }
+        return JSON.parse(user);
     }
 
-    function showToast(message) {
+    // Показать всплывающее уведомление
+    function showToast(message, isError = false) {
         const toast = document.createElement('div');
         toast.className = 'toast';
+        toast.style.background = isError ? '#e74c3c' : '#2c3e44';
         toast.innerHTML = message;
         document.body.appendChild(toast);
-        setTimeout(() => toast.remove(), 2500);
+        setTimeout(() => toast.remove(), 3000);
     }
 
-    // ========== ПРЕВЬЮ ФОТО ==========
-    let currentPhotoData = '';
-
-    function previewPhoto(input) {
+    // Предпросмотр фото
+    document.getElementById('photoInput').addEventListener('change', function(e) {
         const preview = document.getElementById('photoPreview');
         preview.innerHTML = '';
-
-        if (input.files && input.files[0]) {
+        if (e.target.files && e.target.files[0]) {
             const reader = new FileReader();
-            reader.onload = function(e) {
-                currentPhotoData = e.target.result;
+            reader.onload = function(ev) {
                 const img = document.createElement('img');
-                img.src = currentPhotoData;
+                img.src = ev.target.result;
                 preview.appendChild(img);
-                document.getElementById('photoData').value = currentPhotoData;
+                document.getElementById('photoData').value = ev.target.result;
             };
-            reader.readAsDataURL(input.files[0]);
+            reader.readAsDataURL(e.target.files[0]);
         }
-    }
+    });
 
-    // ========== ОТПРАВКА ЗАЯВКИ ==========
+    // Отправка формы
     document.getElementById('addListingForm').addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const currentUser = getCurrentUser();
-
-        if (!currentUser) {
-            showToast('Пожалуйста, войдите в аккаунт');
-            setTimeout(() => window.location.href = 'login.html', 1500);
-            return;
-        }
-
         const title = document.getElementById('title').value.trim();
         const city = document.getElementById('city').value;
         const type = document.getElementById('type').value;
@@ -601,46 +426,20 @@
         const amenities = amenitiesRaw.split(',').map(a => a.trim()).filter(a => a);
         const photoData = document.getElementById('photoData').value;
 
-        const errorDiv = document.getElementById('formError');
-        const successDiv = document.getElementById('formSuccess');
-
-        errorDiv.style.display = 'none';
-        successDiv.style.display = 'none';
-
         // Валидация
         if (!title || !city || !address || !price || !description) {
-            errorDiv.textContent = 'Заполните все обязательные поля';
-            errorDiv.style.display = 'block';
-            setTimeout(() => errorDiv.style.display = 'none', 3000);
+            showToast('Заполните все обязательные поля', true);
             return;
         }
-
-        if (price < 500) {
-            errorDiv.textContent = 'Цена не может быть меньше 500 ₽';
-            errorDiv.style.display = 'block';
-            setTimeout(() => errorDiv.style.display = 'none', 3000);
-            return;
-        }
-
         if (!photoData) {
-            errorDiv.textContent = 'Пожалуйста, добавьте фотографию жилья';
-            errorDiv.style.display = 'block';
-            setTimeout(() => errorDiv.style.display = 'none', 3000);
+            showToast('Добавьте фотографию жилья', true);
             return;
         }
 
-        // Создаём заявку
         const newListing = {
             id: Date.now(),
-            title: title,
-            city: city,
-            type: type,
-            address: address,
-            price: price,
-            beds: beds,
-            baths: baths,
-            guests: guests,
-            description: description,
+            title, city, type, address, price, beds, baths, guests,
+            description,
             amenities: amenities.length ? amenities : ['Wi-Fi', 'Кухня', 'Телевизор'],
             image: photoData,
             status: 'pending',
@@ -650,81 +449,42 @@
             userEmail: currentUser.email
         };
 
-        const result = await addPendingListing(newListing);
+        try {
+            const response = await fetch(`${SUPABASE_URL}/rest/v1/pending_listings`, {
+                method: 'POST',
+                headers: {
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': `Bearer ${SUPABASE_KEY}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newListing)
+            });
 
-        if (result?.success) {
-            // Очищаем форму
-            document.getElementById('addListingForm').reset();
-            document.getElementById('photoPreview').innerHTML = '';
-            document.getElementById('photoData').value = '';
-            currentPhotoData = '';
-
-            successDiv.style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            setTimeout(() => {
-                successDiv.style.display = 'none';
-            }, 5000);
-        } else {
-            errorDiv.textContent = 'Ошибка при отправке заявки';
-            errorDiv.style.display = 'block';
-            setTimeout(() => errorDiv.style.display = 'none', 3000);
+            if (response.ok) {
+                showToast('Заявка отправлена! Администратор рассмотрит её в ближайшее время.');
+                document.getElementById('addListingForm').reset();
+                document.getElementById('photoPreview').innerHTML = '';
+                document.getElementById('photoData').value = '';
+            } else {
+                const error = await response.text();
+                console.error(error);
+                showToast(`Ошибка ${response.status}. Попробуйте позже.`, true);
+            }
+        } catch (err) {
+            console.error(err);
+            showToast('Ошибка соединения. Проверьте интернет.', true);
         }
     });
 
-    // ========== МЕНЮ ПОЛЬЗОВАТЕЛЯ ==========
-    function logout() {
-        localStorage.removeItem('brosky_current_user');
-        window.location.href = 'index.html';
-    }
-
-    function toggleDropdown() {
-        const d = document.getElementById('dropdownMenu');
-        if (d) d.style.display = d.style.display === 'none' ? 'block' : 'none';
-    }
-
+    // Отображение имени пользователя в шапке
     function updateUserMenu() {
         const userMenu = document.getElementById('userMenu');
-        if (!userMenu) return;
-
-        const currentUser = getCurrentUser();
-
-        if (currentUser) {
-            userMenu.innerHTML = `
-                <div class="user-dropdown">
-                    <button class="btn-outline-light" onclick="toggleDropdown()">
-                        <i class="fas fa-user-circle"></i> ${currentUser.name}
-                        <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
-                    </button>
-                    <div class="dropdown-menu" id="dropdownMenu" style="display: none;">
-                        <a href="my-bookings.html"><i class="fas fa-calendar-check"></i> Мои брони</a>
-                        <a href="favorites.html"><i class="fas fa-heart"></i> Избранное</a>
-                        <a href="#" onclick="logout()" class="logout"><i class="fas fa-sign-out-alt"></i> Выйти</a>
-                    </div>
-                </div>
-            `;
-        } else {
-            userMenu.innerHTML = `<button class="btn-outline-light" onclick="window.location.href='login.html'"><i class="far fa-user"></i> Войти</button>`;
+        const user = getCurrentUser();
+        if (userMenu) {
+            userMenu.innerHTML = `<button class="btn-outline-light"><i class="fas fa-user-circle"></i> ${user.name}</button>`;
         }
     }
-
-    function checkAndShowAdminLink() {
-        const adminLink = document.getElementById('adminLink');
-        const currentUser = getCurrentUser();
-        if (adminLink && currentUser && currentUser.email === 'admin@brosky.ru') {
-            adminLink.style.display = 'inline-block';
-        } else if (adminLink) {
-            adminLink.style.display = 'none';
-        }
-    }
-
-    document.addEventListener('click', function(e) {
-        const d = document.getElementById('dropdownMenu');
-        if (d && !e.target.closest('.user-dropdown')) d.style.display = 'none';
-    });
-
     updateUserMenu();
-    checkAndShowAdminLink();
 </script>
 </body>
 </html>
