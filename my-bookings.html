@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* ========== RESET & GLOBAL ========== */
         * {
             margin: 0;
             padding: 0;
@@ -17,12 +18,13 @@
             font-family: 'Inter', sans-serif;
             background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%);
             color: #1a2c3e;
+            scroll-behavior: smooth;
+            line-height: 1.4;
         }
 
         :root {
             --primary-blue: #2c7da0;
-            --accent-teal: #3DCFB6;
-            --accent-purple: #5B56E0;
+            --accent-pink: #FF69B4;
             --accent-coral: #FF6B6B;
             --soft-blue: #d4e6f1;
             --light-slate: #eef2f7;
@@ -40,7 +42,7 @@
             padding: 0 32px;
         }
 
-        /* ========== ШАПКА (как на других страницах) ========== */
+        /* ========== HEADER ========== */
         header {
             padding: 24px 0 16px;
             backdrop-filter: blur(8px);
@@ -70,7 +72,7 @@
         }
 
         .logo i {
-            color: var(--accent-teal);
+            color: var(--accent-pink);
             font-size: 2rem;
             transition: transform 0.3s ease;
         }
@@ -102,8 +104,9 @@
             left: 0;
             width: 0%;
             height: 2px;
-            background: var(--accent-purple);
+            background: var(--accent-pink);
             transition: width 0.25s;
+            border-radius: 2px;
         }
 
         .nav-links a:hover {
@@ -115,12 +118,13 @@
         }
 
         .btn-outline-light {
-            border: 1.5px solid var(--accent-purple);
+            border: 1.5px solid var(--accent-pink);
             background: transparent;
             padding: 8px 20px;
             border-radius: 40px;
-            color: var(--accent-purple);
+            color: var(--accent-pink);
             font-weight: 600;
+            transition: var(--transition);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
@@ -129,12 +133,12 @@
         }
 
         .btn-outline-light:hover {
-            background: var(--accent-purple);
+            background: var(--accent-pink);
             color: white;
             transform: translateY(-2px);
         }
 
-        /* ========== ЗАГОЛОВОК ========== */
+        /* ========== PAGE HEADER ========== */
         .page-header {
             text-align: center;
             margin: 48px 0 32px;
@@ -154,7 +158,7 @@
             margin: 0 auto;
         }
 
-        /* ========== ТАБЫ ========== */
+        /* ========== TABS ========== */
         .tabs {
             display: flex;
             gap: 16px;
@@ -173,11 +177,11 @@
         }
 
         .tab:hover {
-            color: var(--accent-purple);
+            color: var(--accent-pink);
         }
 
         .tab.active {
-            color: var(--accent-purple);
+            color: var(--accent-pink);
         }
 
         .tab.active::after {
@@ -187,10 +191,10 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: var(--accent-purple);
+            background: var(--accent-pink);
         }
 
-        /* ========== СЕТКА БРОНИРОВАНИЙ ========== */
+        /* ========== BOOKINGS GRID ========== */
         .bookings-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -319,7 +323,7 @@
 
         .btn-rebook {
             flex: 1;
-            background: var(--accent-teal);
+            background: var(--accent-pink);
             border: none;
             color: white;
             padding: 10px;
@@ -333,7 +337,7 @@
         }
 
         .btn-rebook:hover {
-            background: #2cb89f;
+            background: #e85da0;
             transform: translateY(-2px);
         }
 
@@ -362,7 +366,6 @@
             margin-bottom: 24px;
         }
 
-        /* ========== ПОДВАЛ ========== */
         footer {
             text-align: center;
             padding: 40px 0;
@@ -371,7 +374,42 @@
             font-size: 0.85rem;
         }
 
-        /* ========== ВЫПАДАЮЩЕЕ МЕНЮ ========== */
+        /* ========== TOAST ========== */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--charcoal);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 48px;
+            z-index: 1100;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        /* ========== USER DROPDOWN ========== */
         .user-dropdown {
             position: relative;
             display: inline-block;
@@ -412,27 +450,7 @@
             color: var(--accent-coral);
         }
 
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--charcoal);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 48px;
-            z-index: 1100;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes slideOut {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
-        }
-
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
             .container {
                 padding: 0 20px;
@@ -461,7 +479,7 @@
     <div class="container">
         <div class="navbar">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="BroSky" style="height: 40px;">
+                <i class="fas fa-cloud"></i>
                 <span>BroSky</span>
             </a>
             <div class="nav-links">
@@ -504,8 +522,7 @@
     // ========== НАСТРОЙКИ SUPABASE ==========
     const SUPABASE_URL = 'https://bgyjgzzvoxyvpysywvlb.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJneWpnenp2b3h5dnB5c3l3dmxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2Mzk3NjQsImV4cCI6MjA5NjIxNTc2NH0.Yz91MvAXo45Z3hq-76V5yBD4aB_2dFgpjXDBDWG9FHM';
-
-    // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
+    
     let currentUser = null;
     let allBookings = [];
     let currentTab = 'all';
@@ -519,16 +536,25 @@
             'Content-Type': 'application/json'
         };
         let options = { method, headers };
-        if (method === 'GET') { if (id) url += `?id=eq.${id}`; }
-        else if (method === 'POST') { options.body = JSON.stringify(data); }
-        else if (method === 'PATCH') { url += `?id=eq.${id}`; options.body = JSON.stringify(data); }
-        else if (method === 'DELETE') { url += `?id=eq.${id}`; }
+        if (method === 'GET') {
+            if (id) url += `?id=eq.${id}`;
+        } else if (method === 'POST') {
+            options.body = JSON.stringify(data);
+        } else if (method === 'PATCH') {
+            url += `?id=eq.${id}`;
+            options.body = JSON.stringify(data);
+        } else if (method === 'DELETE') {
+            url += `?id=eq.${id}`;
+        }
         try {
             const response = await fetch(url, options);
             if (!response.ok) throw new Error(`Ошибка ${response.status}`);
             if (method === 'GET') return await response.json();
             return { success: true };
-        } catch (error) { console.error(error); return null; }
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
     }
 
     async function getBookings() {
@@ -545,14 +571,16 @@
 
     // ========== ПОЛЬЗОВАТЕЛЬ ==========
     function getCurrentUser() {
-        try { const user = localStorage.getItem('brosky_current_user'); return user ? JSON.parse(user) : null; }
-        catch(e) { return null; }
+        try {
+            const user = localStorage.getItem('brosky_current_user');
+            return user ? JSON.parse(user) : null;
+        } catch(e) { return null; }
     }
 
     function showToast(message) {
         const toast = document.createElement('div');
         toast.className = 'toast';
-        toast.innerHTML = message;
+        toast.textContent = message;
         document.body.appendChild(toast);
         setTimeout(() => {
             toast.style.animation = 'slideOut 0.3s ease';
@@ -572,7 +600,7 @@
             if (result?.success) {
                 showToast('Бронирование отменено');
                 await loadBookings();
-                renderBookings();
+                await renderBookings();
             } else {
                 showToast('Ошибка при отмене');
             }
@@ -585,9 +613,9 @@
 
     async function renderBookings() {
         const container = document.getElementById('bookingsList');
-
+        
         currentUser = getCurrentUser();
-
+        
         if (!currentUser) {
             container.innerHTML = `
                 <div class="empty-state">
@@ -599,21 +627,21 @@
             `;
             return;
         }
-
+        
         let filteredBookings = allBookings.filter(b => b.user_id === currentUser.id);
-
+        
         if (currentTab === 'pending') {
             filteredBookings = filteredBookings.filter(b => b.status === 'pending');
         } else if (currentTab === 'confirmed') {
             filteredBookings = filteredBookings.filter(b => b.status === 'confirmed');
         }
-
+        
         if (filteredBookings.length === 0) {
             let message = '';
             if (currentTab === 'pending') message = 'Нет бронирований в ожидании';
             else if (currentTab === 'confirmed') message = 'Нет подтверждённых бронирований';
             else message = 'У вас пока нет бронирований';
-
+            
             container.innerHTML = `
                 <div class="empty-state">
                     <i class="fas fa-calendar-times"></i>
@@ -624,9 +652,9 @@
             `;
             return;
         }
-
+        
         const listings = await getListings();
-
+        
         container.innerHTML = filteredBookings.map(booking => {
             const listing = listings.find(l => l.id === booking.listing_id);
             return `
@@ -699,7 +727,7 @@
                 </div>
             `;
         } else {
-            userMenu.innerHTML = `<button class="btn-outline-light" onclick="window.location.href='login.html'"><i class="far fa-user"></i> Войти</button>`;
+            userMenu.innerHTML = `<a href="login.html" class="btn-outline-light"><i class="far fa-user"></i> Войти</a>`;
         }
     }
 
@@ -714,7 +742,9 @@
 
     document.addEventListener('click', function(e) {
         const d = document.getElementById('dropdownMenu');
-        if (d && !e.target.closest('.user-dropdown')) d.style.display = 'none';
+        if (d && !e.target.closest('.user-dropdown')) {
+            d.style.display = 'none';
+        }
     });
 
     window.cancelBooking = cancelBooking;
@@ -733,5 +763,6 @@
 
     init();
 </script>
+
 </body>
 </html>

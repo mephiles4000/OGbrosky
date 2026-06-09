@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Визуальный тест отправки заявки | BroSky</title>
+    <title>Тест отправки заявки | BroSky</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -12,35 +14,34 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%);
             padding: 40px;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         .card {
             background: white;
-            border-radius: 24px;
+            border-radius: 28px;
             padding: 32px;
             margin-bottom: 24px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
-            color: #333;
+            font-size: 1.8rem;
+            color: #2c3e44;
             margin-bottom: 8px;
-            font-size: 28px;
         }
 
         .subtitle {
-            color: #666;
+            color: #5a6e7c;
             margin-bottom: 24px;
-            font-size: 14px;
+            font-size: 0.9rem;
         }
 
         /* Форма */
@@ -52,14 +53,15 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: #333;
+            color: #2c3e44;
         }
 
         input, select, textarea {
             width: 100%;
             padding: 12px 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
+            border: 1px solid #d0dee9;
+            border-radius: 16px;
+            font-family: inherit;
             font-size: 14px;
             transition: all 0.3s;
         }
@@ -67,12 +69,25 @@
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: #FF69B4;
+            box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.1);
         }
 
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Загрузка фото (опционально) */
         .photo-upload {
-            border: 2px dashed #ccc;
-            border-radius: 12px;
-            padding: 20px;
+            border: 2px dashed #d0dee9;
+            border-radius: 16px;
+            padding: 30px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
@@ -81,6 +96,17 @@
         .photo-upload:hover {
             border-color: #FF69B4;
             background: #fff0f5;
+        }
+
+        .photo-upload i {
+            font-size: 2rem;
+            color: #FF69B4;
+            margin-bottom: 8px;
+        }
+
+        .photo-upload p {
+            color: #5a6e7c;
+            font-size: 0.9rem;
         }
 
         .photo-preview {
@@ -98,20 +124,45 @@
             border: 2px solid #FF69B4;
         }
 
-        button {
+        /* Чекбокс "без фото" */
+        .no-photo-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 12px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 16px;
+        }
+
+        .no-photo-checkbox input {
+            width: auto;
+            margin: 0;
+        }
+
+        .no-photo-checkbox label {
+            margin: 0;
+            font-weight: 500;
+            color: #5a6e7c;
+            cursor: pointer;
+        }
+
+        /* Кнопка */
+        button[type="submit"] {
+            width: 100%;
             background: #FF69B4;
             color: white;
             border: none;
-            padding: 14px 28px;
-            border-radius: 40px;
+            padding: 14px;
+            border-radius: 48px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            width: 100%;
             transition: all 0.3s;
+            margin-top: 16px;
         }
 
-        button:hover {
+        button[type="submit"]:hover {
             background: #e85da0;
             transform: translateY(-2px);
         }
@@ -132,13 +183,14 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            justify-content: space-between;
         }
 
         .log-content {
             background: #0d0d1a;
             border-radius: 12px;
             padding: 16px;
-            max-height: 400px;
+            max-height: 350px;
             overflow-y: auto;
         }
 
@@ -181,16 +233,15 @@
             color: #aaa;
             padding: 6px 12px;
             font-size: 12px;
-            width: auto;
-            margin-top: 12px;
+            border-radius: 20px;
+            cursor: pointer;
         }
 
         .clear-btn:hover {
             background: #333;
-            transform: none;
         }
 
-        /* Статус бары */
+        /* Статус-бары */
         .status-bars {
             display: flex;
             gap: 12px;
@@ -221,327 +272,338 @@
         .status-item.fail .value { color: #ef4444; }
         .status-item.warning .value { color: #f59e0b; }
 
-        hr {
-            margin: 20px 0;
-            border: none;
-            border-top: 1px solid #e0e0e0;
+        @media (max-width: 768px) {
+            body { padding: 20px; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <h1>🔧 Визуальный тест отправки заявки</h1>
-            <p class="subtitle">Каждый шаг отображается в реальном времени — смотри что происходит</p>
 
-            <div class="status-bars" id="statusBars">
-                <div class="status-item">
-                    <div class="label">🔗 Supabase URL</div>
-                    <div class="value" id="statusUrl">⏳</div>
-                </div>
-                <div class="status-item">
-                    <div class="label">🔑 API Key</div>
-                    <div class="value" id="statusKey">⏳</div>
-                </div>
-                <div class="status-item">
-                    <div class="label">📁 Таблица</div>
-                    <div class="value" id="statusTable">⏳</div>
-                </div>
-                <div class="status-item">
-                    <div class="label">👤 Авторизация</div>
-                    <div class="value" id="statusAuth">⏳</div>
-                </div>
-            </div>
+<div class="container">
+    <div class="card">
+        <h1>🔧 Визуальный тест отправки заявки</h1>
+        <p class="subtitle">Каждый шаг отображается в реальном времени — смотрите, что происходит. <strong>Фото можно не добавлять</strong> (будет отправлена заглушка).</p>
 
-            <form id="testForm">
-                <div class="form-group">
-                    <label>📝 Название объявления</label>
-                    <input type="text" id="title" value="Тестовое объявление" required>
-                </div>
-                <div class="form-group">
-                    <label>📍 Город</label>
-                    <select id="city">
-                        <option value="Москва">Москва</option>
-                        <option value="СПб">Санкт-Петербург</option>
-                        <option value="Сочи">Сочи</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>💰 Цена за сутки (₽)</label>
-                    <input type="number" id="price" value="5000" required>
-                </div>
-                <div class="form-group">
-                    <label>📄 Описание</label>
-                    <textarea id="description" rows="3">Тестовое описание жилья. Очень уютно и комфортно!</textarea>
-                </div>
-                <div class="form-group">
-                    <label>🖼️ Фотография жилья</label>
-                    <div class="photo-upload" onclick="document.getElementById('photoInput').click()">
-                        📸 Нажмите, чтобы выбрать фото
-                    </div>
-                    <input type="file" id="photoInput" accept="image/*" style="display: none;">
-                    <div class="photo-preview" id="photoPreview"></div>
-                </div>
-                <button type="submit" id="submitBtn">🚀 Отправить заявку</button>
-            </form>
+        <!-- Статус бары -->
+        <div class="status-bars" id="statusBars">
+            <div class="status-item"><div class="label">🔗 Supabase URL</div><div class="value" id="statusUrl">⏳</div></div>
+            <div class="status-item"><div class="label">🔑 API Key</div><div class="value" id="statusKey">⏳</div></div>
+            <div class="status-item"><div class="label">📁 Таблица</div><div class="value" id="statusTable">⏳</div></div>
+            <div class="status-item"><div class="label">👤 Авторизация</div><div class="value" id="statusAuth">⏳</div></div>
         </div>
 
-        <div class="card">
-            <div class="log-title">
-                <span>📋</span> Лог проверок (в реальном времени)
-                <button class="clear-btn" onclick="clearLog()">Очистить</button>
+        <form id="testForm">
+            <div class="form-group">
+                <label>📝 Название объявления</label>
+                <input type="text" id="title" value="Тестовое объявление" required>
             </div>
-            <div class="log-content" id="logContent">
-                <div class="log-entry log-info">🟢 Готов к работе. Заполните форму и нажмите "Отправить заявку"</div>
+            <div class="form-group">
+                <label>📍 Город</label>
+                <select id="city">
+                    <option value="Москва">Москва</option>
+                    <option value="СПб">Санкт-Петербург</option>
+                    <option value="Сочи">Сочи</option>
+                    <option value="Казань">Казань</option>
+                </select>
             </div>
-        </div>
+            <div class="form-group">
+                <label>💰 Цена за сутки (₽)</label>
+                <input type="number" id="price" value="5000" required>
+            </div>
+            <div class="form-group">
+                <label>📄 Описание</label>
+                <textarea id="description" rows="3">Тестовое описание жилья. Очень уютно и комфортно!</textarea>
+            </div>
+            <div class="form-group">
+                <label>🖼️ Фотография жилья (опционально)</label>
+                <div class="photo-upload" onclick="document.getElementById('photoInput').click()">
+                    <i class="fas fa-camera"></i>
+                    <p>Нажмите, чтобы выбрать фото</p>
+                    <p style="font-size: 12px; color: #999;">Можно не выбирать — будет отправлена заглушка</p>
+                </div>
+                <input type="file" id="photoInput" accept="image/*" style="display: none;">
+                <div class="photo-preview" id="photoPreview"></div>
+                <input type="hidden" id="photoData" value="">
+                
+                <div class="no-photo-checkbox">
+                    <input type="checkbox" id="noPhotoCheckbox">
+                    <label for="noPhotoCheckbox">📷 Отправить без фото (использовать заглушку)</label>
+                </div>
+            </div>
+            <button type="submit" id="submitBtn">🚀 Отправить заявку</button>
+        </form>
     </div>
 
-    <script>
-        // ============================================================
-        // ⬇️⬇️⬇️ ВСТАВЬ СВОИ ДАННЫЕ ИЗ SUPABASE ⬇️⬇️⬇️
-        // ============================================================
-        const SUPABASE_URL = 'https://bgyjgzzvoxyvpysywvlb.supabase.co';
-        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJneWpnenp2b3h5dnB5c3l3dmxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2Mzk3NjQsImV4cCI6MjA5NjIxNTc2NH0.Yz91MvAXo45Z3hq-76V5yBD4aB_2dFgpjXDBDWG9FHM';
-        // ============================================================
+    <div class="card">
+        <div class="log-title">
+            <span><i class="fas fa-terminal"></i> 📋 Лог проверок (в реальном времени)</span>
+            <button class="clear-btn" onclick="clearLog()">Очистить</button>
+        </div>
+        <div class="log-content" id="logContent">
+            <div class="log-entry log-info">🟢 Готов к работе. Заполните форму и нажмите "Отправить заявку"</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ============================================================
+    // НАСТРОЙКИ SUPABASE (уже вставлены ваши данные)
+    // ============================================================
+    const SUPABASE_URL = 'https://bgyjgzzvoxyvpysywvlb.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJneWpnenp2b3h5dnB5c3l3dmxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2Mzk3NjQsImV4cCI6MjA5NjIxNTc2NH0.Yz91MvAXo45Z3hq-76V5yBD4aB_2dFgpjXDBDWG9FHM';
+    // ============================================================
+    
+    let logs = [];
+
+    function addLog(message, type = 'info') {
+        const logDiv = document.getElementById('logContent');
+        const entry = document.createElement('div');
+        entry.className = `log-entry log-${type}`;
+        const time = new Date().toLocaleTimeString();
+        entry.innerHTML = `[${time}] ${message}`;
+        logDiv.appendChild(entry);
+        entry.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        logs.push({ time, message, type });
+    }
+
+    function clearLog() {
+        document.getElementById('logContent').innerHTML = '';
+        addLog('Лог очищен', 'info');
+    }
+
+    function updateStatus(id, status, text) {
+        const el = document.getElementById(id);
+        if (el) {
+            el.innerText = text;
+            el.parentElement.className = `status-item ${status}`;
+        }
+    }
+
+    // Получение/создание тестового пользователя
+    function getTestUser() {
+        let user = localStorage.getItem('brosky_current_user');
+        if (!user) {
+            user = {
+                id: Date.now(),
+                name: 'Тестовый Пользователь',
+                email: 'test@test.com'
+            };
+            localStorage.setItem('brosky_current_user', JSON.stringify(user));
+            addLog(`👤 Создан тестовый пользователь: ${user.name} (${user.email})`, 'success');
+        } else {
+            user = JSON.parse(user);
+            addLog(`👤 Пользователь авторизован: ${user.name} (${user.email})`, 'success');
+        }
+        return user;
+    }
+
+    // Предпросмотр фото (если выбрано)
+    document.getElementById('photoInput').addEventListener('change', function(e) {
+        const preview = document.getElementById('photoPreview');
+        preview.innerHTML = '';
+        const noPhotoCheckbox = document.getElementById('noPhotoCheckbox');
         
-        let logs = [];
-
-        function addLog(message, type = 'info') {
-            const logDiv = document.getElementById('logContent');
-            const entry = document.createElement('div');
-            entry.className = `log-entry log-${type}`;
-            const time = new Date().toLocaleTimeString();
-            entry.innerHTML = `[${time}] ${message}`;
-            logDiv.appendChild(entry);
-            entry.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        if (e.target.files && e.target.files[0]) {
+            // Если выбрали фото, снимаем галочку "без фото"
+            noPhotoCheckbox.checked = false;
             
-            logs.push({ time, message, type });
+            const file = e.target.files[0];
+            addLog(`📸 Выбран файл: ${file.name} (${(file.size / 1024).toFixed(2)} KB)`, 'info');
+            
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const img = document.createElement('img');
+                img.src = ev.target.result;
+                preview.appendChild(img);
+                document.getElementById('photoData').value = ev.target.result;
+                addLog(`✅ Фото загружено в предпросмотр`, 'success');
+            };
+            reader.readAsDataURL(file);
         }
-
-        function clearLog() {
-            document.getElementById('logContent').innerHTML = '';
-            addLog('Лог очищен', 'info');
+    });
+    
+    // Если включаем "без фото" — очищаем предпросмотр
+    document.getElementById('noPhotoCheckbox').addEventListener('change', function(e) {
+        if (e.target.checked) {
+            document.getElementById('photoInput').value = '';
+            document.getElementById('photoPreview').innerHTML = '';
+            document.getElementById('photoData').value = '';
+            addLog(`📷 Включён режим "без фото" (будет отправлена заглушка)`, 'info');
         }
+    });
 
-        function updateStatus(id, status, text) {
-            const el = document.getElementById(id);
-            if (el) {
-                el.innerText = text;
-                el.parentElement.className = `status-item ${status}`;
-            }
+    // Проверка настроек
+    async function checkSettings() {
+        addLog('🔍 Проверка настроек...', 'info');
+        
+        if (SUPABASE_URL && SUPABASE_URL !== 'https://ТВОЙ_ПРОЕКТ.supabase.co') {
+            updateStatus('statusUrl', 'pass', '✅');
+            addLog(`✅ SUPABASE_URL: ${SUPABASE_URL}`, 'success');
+        } else {
+            updateStatus('statusUrl', 'fail', '❌');
+            addLog(`❌ SUPABASE_URL не настроен!`, 'error');
+            return false;
         }
-
-        // Проверка настроек при загрузке
-        async function checkSettings() {
-            addLog('🔍 Начинаю проверку настроек...', 'info');
-            
-            // Проверка URL
-            if (SUPABASE_URL && SUPABASE_URL !== 'https://ТВОЙ_ПРОЕКТ.supabase.co') {
-                updateStatus('statusUrl', 'pass', '✅');
-                addLog(`✅ SUPABASE_URL: ${SUPABASE_URL}`, 'success');
-            } else {
-                updateStatus('statusUrl', 'fail', '❌');
-                addLog(`❌ SUPABASE_URL не настроен! Текущее значение: "${SUPABASE_URL}"`, 'error');
-                addLog(`   Нужно заменить на свой URL из Supabase (Settings → API)`, 'warning');
-                return false;
-            }
-            
-            // Проверка KEY
-            if (SUPABASE_KEY && SUPABASE_KEY !== 'ТВОЙ_ANON_KEY' && SUPABASE_KEY.length > 50) {
-                updateStatus('statusKey', 'pass', '✅');
-                addLog(`✅ SUPABASE_KEY найден (${SUPABASE_KEY.substring(0, 30)}...)`, 'success');
-            } else {
-                updateStatus('statusKey', 'fail', '❌');
-                addLog(`❌ SUPABASE_KEY не настроен!`, 'error');
-                return false;
-            }
-            
-            // Проверка таблицы
-            addLog(`🔍 Проверяю таблицу pending_listings...`, 'info');
-            try {
-                const testResponse = await fetch(`${SUPABASE_URL}/rest/v1/pending_listings?limit=1`, {
-                    headers: {
-                        'apikey': SUPABASE_KEY,
-                        'Authorization': `Bearer ${SUPABASE_KEY}`
-                    }
-                });
-                
-                if (testResponse.ok) {
-                    updateStatus('statusTable', 'pass', '✅');
-                    addLog(`✅ Таблица pending_listings существует и доступна`, 'success');
-                } else if (testResponse.status === 404) {
-                    updateStatus('statusTable', 'fail', '❌');
-                    addLog(`❌ Таблица pending_listings не найдена! (404)`, 'error');
-                    addLog(`   Нужно создать таблицу в Supabase SQL Editor`, 'warning');
-                    return false;
-                } else {
-                    updateStatus('statusTable', 'warning', '⚠️');
-                    addLog(`⚠️ Таблица pending_listings: статус ${testResponse.status}`, 'warning');
+        
+        if (SUPABASE_KEY && SUPABASE_KEY !== 'ТВОЙ_ANON_KEY' && SUPABASE_KEY.length > 50) {
+            updateStatus('statusKey', 'pass', '✅');
+            addLog(`✅ SUPABASE_KEY найден (${SUPABASE_KEY.substring(0, 30)}...)`, 'success');
+        } else {
+            updateStatus('statusKey', 'fail', '❌');
+            addLog(`❌ SUPABASE_KEY не настроен!`, 'error');
+            return false;
+        }
+        
+        try {
+            const testResponse = await fetch(`${SUPABASE_URL}/rest/v1/pending_listings?limit=1`, {
+                headers: {
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': `Bearer ${SUPABASE_KEY}`
                 }
-            } catch (err) {
+            });
+            
+            if (testResponse.ok) {
+                updateStatus('statusTable', 'pass', '✅');
+                addLog(`✅ Таблица pending_listings существует`, 'success');
+            } else if (testResponse.status === 404) {
                 updateStatus('statusTable', 'fail', '❌');
-                addLog(`❌ Не удалось подключиться к Supabase: ${err.message}`, 'error');
+                addLog(`❌ Таблица pending_listings не найдена! (404)`, 'error');
+                addLog(`   Нужно создать таблицу в Supabase SQL Editor`, 'warning');
                 return false;
-            }
-            
-            // Проверка авторизации
-            const user = localStorage.getItem('brosky_current_user');
-            if (user) {
-                const userData = JSON.parse(user);
-                updateStatus('statusAuth', 'pass', '✅');
-                addLog(`✅ Пользователь авторизован: ${userData.name} (${userData.email})`, 'success');
             } else {
-                updateStatus('statusAuth', 'warning', '⚠️');
-                addLog(`⚠️ Пользователь не авторизован. Создаю тестового...`, 'warning');
-                const testUser = {
-                    id: Date.now(),
-                    name: 'Тестовый Пользователь',
-                    email: 'test@test.com'
-                };
-                localStorage.setItem('brosky_current_user', JSON.stringify(testUser));
-                addLog(`✅ Создан тестовый пользователь: ${testUser.name}`, 'success');
-                updateStatus('statusAuth', 'pass', '✅');
+                updateStatus('statusTable', 'warning', '⚠️');
+                addLog(`⚠️ Таблица pending_listings: статус ${testResponse.status}`, 'warning');
             }
-            
-            addLog(`🎉 Все настройки проверены! Можете отправлять заявку.`, 'success');
-            return true;
+        } catch (err) {
+            updateStatus('statusTable', 'fail', '❌');
+            addLog(`❌ Не удалось подключиться к Supabase: ${err.message}`, 'error');
+            addLog(`   Проверьте интернет-соединение и настройки`, 'warning');
+            return false;
         }
+        
+        const user = getTestUser();
+        updateStatus('statusAuth', 'pass', '✅');
+        addLog(`✅ Пользователь авторизован: ${user.name} (${user.email})`, 'success');
+        
+        addLog(`🎉 Все настройки проверены! Можете отправлять заявку.`, 'success');
+        return true;
+    }
 
-        // Предпросмотр фото
-        document.getElementById('photoInput').addEventListener('change', function(e) {
-            const preview = document.getElementById('photoPreview');
-            preview.innerHTML = '';
-            if (e.target.files && e.target.files[0]) {
-                const file = e.target.files[0];
-                addLog(`📸 Выбран файл: ${file.name} (${(file.size / 1024).toFixed(2)} KB)`, 'info');
-                
-                const reader = new FileReader();
-                reader.onload = function(ev) {
-                    const img = document.createElement('img');
-                    img.src = ev.target.result;
-                    preview.appendChild(img);
-                    addLog(`✅ Фото загружено в предпросмотр`, 'success');
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Отправка формы
-        document.getElementById('testForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            addLog('🚀 === НАЧАЛО ОТПРАВКИ ЗАЯВКИ ===', 'info');
-            
-            // Получаем данные
-            const title = document.getElementById('title').value;
-            const city = document.getElementById('city').value;
-            const price = parseInt(document.getElementById('price').value);
-            const description = document.getElementById('description').value;
-            const photoFile = document.getElementById('photoInput').files[0];
-            
-            addLog(`📝 Данные формы:`, 'info');
-            addLog(`   - Название: "${title}"`, 'info');
-            addLog(`   - Город: ${city}`, 'info');
-            addLog(`   - Цена: ${price} ₽`, 'info');
-            
-            // Проверка фото
-            if (!photoFile) {
-                addLog(`❌ ОШИБКА: Не выбрано фото!`, 'error');
-                return;
-            }
-            
+    // Отправка формы
+    document.getElementById('testForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        addLog('🚀 === НАЧАЛО ОТПРАВКИ ЗАЯВКИ ===', 'info');
+        
+        const currentUser = getTestUser();
+        const title = document.getElementById('title').value.trim();
+        const city = document.getElementById('city').value;
+        const price = parseInt(document.getElementById('price').value);
+        const description = document.getElementById('description').value.trim();
+        const noPhotoMode = document.getElementById('noPhotoCheckbox').checked;
+        const photoFile = document.getElementById('photoInput').files[0];
+        
+        addLog(`📝 Данные формы:`, 'info');
+        addLog(`   - Название: "${title}"`, 'info');
+        addLog(`   - Город: ${city}`, 'info');
+        addLog(`   - Цена: ${price} ₽`, 'info');
+        
+        // Обработка фото
+        let photoData = '';
+        
+        if (noPhotoMode) {
+            // Режим без фото – отправляем заглушку
+            photoData = 'https://placehold.co/800x500/2c7da0/white?text=BroSky';
+            addLog(`📷 Режим "без фото" активен. Будет использована заглушка.`, 'warning');
+        } else if (photoFile) {
+            // Есть фото – конвертируем
             addLog(`📸 Фото: ${photoFile.name} (${(photoFile.size / 1024).toFixed(2)} KB)`, 'info');
-            
-            // Получаем пользователя
-            const user = JSON.parse(localStorage.getItem('brosky_current_user') || '{}');
-            addLog(`👤 Пользователь: ${user.name || 'unknown'} (${user.email || 'no email'})`, 'info');
-            
-            // Конвертируем фото
             addLog(`🔄 Конвертируем фото в Base64...`, 'info');
             
             const reader = new FileReader();
             reader.onload = async function(ev) {
-                const photoData = ev.target.result;
+                photoData = ev.target.result;
                 addLog(`✅ Фото сконвертировано (${(photoData.length / 1024).toFixed(2)} KB)`, 'success');
-                
-                const newListing = {
-                    id: Date.now(),
-                    title: title,
-                    city: city,
-                    type: 'apartment',
-                    address: 'Тестовый адрес',
-                    price: price,
-                    beds: 1,
-                    baths: 1,
-                    guests: 2,
-                    description: description,
-                    amenities: ['Wi-Fi', 'Кухня'],
-                    image: photoData,
-                    status: 'pending',
-                    created_at: new Date().toISOString(),
-                    userId: user.id || Date.now(),
-                    userName: user.name || 'Тестер',
-                    userEmail: user.email || 'test@test.com'
-                };
-                
-                addLog(`📦 Подготовлены данные для отправки:`, 'info');
-                addLog(`   - ID: ${newListing.id}`, 'info');
-                addLog(`   - Статус: ${newListing.status}`, 'info');
-                
-                addLog(`🌐 Отправка запроса в Supabase...`, 'info');
-                addLog(`   URL: ${SUPABASE_URL}/rest/v1/pending_listings`, 'info');
-                
-                try {
-                    const response = await fetch(`${SUPABASE_URL}/rest/v1/pending_listings`, {
-                        method: 'POST',
-                        headers: {
-                            'apikey': SUPABASE_KEY,
-                            'Authorization': `Bearer ${SUPABASE_KEY}`,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(newListing)
-                    });
-                    
-                    addLog(`📡 Ответ сервера: статус ${response.status} ${response.statusText}`, 'info');
-                    
-                    if (response.ok) {
-                        addLog(`✅✅✅ УСПЕХ! Заявка успешно отправлена! ✅✅✅`, 'success');
-                        addLog(`🎉 Проверьте админ-панель (admin-bookings.html) для подтверждения`, 'success');
-                        
-                        // Очищаем форму
-                        document.getElementById('testForm').reset();
-                        document.getElementById('photoPreview').innerHTML = '';
-                        document.getElementById('title').value = 'Тестовое объявление';
-                        document.getElementById('price').value = '5000';
-                        
-                        addLog(`🧹 Форма очищена`, 'info');
-                    } else {
-                        const errorText = await response.text();
-                        addLog(`❌ ОШИБКА ${response.status}: ${errorText}`, 'error');
-                        
-                        if (response.status === 401) {
-                            addLog(`🔑 Проблема с API ключом. Проверьте SUPABASE_KEY`, 'warning');
-                        } else if (response.status === 404) {
-                            addLog(`📁 Таблица 'pending_listings' не найдена. Создайте её в Supabase`, 'warning');
-                        } else if (response.status === 400) {
-                            addLog(`📝 Неверный формат данных. Проверьте структуру таблицы`, 'warning');
-                        }
-                    }
-                } catch (error) {
-                    addLog(`❌❌❌ СЕТЕВАЯ ОШИБКА: ${error.message} ❌❌❌`, 'error');
-                    addLog(`💡 Возможные причины:`, 'warning');
-                    addLog(`   1. Неправильный URL Supabase`, 'warning');
-                    addLog(`   2. Нет интернет-соединения`, 'warning');
-                    addLog(`   3. Блокировка CORS (нужен Live Server)`, 'warning');
-                }
+                await sendRequest(photoData);
+            };
+            reader.readAsDataURL(photoFile);
+            return; // Ждём окончания конвертации
+        } else {
+            // Нет фото и не выбран режим "без фото" – используем заглушку
+            photoData = 'https://placehold.co/800x500/2c7da0/white?text=BroSky';
+            addLog(`⚠️ Фото не выбрано и режим "без фото" не активен. Используем заглушку.`, 'warning');
+        }
+        
+        await sendRequest(photoData);
+        
+        async function sendRequest(photoData) {
+            const newListing = {
+                id: Date.now(),
+                title: title,
+                city: city,
+                type: 'apartment',
+                address: 'Тестовый адрес',
+                price: price,
+                beds: 1,
+                baths: 1,
+                guests: 2,
+                description: description,
+                amenities: ['Wi-Fi', 'Кухня'],
+                image: photoData,
+                status: 'pending',
+                created_at: new Date().toISOString(),
+                userId: currentUser.id,
+                userName: currentUser.name,
+                userEmail: currentUser.email
             };
             
-            reader.readAsDataURL(photoFile);
-        });
-        
-        // Запускаем проверку при загрузке
-        checkSettings();
-    </script>
+            addLog(`📦 Подготовлены данные для отправки (ID: ${newListing.id})`, 'info');
+            addLog(`🌐 Отправка запроса в Supabase...`, 'info');
+            addLog(`   URL: ${SUPABASE_URL}/rest/v1/pending_listings`, 'info');
+            
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/pending_listings`, {
+                    method: 'POST',
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newListing)
+                });
+                
+                addLog(`📡 Ответ сервера: статус ${response.status} ${response.statusText}`, 'info');
+                
+                if (response.ok) {
+                    addLog(`✅✅✅ УСПЕХ! Заявка успешно отправлена! ✅✅✅`, 'success');
+                    addLog(`🎉 Проверьте админ-панель (admin-bookings.html) для подтверждения`, 'success');
+                    document.getElementById('testForm').reset();
+                    document.getElementById('photoPreview').innerHTML = '';
+                    document.getElementById('photoData').value = '';
+                    document.getElementById('noPhotoCheckbox').checked = false;
+                } else {
+                    const errorText = await response.text();
+                    addLog(`❌ ОШИБКА ${response.status}: ${errorText.substring(0, 300)}`, 'error');
+                    
+                    if (response.status === 401) {
+                        addLog(`🔑 Проблема с API ключом. Проверьте SUPABASE_KEY`, 'warning');
+                    } else if (response.status === 404) {
+                        addLog(`📁 Таблица 'pending_listings' не найдена. Создайте её в Supabase`, 'warning');
+                    }
+                }
+            } catch (error) {
+                addLog(`❌❌❌ СЕТЕВАЯ ОШИБКА: ${error.message} ❌❌❌`, 'error');
+                addLog(`💡 Возможные причины:`, 'warning');
+                addLog(`   1. Неправильный URL Supabase`, 'warning');
+                addLog(`   2. Нет интернет-соединения`, 'warning');
+                addLog(`   3. Блокировка CORS (нужен Live Server)`, 'warning');
+            }
+        }
+    });
+    
+    checkSettings();
+</script>
+
 </body>
 </html>

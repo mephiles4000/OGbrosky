@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* ========== RESET & GLOBAL ========== */
         * {
             margin: 0;
             padding: 0;
@@ -17,12 +18,13 @@
             font-family: 'Inter', sans-serif;
             background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%);
             color: #1a2c3e;
+            scroll-behavior: smooth;
+            line-height: 1.4;
         }
 
         :root {
             --primary-blue: #2c7da0;
-            --accent-teal: #3DCFB6;
-            --accent-purple: #5B56E0;
+            --accent-pink: #FF69B4;
             --accent-coral: #FF6B6B;
             --soft-blue: #d4e6f1;
             --light-slate: #eef2f7;
@@ -40,7 +42,7 @@
             padding: 0 32px;
         }
 
-        /* ========== ШАПКА ========== */
+        /* ========== HEADER ========== */
         header {
             padding: 24px 0 16px;
             backdrop-filter: blur(8px);
@@ -70,7 +72,7 @@
         }
 
         .logo i {
-            color: var(--accent-teal);
+            color: var(--accent-pink);
             font-size: 2rem;
             transition: transform 0.3s ease;
         }
@@ -102,8 +104,9 @@
             left: 0;
             width: 0%;
             height: 2px;
-            background: var(--accent-purple);
+            background: var(--accent-pink);
             transition: width 0.25s;
+            border-radius: 2px;
         }
 
         .nav-links a:hover {
@@ -115,12 +118,13 @@
         }
 
         .btn-outline-light {
-            border: 1.5px solid var(--accent-purple);
+            border: 1.5px solid var(--accent-pink);
             background: transparent;
             padding: 8px 20px;
             border-radius: 40px;
-            color: var(--accent-purple);
+            color: var(--accent-pink);
             font-weight: 600;
+            transition: var(--transition);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
@@ -129,12 +133,12 @@
         }
 
         .btn-outline-light:hover {
-            background: var(--accent-purple);
+            background: var(--accent-pink);
             color: white;
             transform: translateY(-2px);
         }
 
-        /* ========== ЗАГОЛОВОК СТРАНИЦЫ ========== */
+        /* ========== PAGE HEADER ========== */
         .page-header {
             text-align: center;
             margin: 48px 0 32px;
@@ -154,7 +158,7 @@
             margin: 0 auto;
         }
 
-        /* ========== ИЗБРАННОЕ ========== */
+        /* ========== FAVORITES STATS ========== */
         .favorites-stats {
             background: white;
             border-radius: 20px;
@@ -195,6 +199,7 @@
             color: white;
         }
 
+        /* ========== FAVORITES GRID ========== */
         .favorites-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -241,7 +246,7 @@
             position: absolute;
             top: 16px;
             left: 16px;
-            background: var(--accent-teal);
+            background: var(--accent-pink);
             color: white;
             padding: 6px 12px;
             border-radius: 30px;
@@ -337,6 +342,12 @@
             border-top: 1px solid #eef2f7;
         }
 
+        .card-details span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
         .empty-state {
             text-align: center;
             padding: 80px 20px;
@@ -362,7 +373,6 @@
             margin-bottom: 24px;
         }
 
-        /* ========== ПОДВАЛ ========== */
         footer {
             text-align: center;
             padding: 40px 0;
@@ -371,7 +381,42 @@
             font-size: 0.85rem;
         }
 
-        /* ========== ВЫПАДАЮЩЕЕ МЕНЮ ПОЛЬЗОВАТЕЛЯ ========== */
+        /* ========== TOAST ========== */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--charcoal);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 48px;
+            z-index: 1100;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        /* ========== USER DROPDOWN ========== */
         .user-dropdown {
             position: relative;
             display: inline-block;
@@ -412,28 +457,7 @@
             color: var(--accent-coral);
         }
 
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--charcoal);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 48px;
-            z-index: 1100;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes slideOut {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
-        }
-
-        /* ========== АДАПТИВНОСТЬ ========== */
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
             .container {
                 padding: 0 20px;
@@ -463,7 +487,7 @@
     <div class="container">
         <div class="navbar">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="BroSky" style="height: 40px;">
+                <i class="fas fa-cloud"></i>
                 <span>BroSky</span>
             </a>
             <div class="nav-links">
@@ -505,8 +529,7 @@
     // ========== НАСТРОЙКИ SUPABASE ==========
     const SUPABASE_URL = 'https://bgyjgzzvoxyvpysywvlb.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJneWpnenp2b3h5dnB5c3l3dmxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2Mzk3NjQsImV4cCI6MjA5NjIxNTc2NH0.Yz91MvAXo45Z3hq-76V5yBD4aB_2dFgpjXDBDWG9FHM';
-
-    // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
+    
     let currentUser = null;
     let allListings = [];
 
@@ -519,82 +542,84 @@
             'Content-Type': 'application/json'
         };
         let options = { method, headers };
-        if (method === 'GET') { if (id) url += `?id=eq.${id}`; }
-        else if (method === 'POST') { options.body = JSON.stringify(data); }
-        else if (method === 'PATCH') { url += `?id=eq.${id}`; options.body = JSON.stringify(data); }
-        else if (method === 'DELETE') { url += `?id=eq.${id}`; }
+        if (method === 'GET') {
+            if (id) url += `?id=eq.${id}`;
+        } else if (method === 'POST') {
+            options.body = JSON.stringify(data);
+        } else if (method === 'PATCH') {
+            url += `?id=eq.${id}`;
+            options.body = JSON.stringify(data);
+        } else if (method === 'DELETE') {
+            url += `?id=eq.${id}`;
+        }
         try {
             const response = await fetch(url, options);
             if (!response.ok) throw new Error(`Ошибка ${response.status}`);
             if (method === 'GET') return await response.json();
             return { success: true };
-        } catch (error) { console.error(error); return null; }
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
     }
 
     async function getListings() {
         return (await supabaseRequest('listings', 'GET')) || [];
     }
 
-    // ========== ПОЛЬЗОВАТЕЛЬ ==========
-    function getCurrentUser() {
-        try { const user = localStorage.getItem('brosky_current_user'); return user ? JSON.parse(user) : null; }
-        catch(e) { return null; }
+    // ========== ГЛОБАЛЬНОЕ ИЗБРАННОЕ ==========
+    async function getFavoritesFromDB() {
+        if (!currentUser) return [];
+        const favs = await supabaseRequest(`favorites?user_id=eq.${currentUser.id}`, 'GET');
+        return favs ? favs.map(f => f.listing_id) : [];
     }
 
-    function showToast(message) {
-        const toast = document.createElement('div');
-        toast.className = 'toast';
-        toast.innerHTML = message;
-        document.body.appendChild(toast);
-        setTimeout(() => {
-            toast.style.animation = 'slideOut 0.3s ease';
-            setTimeout(() => toast.remove(), 300);
-        }, 2500);
+    async function addFavoriteDB(listingId) {
+        if (!currentUser) return false;
+        const result = await supabaseRequest('favorites', 'POST', {
+            user_id: currentUser.id,
+            listing_id: listingId
+        });
+        return result?.success;
     }
 
-    // ========== ИЗБРАННОЕ ==========
-    function getFavoritesIds() {
-        const user = getCurrentUser();
-        if (!user) return [];
-        const key = `favorites_${user.id}`;
-        const fav = localStorage.getItem(key);
-        return fav ? JSON.parse(fav) : [];
-    }
-
-    function saveFavoritesIds(ids) {
-        const user = getCurrentUser();
-        if (user) localStorage.setItem(`favorites_${user.id}`, JSON.stringify(ids));
-    }
-
-    function generateStars(rating) {
-        const fullStars = Math.floor(rating);
-        let stars = '★'.repeat(fullStars);
-        stars += '☆'.repeat(5 - fullStars);
-        return stars;
-    }
-
-    async function removeFromFavorites(listingId) {
-        let favorites = getFavoritesIds();
-        favorites = favorites.filter(id => id !== listingId);
-        saveFavoritesIds(favorites);
-        showToast('Удалено из избранного 💔');
-        renderFavorites();
+    async function removeFavoriteDB(listingId) {
+        if (!currentUser) return false;
+        const favs = await supabaseRequest(`favorites?user_id=eq.${currentUser.id}&listing_id=eq.${listingId}`, 'GET');
+        if (favs && favs.length) {
+            const result = await supabaseRequest('favorites', 'DELETE', null, favs[0].id);
+            return result?.success;
+        }
+        return false;
     }
 
     async function clearAllFavorites() {
-        if (confirm('Очистить всё избранное?')) {
-            saveFavoritesIds([]);
-            showToast('Избранное очищено');
-            renderFavorites();
+        if (!currentUser) return;
+        if (!confirm('Очистить всё избранное?')) return;
+        const favs = await getFavoritesFromDB();
+        for (let id of favs) {
+            await removeFavoriteDB(id);
         }
+        showToast('Избранное очищено');
+        await renderFavorites();
+    }
+
+    // ========== ОТОБРАЖЕНИЕ ==========
+    function generateStars(rating) {
+        const fullStars = Math.floor(rating);
+        const hasHalf = rating % 1 >= 0.5;
+        let stars = '★'.repeat(fullStars);
+        if (hasHalf) stars += '½';
+        stars += '☆'.repeat(5 - Math.ceil(rating));
+        return stars;
     }
 
     async function renderFavorites() {
         const container = document.getElementById('favoritesList');
         const statsDiv = document.getElementById('favoritesStats');
-
+        
         currentUser = getCurrentUser();
-
+        
         if (!currentUser) {
             container.innerHTML = `
                 <div class="empty-state">
@@ -607,15 +632,15 @@
             statsDiv.style.display = 'none';
             return;
         }
-
-        const favoriteIds = getFavoritesIds();
-
+        
+        const favoriteIds = await getFavoritesFromDB();
+        
         if (allListings.length === 0) {
             allListings = await getListings();
         }
-
+        
         const favoriteListings = allListings.filter(l => favoriteIds.includes(l.id));
-
+        
         if (favoriteListings.length === 0) {
             container.innerHTML = `
                 <div class="empty-state">
@@ -628,30 +653,28 @@
             statsDiv.style.display = 'none';
             return;
         }
-
+        
         statsDiv.style.display = 'flex';
         document.getElementById('favCount').innerHTML = favoriteListings.length;
-
+        
         const typeName = {
             'apartment': 'Квартира',
             'house': 'Дом',
             'loft': 'Loft'
         };
-
+        
         container.innerHTML = favoriteListings.map(listing => `
-            <div class="favorite-card" onclick="window.location.href='listing-detail.html?id=${listing.id}'">
+            <a href="listing-detail.html?id=${listing.id}" class="favorite-card">
                 <div class="card-image">
                     <img src="${listing.image || 'https://placehold.co/500x300/2c7da0/white?text=BroSky'}" alt="${listing.title}">
                     <div class="card-badge">${typeName[listing.type] || 'Жильё'}</div>
-                    <button class="remove-fav-btn" onclick="event.stopPropagation(); removeFromFavorites(${listing.id})">
+                    <div class="remove-fav-btn" onclick="event.preventDefault(); removeFromFavorites(${listing.id})">
                         <i class="fas fa-trash-alt"></i>
-                    </button>
+                    </div>
                 </div>
                 <div class="card-content">
                     <div class="card-title">${listing.title}</div>
-                    <div class="card-location">
-                        <i class="fas fa-map-marker-alt"></i> ${listing.city}
-                    </div>
+                    <div class="card-location"><i class="fas fa-map-marker-alt"></i> ${listing.city}</div>
                     <div class="card-rating">
                         <div class="stars">${generateStars(listing.rating || 4.5)}</div>
                         <div class="reviews">${listing.reviews || 42} отзывов</div>
@@ -665,11 +688,39 @@
                         <span><i class="fas fa-users"></i> до ${listing.guests || 4} гостей</span>
                     </div>
                 </div>
-            </div>
+            </a>
         `).join('');
     }
 
-    // ========== МЕНЮ ПОЛЬЗОВАТЕЛЯ ==========
+    async function removeFromFavorites(listingId) {
+        if (!currentUser) return;
+        const result = await removeFavoriteDB(listingId);
+        if (result) {
+            showToast('Удалено из избранного 💔');
+            await renderFavorites();
+        }
+    }
+
+    // ========== УВЕДОМЛЕНИЯ ==========
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        setTimeout(() => {
+            toast.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => toast.remove(), 300);
+        }, 2000);
+    }
+
+    // ========== ПОЛЬЗОВАТЕЛЬСКОЕ МЕНЮ ==========
+    function getCurrentUser() {
+        try {
+            const user = localStorage.getItem('brosky_current_user');
+            return user ? JSON.parse(user) : null;
+        } catch(e) { return null; }
+    }
+
     function logout() {
         localStorage.removeItem('brosky_current_user');
         window.location.href = 'index.html';
@@ -699,7 +750,7 @@
                 </div>
             `;
         } else {
-            userMenu.innerHTML = `<button class="btn-outline-light" onclick="window.location.href='login.html'"><i class="far fa-user"></i> Войти</button>`;
+            userMenu.innerHTML = `<a href="login.html" class="btn-outline-light"><i class="far fa-user"></i> Войти</a>`;
         }
     }
 
@@ -714,7 +765,9 @@
 
     document.addEventListener('click', function(e) {
         const d = document.getElementById('dropdownMenu');
-        if (d && !e.target.closest('.user-dropdown')) d.style.display = 'none';
+        if (d && !e.target.closest('.user-dropdown')) {
+            d.style.display = 'none';
+        }
     });
 
     window.removeFromFavorites = removeFromFavorites;
@@ -723,10 +776,12 @@
     async function init() {
         updateUserMenu();
         checkAndShowAdminLink();
+        allListings = await getListings();
         await renderFavorites();
     }
 
     init();
 </script>
+
 </body>
 </html>

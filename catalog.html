@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Каталог жилья | BroSky</title>
+    <title>Каталог | BroSky</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* ========== RESET & GLOBAL ========== */
         * {
             margin: 0;
             padding: 0;
@@ -18,12 +19,12 @@
             background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%);
             color: #1a2c3e;
             scroll-behavior: smooth;
+            line-height: 1.4;
         }
 
         :root {
             --primary-blue: #2c7da0;
-            --accent-teal: #3DCFB6;
-            --accent-purple: #5B56E0;
+            --accent-pink: #FF69B4;
             --accent-coral: #FF6B6B;
             --soft-blue: #d4e6f1;
             --light-slate: #eef2f7;
@@ -41,7 +42,7 @@
             padding: 0 32px;
         }
 
-        /* ========== ШАПКА ========== */
+        /* ========== HEADER ========== */
         header {
             padding: 24px 0 16px;
             backdrop-filter: blur(8px);
@@ -68,11 +69,10 @@
             font-weight: 700;
             color: var(--charcoal);
             text-decoration: none;
-            transition: var(--transition);
         }
 
         .logo i {
-            color: var(--accent-teal);
+            color: var(--accent-pink);
             font-size: 2rem;
             transition: transform 0.3s ease;
         }
@@ -104,7 +104,7 @@
             left: 0;
             width: 0%;
             height: 2px;
-            background: var(--accent-purple);
+            background: var(--accent-pink);
             transition: width 0.25s;
             border-radius: 2px;
         }
@@ -118,11 +118,11 @@
         }
 
         .btn-outline-light {
-            border: 1.5px solid var(--accent-purple);
+            border: 1.5px solid var(--accent-pink);
             background: transparent;
             padding: 8px 20px;
             border-radius: 40px;
-            color: var(--accent-purple);
+            color: var(--accent-pink);
             font-weight: 600;
             transition: var(--transition);
             text-decoration: none;
@@ -133,12 +133,12 @@
         }
 
         .btn-outline-light:hover {
-            background: var(--accent-purple);
+            background: var(--accent-pink);
             color: white;
             transform: translateY(-2px);
         }
 
-        /* ========== ЗАГОЛОВОК СТРАНИЦЫ ========== */
+        /* ========== PAGE HEADER ========== */
         .page-header {
             text-align: center;
             margin: 48px 0 32px;
@@ -158,7 +158,7 @@
             margin: 0 auto;
         }
 
-        /* ========== ФИЛЬТРЫ ========== */
+        /* ========== FILTERS ========== */
         .filters-section {
             background: white;
             border-radius: 28px;
@@ -178,7 +178,7 @@
         }
 
         .filters-title i {
-            color: var(--accent-purple);
+            color: var(--accent-pink);
             font-size: 1.3rem;
         }
 
@@ -217,12 +217,12 @@
         .filter-group select:focus,
         .filter-group input:focus {
             outline: none;
-            border-color: var(--accent-purple);
-            box-shadow: 0 0 0 3px rgba(91, 86, 224, 0.1);
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.1);
         }
 
         .btn-filter {
-            background: var(--accent-purple);
+            background: var(--accent-pink);
             color: white;
             border: none;
             padding: 12px 28px;
@@ -236,7 +236,7 @@
         }
 
         .btn-filter:hover {
-            background: #4a45c4;
+            background: #e85da0;
             transform: translateY(-2px);
         }
 
@@ -256,7 +256,7 @@
             color: var(--accent-coral);
         }
 
-        /* ========== СЕТКА ОБЪЯВЛЕНИЙ ========== */
+        /* ========== LISTINGS GRID ========== */
         .listings-header {
             display: flex;
             justify-content: space-between;
@@ -324,7 +324,7 @@
             position: absolute;
             top: 16px;
             left: 16px;
-            background: var(--accent-teal);
+            background: var(--accent-pink);
             color: white;
             padding: 6px 12px;
             border-radius: 30px;
@@ -468,7 +468,7 @@
             margin-bottom: 24px;
         }
 
-        /* ========== ПАГИНАЦИЯ ========== */
+        /* ========== PAGINATION ========== */
         .pagination {
             display: flex;
             justify-content: center;
@@ -488,17 +488,17 @@
         }
 
         .pagination button:hover {
-            border-color: var(--accent-purple);
-            color: var(--accent-purple);
+            border-color: var(--accent-pink);
+            color: var(--accent-pink);
         }
 
         .pagination button.active {
-            background: var(--accent-purple);
+            background: var(--accent-pink);
             color: white;
-            border-color: var(--accent-purple);
+            border-color: var(--accent-pink);
         }
 
-        /* ========== ПОДВАЛ ========== */
+        /* ========== FOOTER ========== */
         footer {
             text-align: center;
             padding: 40px 0;
@@ -507,7 +507,42 @@
             font-size: 0.85rem;
         }
 
-        /* ========== ВЫПАДАЮЩЕЕ МЕНЮ ПОЛЬЗОВАТЕЛЯ ========== */
+        /* ========== TOAST ========== */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--charcoal);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 48px;
+            z-index: 1100;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        /* ========== USER DROPDOWN ========== */
         .user-dropdown {
             position: relative;
             display: inline-block;
@@ -548,47 +583,7 @@
             color: var(--accent-coral);
         }
 
-        .dropdown-menu .logout:hover {
-            background: #fdeaea;
-        }
-
-        /* ========== УВЕДОМЛЕНИЯ ========== */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--charcoal);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 48px;
-            z-index: 1100;
-            animation: slideIn 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-        }
-
-        /* ========== АДАПТИВНОСТЬ ========== */
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 992px) {
             .filters-grid {
                 flex-direction: column;
@@ -618,6 +613,10 @@
             .listings-grid {
                 grid-template-columns: 1fr;
             }
+            .listings-header {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -627,7 +626,7 @@
     <div class="container">
         <div class="navbar">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="BroSky" style="height: 40px;">
+                <i class="fas fa-cloud"></i>
                 <span>BroSky</span>
             </a>
             <div class="nav-links">
@@ -722,14 +721,12 @@
 
 <script>
     // ========== НАСТРОЙКИ SUPABASE ==========
-    // ⬇️⬇️⬇️ ЗАМЕНИ НА СВОИ ДАННЫЕ ИЗ SUPABASE ⬇️⬇️⬇️
     const SUPABASE_URL = 'https://bgyjgzzvoxyvpysywvlb.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJneWpnenp2b3h5dnB5c3l3dmxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2Mzk3NjQsImV4cCI6MjA5NjIxNTc2NH0.Yz91MvAXo45Z3hq-76V5yBD4aB_2dFgpjXDBDWG9FHM';
 
-    // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
+    let currentUser = null;
     let allListings = [];
     let filteredListings = [];
-    let currentUser = null;
     let currentPage = 1;
     const itemsPerPage = 6;
 
@@ -741,12 +738,9 @@
             'Authorization': `Bearer ${SUPABASE_KEY}`,
             'Content-Type': 'application/json'
         };
-
         let options = { method, headers };
-
         if (method === 'GET') {
             if (id) url += `?id=eq.${id}`;
-            options.method = 'GET';
         } else if (method === 'POST') {
             options.body = JSON.stringify(data);
         } else if (method === 'PATCH') {
@@ -755,14 +749,13 @@
         } else if (method === 'DELETE') {
             url += `?id=eq.${id}`;
         }
-
         try {
             const response = await fetch(url, options);
             if (!response.ok) throw new Error(`Ошибка ${response.status}`);
             if (method === 'GET') return await response.json();
             return { success: true };
         } catch (error) {
-            console.error('Ошибка Supabase:', error);
+            console.error(error);
             return null;
         }
     }
@@ -772,90 +765,54 @@
         return listings || [];
     }
 
-    // ========== ИЗБРАННОЕ ==========
-    function getCurrentUser() {
-        try {
-            const user = localStorage.getItem('brosky_current_user');
-            return user ? JSON.parse(user) : null;
-        } catch(e) { return null; }
+    // ========== ГЛОБАЛЬНОЕ ИЗБРАННОЕ ==========
+    async function getFavoritesFromDB() {
+        if (!currentUser) return [];
+        const favs = await supabaseRequest(`favorites?user_id=eq.${currentUser.id}`, 'GET');
+        return favs ? favs.map(f => f.listing_id) : [];
     }
 
-    function getFavorites() {
-        const user = getCurrentUser();
-        if (!user) return [];
-        const key = `favorites_${user.id}`;
-        const fav = localStorage.getItem(key);
-        return fav ? JSON.parse(fav) : [];
+    async function addFavoriteDB(listingId) {
+        if (!currentUser) return false;
+        const result = await supabaseRequest('favorites', 'POST', {
+            user_id: currentUser.id,
+            listing_id: listingId
+        });
+        return result?.success;
     }
 
-    function isFavorite(listingId) {
-        return getFavorites().includes(listingId);
-    }
-
-    function addToFavorites(listingId) {
-        let favorites = getFavorites();
-        if (!favorites.includes(listingId)) {
-            favorites.push(listingId);
-            const user = getCurrentUser();
-            if (user) localStorage.setItem(`favorites_${user.id}`, JSON.stringify(favorites));
-            showToast('Добавлено в избранное! ❤️');
-            renderListings();
+    async function removeFavoriteDB(listingId) {
+        if (!currentUser) return false;
+        const favs = await supabaseRequest(`favorites?user_id=eq.${currentUser.id}&listing_id=eq.${listingId}`, 'GET');
+        if (favs && favs.length) {
+            const result = await supabaseRequest('favorites', 'DELETE', null, favs[0].id);
+            return result?.success;
         }
+        return false;
     }
 
-    function removeFromFavorites(listingId) {
-        let favorites = getFavorites();
-        favorites = favorites.filter(id => id !== listingId);
-        const user = getCurrentUser();
-        if (user) localStorage.setItem(`favorites_${user.id}`, JSON.stringify(favorites));
-        showToast('Удалено из избранного 💔');
-        renderListings();
+    async function isFavoriteDB(listingId) {
+        if (!currentUser) return false;
+        const favs = await supabaseRequest(`favorites?user_id=eq.${currentUser.id}&listing_id=eq.${listingId}`, 'GET');
+        return favs && favs.length > 0;
     }
 
-    function toggleFavorite(listingId, event) {
-        event.stopPropagation();
-        if (isFavorite(listingId)) {
-            removeFromFavorites(listingId);
-        } else {
-            addToFavorites(listingId);
-        }
-    }
-
-    function showToast(message) {
-        const toast = document.createElement('div');
-        toast.className = 'toast';
-        toast.innerHTML = message;
-        document.body.appendChild(toast);
-        setTimeout(() => {
-            toast.style.animation = 'slideOut 0.3s ease';
-            setTimeout(() => toast.remove(), 300);
-        }, 2000);
-    }
-
-    // ========== ФИЛЬТРАЦИЯ ==========
-    function applyFilters() {
+    // ========== ФИЛЬТРАЦИЯ И ПАГИНАЦИЯ ==========
+    async function applyFilters() {
         const city = document.getElementById('cityFilter').value;
         const type = document.getElementById('typeFilter').value;
         const maxPrice = document.getElementById('priceFilter').value;
         const minBeds = parseInt(document.getElementById('bedsFilter').value);
-
-        filteredListings = [...allListings];
-
-        if (city !== 'all') {
-            filteredListings = filteredListings.filter(l => l.city === city);
-        }
-        if (type !== 'all') {
-            filteredListings = filteredListings.filter(l => l.type === type);
-        }
-        if (maxPrice) {
-            filteredListings = filteredListings.filter(l => l.price <= parseInt(maxPrice));
-        }
-        if (minBeds > 0) {
-            filteredListings = filteredListings.filter(l => (l.beds || 1) >= minBeds);
-        }
-
+        
+        let filtered = [...allListings];
+        if (city !== 'all') filtered = filtered.filter(l => l.city === city);
+        if (type !== 'all') filtered = filtered.filter(l => l.type === type);
+        if (maxPrice) filtered = filtered.filter(l => l.price <= parseInt(maxPrice));
+        if (minBeds > 0) filtered = filtered.filter(l => (l.beds || 1) >= minBeds);
+        
+        filteredListings = filtered;
         currentPage = 1;
-        renderListings();
+        await renderListings();
         renderPagination();
         updateListingsCount();
     }
@@ -879,33 +836,32 @@
         }
     }
 
-    // ========== ПАГИНАЦИЯ ==========
     function renderPagination() {
         const totalPages = Math.ceil(filteredListings.length / itemsPerPage);
         const paginationDiv = document.getElementById('pagination');
-
+        
         if (totalPages <= 1) {
             paginationDiv.innerHTML = '';
             return;
         }
-
+        
         let html = '';
         if (currentPage > 1) {
-            html += `<button onclick="goToPage(${currentPage - 1})"><i class="fas fa-chevron-left"></i></button>`;
+            html += `<button onclick="goToPage(${currentPage - 1})"><i class="fas fa-chevron-left"></i> Назад</button>`;
         }
-
+        
         for (let i = 1; i <= totalPages; i++) {
             if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
                 html += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
             } else if (i === currentPage - 2 || i === currentPage + 2) {
-                html += `<span>...</span>`;
+                html += `<span style="padding: 10px;">...</span>`;
             }
         }
-
+        
         if (currentPage < totalPages) {
-            html += `<button onclick="goToPage(${currentPage + 1})"><i class="fas fa-chevron-right"></i></button>`;
+            html += `<button onclick="goToPage(${currentPage + 1})">Вперёд <i class="fas fa-chevron-right"></i></button>`;
         }
-
+        
         paginationDiv.innerHTML = html;
     }
 
@@ -927,12 +883,13 @@
         return stars;
     }
 
-    function renderListings() {
+    async function renderListings() {
         const container = document.getElementById('listingsGrid');
         const start = (currentPage - 1) * itemsPerPage;
         const end = start + itemsPerPage;
         const pageListings = filteredListings.slice(start, end);
-
+        const favorites = await getFavoritesFromDB();
+        
         if (pageListings.length === 0) {
             container.innerHTML = `
                 <div class="empty-state">
@@ -944,30 +901,32 @@
             `;
             return;
         }
-
+        
+        const typeName = {
+            'apartment': 'Квартира',
+            'house': 'Дом',
+            'loft': 'Loft'
+        };
+        
         container.innerHTML = pageListings.map(listing => {
-            const isFav = isFavorite(listing.id);
-            const rating = listing.rating || 4.5;
-            const reviews = listing.reviews || Math.floor(Math.random() * 100) + 10;
-            const typeName = listing.type === 'apartment' ? 'Квартира' : (listing.type === 'house' ? 'Дом' : 'Loft');
-
+            const isFav = favorites.includes(listing.id);
             return `
                 <div class="listing-card" onclick="window.location.href='listing-detail.html?id=${listing.id}'">
                     <div class="card-image">
                         <img src="${listing.image || 'https://placehold.co/500x300/2c7da0/white?text=BroSky'}" alt="${listing.title}">
-                        <div class="card-badge">${typeName}</div>
-                        <button class="favorite-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite(${listing.id}, event)">
+                        <div class="card-badge">${typeName[listing.type] || 'Жильё'}</div>
+                        <button class="favorite-btn ${isFav ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${listing.id})">
                             <i class="fas fa-heart"></i>
                         </button>
                     </div>
                     <div class="card-content">
                         <div class="card-title">${listing.title}</div>
                         <div class="card-location">
-                            <i class="fas fa-map-marker-alt"></i> ${listing.city}, ${listing.address || 'центр'}
+                            <i class="fas fa-map-marker-alt"></i> ${listing.city}
                         </div>
                         <div class="card-rating">
-                            <div class="stars">${generateStars(rating)}</div>
-                            <div class="reviews">${reviews} отзывов</div>
+                            <div class="stars">${generateStars(listing.rating || 4.5)}</div>
+                            <div class="reviews">${listing.reviews || 42} отзывов</div>
                         </div>
                         <div class="card-price">
                             ${listing.price.toLocaleString()} ₽ <small>/ сутки</small>
@@ -983,25 +942,56 @@
         }).join('');
     }
 
+    async function toggleFavorite(listingId) {
+        if (!currentUser) {
+            showToast('Войдите в аккаунт');
+            return;
+        }
+        const isFav = await isFavoriteDB(listingId);
+        if (isFav) {
+            await removeFavoriteDB(listingId);
+            showToast('Удалено из избранного 💔');
+        } else {
+            await addFavoriteDB(listingId);
+            showToast('Добавлено в избранное! ❤️');
+        }
+        await renderListings(); // обновляем кнопки без перезагрузки фильтров
+    }
+
+    // ========== УВЕДОМЛЕНИЯ ==========
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerText = message;
+        document.body.appendChild(toast);
+        setTimeout(() => {
+            toast.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => toast.remove(), 300);
+        }, 2000);
+    }
+
     // ========== ПОЛЬЗОВАТЕЛЬСКОЕ МЕНЮ ==========
+    function getCurrentUser() {
+        try {
+            const user = localStorage.getItem('brosky_current_user');
+            return user ? JSON.parse(user) : null;
+        } catch(e) { return null; }
+    }
+
     function logout() {
         localStorage.removeItem('brosky_current_user');
         window.location.href = 'index.html';
     }
 
     function toggleDropdown() {
-        const dropdown = document.getElementById('dropdownMenu');
-        if (dropdown) {
-            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
-        }
+        const d = document.getElementById('dropdownMenu');
+        if (d) d.style.display = d.style.display === 'none' ? 'block' : 'none';
     }
 
     function updateUserMenu() {
         const userMenu = document.getElementById('userMenu');
         if (!userMenu) return;
-
         currentUser = getCurrentUser();
-
         if (currentUser) {
             userMenu.innerHTML = `
                 <div class="user-dropdown">
@@ -1017,7 +1007,7 @@
                 </div>
             `;
         } else {
-            userMenu.innerHTML = `<button class="btn-outline-light" onclick="window.location.href='login.html'"><i class="far fa-user"></i> Войти</button>`;
+            userMenu.innerHTML = `<a href="login.html" class="btn-outline-light"><i class="far fa-user"></i> Войти</a>`;
         }
     }
 
@@ -1030,34 +1020,31 @@
         }
     }
 
-    // Закрытие дропдауна при клике вне
-    document.addEventListener('click', function(event) {
-        const dropdown = document.getElementById('dropdownMenu');
-        if (dropdown && !event.target.closest('.user-dropdown')) {
-            dropdown.style.display = 'none';
+    document.addEventListener('click', function(e) {
+        const d = document.getElementById('dropdownMenu');
+        if (d && !e.target.closest('.user-dropdown')) {
+            d.style.display = 'none';
         }
     });
 
-    // ========== ЗАГРУЗКА ДАННЫХ ==========
-    async function loadData() {
-        allListings = await getListings();
-        filteredListings = [...allListings];
-        updateUserMenu();
-        checkAndShowAdminLink();
-        renderListings();
-        renderPagination();
-        updateListingsCount();
-    }
-
-    // Делаем функции глобальными
+    // ========== ГЛОБАЛЬНЫЕ ФУНКЦИИ ==========
     window.applyFilters = applyFilters;
     window.resetFilters = resetFilters;
     window.goToPage = goToPage;
     window.toggleFavorite = toggleFavorite;
-    window.toggleDropdown = toggleDropdown;
-    window.logout = logout;
 
-    loadData();
+    // ========== ИНИЦИАЛИЗАЦИЯ ==========
+    async function init() {
+        updateUserMenu();
+        checkAndShowAdminLink();
+        allListings = await getListings();
+        filteredListings = [...allListings];
+        await renderListings();
+        renderPagination();
+        updateListingsCount();
+    }
+
+    init();
 </script>
 
 </body>

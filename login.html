@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* ========== RESET & GLOBAL ========== */
         * {
             margin: 0;
             padding: 0;
@@ -21,8 +22,7 @@
 
         :root {
             --primary-blue: #2c7da0;
-            --accent-teal: #3DCFB6;
-            --accent-purple: #5B56E0;
+            --accent-pink: #FF69B4;
             --accent-coral: #FF6B6B;
             --soft-blue: #d4e6f1;
             --light-slate: #eef2f7;
@@ -30,6 +30,7 @@
             --cool-gray: #5a6e7c;
             --charcoal: #2c3e44;
             --shadow-sm: 0 12px 28px rgba(0, 32, 64, 0.08);
+            --shadow-hover: 0 20px 32px rgba(27, 65, 92, 0.12);
             --transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
@@ -39,7 +40,7 @@
             padding: 0 20px;
         }
 
-        /* ========== ШАПКА ========== */
+        /* ========== HEADER ========== */
         header {
             padding: 24px 0;
             text-align: center;
@@ -57,7 +58,7 @@
         }
 
         .logo i {
-            color: var(--accent-teal);
+            color: var(--accent-pink);
             font-size: 2rem;
             transition: transform 0.3s ease;
         }
@@ -66,7 +67,7 @@
             transform: scale(1.05) rotate(-2deg);
         }
 
-        /* ========== КАРТОЧКА ВХОДА ========== */
+        /* ========== LOGIN CARD ========== */
         .login-card {
             background: white;
             border-radius: 32px;
@@ -75,7 +76,7 @@
             margin: 20px 0 60px;
         }
 
-        /* ========== ВКЛАДКИ ========== */
+        /* ========== TABS ========== */
         .tabs {
             display: flex;
             gap: 16px;
@@ -99,7 +100,7 @@
         }
 
         .tab.active {
-            color: var(--accent-purple);
+            color: var(--accent-pink);
         }
 
         .tab.active::after {
@@ -109,10 +110,10 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: var(--accent-purple);
+            background: var(--accent-pink);
         }
 
-        /* ========== ФОРМЫ ========== */
+        /* ========== FORMS ========== */
         .form-panel {
             display: none;
         }
@@ -156,14 +157,14 @@
 
         input:focus {
             outline: none;
-            border-color: var(--accent-purple);
-            box-shadow: 0 0 0 3px rgba(91, 86, 224, 0.1);
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.1);
         }
 
-        /* ========== КНОПКИ ========== */
+        /* ========== BUTTONS ========== */
         .btn-login {
             width: 100%;
-            background: var(--accent-teal);
+            background: var(--accent-pink);
             color: white;
             border: none;
             padding: 14px;
@@ -176,9 +177,9 @@
         }
 
         .btn-login:hover {
-            background: #2cb89f;
+            background: #e85da0;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(61, 207, 182, 0.3);
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
         }
 
         .btn-google {
@@ -198,7 +199,7 @@
         }
 
         .btn-google:hover {
-            border-color: var(--accent-purple);
+            border-color: var(--accent-pink);
             background: #f8f9fa;
         }
 
@@ -206,27 +207,37 @@
             font-size: 1.2rem;
         }
 
-        /* ========== СООБЩЕНИЯ ========== */
-        .error-message {
-            color: var(--accent-coral);
-            font-size: 0.8rem;
-            margin-top: 5px;
-            display: none;
-            text-align: center;
-            background: #fdeaea;
-            padding: 10px;
-            border-radius: 12px;
+        .forgot-password {
+            text-align: right;
+            margin-top: 8px;
         }
 
-        .success-message {
-            color: var(--accent-teal);
-            font-size: 0.85rem;
+        .forgot-password a {
+            color: var(--cool-gray);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .forgot-password a:hover {
+            color: var(--accent-pink);
+        }
+
+        .register-note {
             text-align: center;
-            margin-top: 16px;
-            padding: 10px;
-            background: #e8f8f0;
-            border-radius: 12px;
-            display: none;
+            margin-top: 24px;
+            color: var(--cool-gray);
+            font-size: 0.9rem;
+        }
+
+        .register-note a {
+            color: var(--accent-pink);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .register-note a:hover {
+            text-decoration: underline;
         }
 
         .divider {
@@ -253,40 +264,30 @@
             font-size: 0.85rem;
         }
 
-        .forgot-password {
-            text-align: right;
-            margin-top: 8px;
-        }
-
-        .forgot-password a {
-            color: var(--cool-gray);
-            text-decoration: none;
+        /* ========== MESSAGES ========== */
+        .error-message {
+            color: var(--accent-coral);
             font-size: 0.8rem;
-            transition: var(--transition);
-        }
-
-        .forgot-password a:hover {
-            color: var(--accent-purple);
-        }
-
-        .register-note {
+            margin-top: 5px;
+            display: none;
             text-align: center;
-            margin-top: 24px;
-            color: var(--cool-gray);
-            font-size: 0.9rem;
+            background: #fdeaea;
+            padding: 10px;
+            border-radius: 12px;
         }
 
-        .register-note a {
-            color: var(--accent-teal);
-            text-decoration: none;
-            font-weight: 600;
+        .success-message {
+            color: var(--accent-pink);
+            font-size: 0.85rem;
+            text-align: center;
+            margin-top: 16px;
+            padding: 10px;
+            background: #e8f8f0;
+            border-radius: 12px;
+            display: none;
         }
 
-        .register-note a:hover {
-            text-decoration: underline;
-        }
-
-        /* ========== АНИМАЦИЯ ЗАГРУЗКИ ========== */
+        /* ========== LOADER ========== */
         .loader {
             display: inline-block;
             width: 20px;
@@ -305,7 +306,6 @@
             }
         }
 
-        /* ========== ПОДВАЛ ========== */
         footer {
             text-align: center;
             padding: 30px 0;
@@ -326,7 +326,7 @@
 <header>
     <div class="container">
         <a href="index.html" class="logo">
-            <img src="images/logo.png" alt="BroSky" style="height: 40px;">
+            <i class="fas fa-cloud"></i>
             <span>BroSky</span>
         </a>
     </div>
@@ -432,28 +432,28 @@
     // ========== НАСТРОЙКИ SUPABASE ==========
     const SUPABASE_URL = 'https://bgyjgzzvoxyvpysywvlb.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJneWpnenp2b3h5dnB5c3l3dmxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2Mzk3NjQsImV4cCI6MjA5NjIxNTc2NH0.Yz91MvAXo45Z3hq-76V5yBD4aB_2dFgpjXDBDWG9FHM';
-
+    
     // ========== КЛЮЧИ ДЛЯ ХРАНЕНИЯ ==========
     const STORAGE_KEYS = {
         USERS: 'brosky_users',
         CURRENT_USER: 'brosky_current_user'
     };
-
+    
     // ========== ФУНКЦИИ РАБОТЫ С ПОЛЬЗОВАТЕЛЯМИ ==========
     function getUsers() {
         const users = localStorage.getItem(STORAGE_KEYS.USERS);
         return users ? JSON.parse(users) : [];
     }
-
+    
     function saveUsers(users) {
         localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(users));
     }
-
+    
     function getCurrentUser() {
         const user = localStorage.getItem(STORAGE_KEYS.CURRENT_USER);
         return user ? JSON.parse(user) : null;
     }
-
+    
     function setCurrentUser(user) {
         if (user) {
             localStorage.setItem(STORAGE_KEYS.CURRENT_USER, JSON.stringify(user));
@@ -461,48 +461,48 @@
             localStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
         }
     }
-
+    
     function isEmailUnique(email) {
         const users = getUsers();
         return !users.some(user => user.email.toLowerCase() === email.toLowerCase());
     }
-
+    
     function findUserByEmail(email) {
         const users = getUsers();
         return users.find(user => user.email.toLowerCase() === email.toLowerCase());
     }
-
+    
     function hashPassword(password) {
         return btoa(password + 'brosky_salt');
     }
-
+    
     function verifyPassword(password, hash) {
         return hashPassword(password) === hash;
     }
-
+    
     function isValidEmail(email) {
         const re = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
         return re.test(email);
     }
-
+    
     // ========== ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК ==========
     function switchToRegister() {
         document.querySelector('.tab[data-tab="register"]').click();
     }
-
+    
     function switchToLogin() {
         document.querySelector('.tab[data-tab="login"]').click();
     }
-
+    
     const tabs = document.querySelectorAll('.tab');
     const loginPanel = document.getElementById('loginPanel');
     const registerPanel = document.getElementById('registerPanel');
-
+    
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             tabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
-
+            
             if (tab.dataset.tab === 'login') {
                 loginPanel.classList.add('active');
                 registerPanel.classList.remove('active');
@@ -515,7 +515,7 @@
             }
         });
     });
-
+    
     // ========== АНИМАЦИЯ ЗАГРУЗКИ ==========
     function setButtonLoading(button, isLoading) {
         if (isLoading) {
@@ -527,58 +527,56 @@
             button.disabled = false;
         }
     }
-
+    
     // ========== РЕГИСТРАЦИЯ ==========
     document.getElementById('registerForm').addEventListener('submit', function(e) {
         e.preventDefault();
-
+        
         const name = document.getElementById('regName').value.trim();
         const email = document.getElementById('regEmail').value.trim();
         const phone = document.getElementById('regPhone').value.trim();
         const password = document.getElementById('regPassword').value;
         const confirm = document.getElementById('regPasswordConfirm').value;
-
+        
         const errorDiv = document.getElementById('registerError');
         const successDiv = document.getElementById('registerSuccess');
         const registerBtn = document.getElementById('registerBtn');
-
+        
         errorDiv.style.display = 'none';
         successDiv.style.display = 'none';
-
-        // Валидация
+        
         if (name.length < 2) {
             errorDiv.textContent = 'Введите корректное имя (минимум 2 символа)';
             errorDiv.style.display = 'block';
             return;
         }
-
+        
         if (!isValidEmail(email)) {
-            errorDiv.textContent = 'Введите корректный email (например: name@domain.com)';
+            errorDiv.textContent = 'Введите корректный email';
             errorDiv.style.display = 'block';
             return;
         }
-
+        
         if (!isEmailUnique(email)) {
             errorDiv.textContent = 'Пользователь с таким email уже существует';
             errorDiv.style.display = 'block';
             return;
         }
-
+        
         if (password.length < 6) {
             errorDiv.textContent = 'Пароль должен содержать минимум 6 символов';
             errorDiv.style.display = 'block';
             return;
         }
-
+        
         if (password !== confirm) {
             errorDiv.textContent = 'Пароли не совпадают';
             errorDiv.style.display = 'block';
             return;
         }
-
+        
         setButtonLoading(registerBtn, true);
-
-        // Создаём пользователя
+        
         const newUser = {
             id: Date.now(),
             name: name,
@@ -587,75 +585,74 @@
             passwordHash: hashPassword(password),
             createdAt: new Date().toISOString()
         };
-
+        
         const users = getUsers();
         users.push(newUser);
         saveUsers(users);
-
-        // Автоматический вход
+        
         setCurrentUser({
             id: newUser.id,
             name: newUser.name,
             email: newUser.email,
             phone: newUser.phone
         });
-
+        
         setButtonLoading(registerBtn, false);
-
+        
         successDiv.textContent = 'Регистрация успешна! Перенаправление на главную...';
         successDiv.style.display = 'block';
-
+        
         setTimeout(() => {
             window.location.href = 'index.html';
         }, 1500);
     });
-
+    
     // ========== ВХОД ==========
     document.getElementById('loginForm').addEventListener('submit', function(e) {
         e.preventDefault();
-
+        
         const email = document.getElementById('loginEmail').value.trim();
         const password = document.getElementById('loginPassword').value;
         const errorDiv = document.getElementById('loginError');
         const loginBtn = document.getElementById('loginBtn');
-
+        
         errorDiv.style.display = 'none';
-
+        
         if (!email || !password) {
             errorDiv.textContent = 'Введите email и пароль';
             errorDiv.style.display = 'block';
             return;
         }
-
+        
         setButtonLoading(loginBtn, true);
-
+        
         const user = findUserByEmail(email);
-
+        
         if (!user || !verifyPassword(password, user.passwordHash)) {
             setButtonLoading(loginBtn, false);
             errorDiv.textContent = 'Неверный email или пароль';
             errorDiv.style.display = 'block';
             return;
         }
-
+        
         setCurrentUser({
             id: user.id,
             name: user.name,
             email: user.email,
             phone: user.phone
         });
-
+        
         setButtonLoading(loginBtn, false);
-
+        
         alert(`Добро пожаловать, ${user.name}!`);
         window.location.href = 'index.html';
     });
-
+    
     // ========== СОЦИАЛЬНЫЙ ВХОД (ДЕМО) ==========
     function socialLogin(provider) {
         alert(`Вход через ${provider} (демо-режим). В реальном проекте здесь будет OAuth-авторизация.`);
     }
-
+    
     // ========== ПРОВЕРКА АВТОРИЗАЦИИ ==========
     function checkAuth() {
         const currentUser = getCurrentUser();
@@ -663,11 +660,11 @@
             console.log(`Уже авторизован как: ${currentUser.name}`);
         }
     }
-
+    
     window.socialLogin = socialLogin;
     window.switchToRegister = switchToRegister;
     window.switchToLogin = switchToLogin;
-
+    
     checkAuth();
 </script>
 </body>

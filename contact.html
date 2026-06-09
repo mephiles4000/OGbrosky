@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* ========== RESET & GLOBAL ========== */
         * {
             margin: 0;
             padding: 0;
@@ -17,12 +18,13 @@
             font-family: 'Inter', sans-serif;
             background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%);
             color: #1a2c3e;
+            scroll-behavior: smooth;
+            line-height: 1.4;
         }
 
         :root {
             --primary-blue: #2c7da0;
-            --accent-teal: #3DCFB6;
-            --accent-purple: #5B56E0;
+            --accent-pink: #FF69B4;
             --accent-coral: #FF6B6B;
             --soft-blue: #d4e6f1;
             --light-slate: #eef2f7;
@@ -40,7 +42,7 @@
             padding: 0 32px;
         }
 
-        /* ========== ШАПКА ========== */
+        /* ========== HEADER ========== */
         header {
             padding: 24px 0 16px;
             backdrop-filter: blur(8px);
@@ -70,7 +72,7 @@
         }
 
         .logo i {
-            color: var(--accent-teal);
+            color: var(--accent-pink);
             font-size: 2rem;
             transition: transform 0.3s ease;
         }
@@ -102,8 +104,9 @@
             left: 0;
             width: 0%;
             height: 2px;
-            background: var(--accent-purple);
+            background: var(--accent-pink);
             transition: width 0.25s;
+            border-radius: 2px;
         }
 
         .nav-links a:hover {
@@ -115,12 +118,13 @@
         }
 
         .btn-outline-light {
-            border: 1.5px solid var(--accent-purple);
+            border: 1.5px solid var(--accent-pink);
             background: transparent;
             padding: 8px 20px;
             border-radius: 40px;
-            color: var(--accent-purple);
+            color: var(--accent-pink);
             font-weight: 600;
+            transition: var(--transition);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
@@ -129,12 +133,12 @@
         }
 
         .btn-outline-light:hover {
-            background: var(--accent-purple);
+            background: var(--accent-pink);
             color: white;
             transform: translateY(-2px);
         }
 
-        /* ========== ЗАГОЛОВОК СТРАНИЦЫ ========== */
+        /* ========== PAGE HEADER ========== */
         .page-header {
             text-align: center;
             margin: 48px 0 32px;
@@ -154,7 +158,7 @@
             margin: 0 auto;
         }
 
-        /* ========== ОСНОВНАЯ СЕТКА ========== */
+        /* ========== CONTACT GRID ========== */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -162,7 +166,7 @@
             margin: 40px 0;
         }
 
-        /* ========== КОНТАКТНАЯ ИНФОРМАЦИЯ ========== */
+        /* ========== CONTACT INFO ========== */
         .contact-info {
             background: white;
             border-radius: 32px;
@@ -180,7 +184,7 @@
         }
 
         .contact-info h2 i {
-            color: var(--accent-teal);
+            color: var(--accent-pink);
         }
 
         .info-item {
@@ -202,13 +206,13 @@
         .info-icon {
             width: 52px;
             height: 52px;
-            background: rgba(61, 207, 182, 0.12);
+            background: rgba(255, 105, 180, 0.12);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.3rem;
-            color: var(--accent-teal);
+            color: var(--accent-pink);
         }
 
         .info-text h3 {
@@ -222,7 +226,7 @@
             font-size: 0.9rem;
         }
 
-        /* ========== РЕКВИЗИТЫ ========== */
+        /* ========== REQUISITES ========== */
         .requisites {
             background: white;
             border-radius: 32px;
@@ -240,7 +244,7 @@
         }
 
         .requisites h2 i {
-            color: var(--accent-purple);
+            color: var(--primary-blue);
         }
 
         .requisite-item {
@@ -264,7 +268,7 @@
             color: var(--charcoal);
         }
 
-        /* ========== КАРТА ========== */
+        /* ========== MAP ========== */
         .map-container {
             margin: 48px 0;
             border-radius: 32px;
@@ -278,7 +282,7 @@
             border: none;
         }
 
-        /* ========== ФОРМА ОБРАТНОЙ СВЯЗИ ========== */
+        /* ========== FEEDBACK FORM ========== */
         .feedback-form {
             background: white;
             border-radius: 32px;
@@ -326,8 +330,8 @@
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--accent-purple);
-            box-shadow: 0 0 0 3px rgba(91, 86, 224, 0.1);
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.1);
         }
 
         .form-group textarea {
@@ -337,7 +341,7 @@
 
         .btn-send {
             width: 100%;
-            background: var(--accent-teal);
+            background: var(--accent-pink);
             color: white;
             border: none;
             padding: 14px;
@@ -349,11 +353,11 @@
         }
 
         .btn-send:hover {
-            background: #2cb89f;
+            background: #e85da0;
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
         }
 
-        /* ========== ПОДВАЛ ========== */
         footer {
             text-align: center;
             padding: 40px 0;
@@ -362,7 +366,42 @@
             font-size: 0.85rem;
         }
 
-        /* ========== ВЫПАДАЮЩЕЕ МЕНЮ ========== */
+        /* ========== TOAST ========== */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--charcoal);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 48px;
+            z-index: 1100;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        /* ========== USER DROPDOWN ========== */
         .user-dropdown {
             position: relative;
             display: inline-block;
@@ -403,27 +442,7 @@
             color: var(--accent-coral);
         }
 
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--charcoal);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 48px;
-            z-index: 1100;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes slideOut {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
-        }
-
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 992px) {
             .contact-grid {
                 grid-template-columns: 1fr;
@@ -460,7 +479,7 @@
     <div class="container">
         <div class="navbar">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="BroSky" style="height: 40px;">
+                <i class="fas fa-cloud"></i>
                 <span>BroSky</span>
             </a>
             <div class="nav-links">
@@ -487,8 +506,8 @@
             <!-- Контактная информация -->
             <div class="contact-info">
                 <h2><i class="fas fa-phone-alt"></i> Свяжитесь с нами</h2>
-
-                <div class="info-item" onclick="window.location.href='https://maps.google.com/?q=Москва,+ул.+Тверская,+15'">
+                
+                <div class="info-item" onclick="window.open('https://maps.google.com/?q=Москва,+ул.+Тверская,+15', '_blank')">
                     <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
                     <div class="info-text">
                         <h3>Адрес</h3>
@@ -523,7 +542,7 @@
                     </div>
                 </div>
 
-                <div class="info-item" onclick="window.location.href='https://t.me/brosky_support'">
+                <div class="info-item" onclick="window.open('https://t.me/brosky_support', '_blank')">
                     <div class="info-icon"><i class="fab fa-telegram"></i></div>
                     <div class="info-text">
                         <h3>Мессенджеры</h3>
@@ -536,7 +555,7 @@
             <!-- Реквизиты -->
             <div class="requisites">
                 <h2><i class="fas fa-building"></i> Реквизиты</h2>
-
+                
                 <div class="requisite-item">
                     <div class="requisite-label">Полное наименование</div>
                     <div class="requisite-value">ООО "BroSky"</div>
@@ -581,8 +600,8 @@
 
         <!-- Карта -->
         <div class="map-container">
-            <iframe
-                src="https://yandex.ru/map-widget/v1/?um=constructor%3A123456789&source=constructor"
+            <iframe 
+                src="https://yandex.ru/map-widget/v1/?um=constructor%3A123456789&source=constructor" 
                 allowfullscreen>
             </iframe>
         </div>
@@ -627,31 +646,8 @@
     // ========== НАСТРОЙКИ SUPABASE ==========
     const SUPABASE_URL = 'https://bgyjgzzvoxyvpysywvlb.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJneWpnenp2b3h5dnB5c3l3dmxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2Mzk3NjQsImV4cCI6MjA5NjIxNTc2NH0.Yz91MvAXo45Z3hq-76V5yBD4aB_2dFgpjXDBDWG9FHM';
-
-    // ========== ФУНКЦИИ SUPABASE ==========
-    async function supabaseRequest(table, method = 'GET', data = null, id = null) {
-        let url = `${SUPABASE_URL}/rest/v1/${table}`;
-        const headers = {
-            'apikey': SUPABASE_KEY,
-            'Authorization': `Bearer ${SUPABASE_KEY}`,
-            'Content-Type': 'application/json'
-        };
-        let options = { method, headers };
-        if (method === 'GET') { if (id) url += `?id=eq.${id}`; }
-        else if (method === 'POST') { options.body = JSON.stringify(data); }
-        else if (method === 'PATCH') { url += `?id=eq.${id}`; options.body = JSON.stringify(data); }
-        else if (method === 'DELETE') { url += `?id=eq.${id}`; }
-        try {
-            const response = await fetch(url, options);
-            if (!response.ok) throw new Error(`Ошибка ${response.status}`);
-            if (method === 'GET') return await response.json();
-            return { success: true };
-        } catch (error) { console.error(error); return null; }
-    }
-
-    async function addMessage(message) {
-        return await supabaseRequest('messages', 'POST', message);
-    }
+    
+    let currentUser = null;
 
     // ========== ПОЛЬЗОВАТЕЛЬ ==========
     function getCurrentUser() {
@@ -675,24 +671,24 @@
     // ========== ОТПРАВКА СООБЩЕНИЯ ==========
     document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
         e.preventDefault();
-
+        
         const name = document.getElementById('feedbackName').value.trim();
         const email = document.getElementById('feedbackEmail').value.trim();
         const subject = document.getElementById('feedbackSubject').value.trim();
         const message = document.getElementById('feedbackMessage').value.trim();
-
+        
         const sendBtn = document.getElementById('sendBtn');
         const originalText = sendBtn.innerHTML;
-
+        
         sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
         sendBtn.disabled = true;
-
-        // Имитация отправки (в реальном проекте здесь был бы запрос к Supabase)
+        
+        // Имитация отправки (в реальном проекте здесь был бы запрос к Supabase или отправка на email)
         setTimeout(() => {
             sendBtn.innerHTML = originalText;
             sendBtn.disabled = false;
-
-            showToast('Сообщение отправлено! Мы свяжемся с вами в ближайшее время.');
+            
+            showToast('✅ Сообщение отправлено! Мы свяжемся с вами в ближайшее время.');
             document.getElementById('feedbackForm').reset();
         }, 1500);
     });
@@ -711,9 +707,9 @@
     function updateUserMenu() {
         const userMenu = document.getElementById('userMenu');
         if (!userMenu) return;
-
-        const currentUser = getCurrentUser();
-
+        
+        currentUser = getCurrentUser();
+        
         if (currentUser) {
             userMenu.innerHTML = `
                 <div class="user-dropdown">
@@ -729,13 +725,12 @@
                 </div>
             `;
         } else {
-            userMenu.innerHTML = `<button class="btn-outline-light" onclick="window.location.href='login.html'"><i class="far fa-user"></i> Войти</button>`;
+            userMenu.innerHTML = `<a href="login.html" class="btn-outline-light"><i class="far fa-user"></i> Войти</a>`;
         }
     }
 
     function checkAndShowAdminLink() {
         const adminLink = document.getElementById('adminLink');
-        const currentUser = getCurrentUser();
         if (adminLink && currentUser && currentUser.email === 'admin@brosky.ru') {
             adminLink.style.display = 'inline-block';
         } else if (adminLink) {
@@ -745,11 +740,15 @@
 
     document.addEventListener('click', function(e) {
         const d = document.getElementById('dropdownMenu');
-        if (d && !e.target.closest('.user-dropdown')) d.style.display = 'none';
+        if (d && !e.target.closest('.user-dropdown')) {
+            d.style.display = 'none';
+        }
     });
 
+    // ========== ИНИЦИАЛИЗАЦИЯ ==========
     updateUserMenu();
     checkAndShowAdminLink();
 </script>
+
 </body>
 </html>

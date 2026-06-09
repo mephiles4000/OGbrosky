@@ -24,7 +24,6 @@
         :root {
             --primary-blue: #2c7da0;
             --accent-pink: #FF69B4;
-            --accent-purple: #9B59B6;
             --accent-coral: #FF6B6B;
             --soft-blue: #d4e6f1;
             --light-slate: #eef2f7;
@@ -240,12 +239,27 @@
             align-items: center;
             gap: 10px;
             text-decoration: none;
+            position: relative;
         }
 
         .btn-secondary:hover {
             background: white;
             border-color: var(--accent-pink);
             transform: translateY(-3px);
+        }
+
+        .demo-badge {
+            position: absolute;
+            top: -10px;
+            right: -15px;
+            background: var(--accent-coral);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 20px;
+            white-space: nowrap;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
 
         .hero-image {
@@ -441,40 +455,6 @@
             transform: scale(1.05);
         }
 
-        .favorite-btn {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            background: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            z-index: 10;
-        }
-
-        .favorite-btn i {
-            font-size: 1.2rem;
-        }
-
-        .favorite-btn.active {
-            background: var(--accent-coral);
-        }
-
-        .favorite-btn.active i {
-            color: white;
-        }
-
-        .favorite-btn:not(.active) i {
-            color: var(--accent-coral);
-        }
-
         .card-content {
             padding: 20px;
         }
@@ -641,7 +621,7 @@
             background: #fdeaea;
         }
 
-        /* ========== МОДАЛЬНЫЕ ОКНА ========== */
+        /* ========== МОДАЛЬНОЕ ОКНО ВХОДА ========== */
         .modal {
             display: none;
             position: fixed;
@@ -705,6 +685,61 @@
             width: 100%;
             padding: 14px;
             margin-top: 8px;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 24px 0;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e0e8f0;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 16px;
+            position: relative;
+            color: var(--cool-gray);
+            font-size: 0.85rem;
+        }
+
+        .btn-google, .btn-vk {
+            width: 100%;
+            background: white;
+            border: 1px solid #d0dee9;
+            padding: 12px;
+            border-radius: 48px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-weight: 500;
+            margin-top: 12px;
+        }
+
+        .btn-google:hover, .btn-vk:hover {
+            border-color: var(--accent-pink);
+            background: #f8f9fa;
+        }
+
+        .btn-google i {
+            font-size: 1.2rem;
+            color: #DB4437;
+        }
+
+        .btn-vk i {
+            font-size: 1.2rem;
+            color: #0077FF;
         }
 
         .modal-close {
@@ -829,7 +864,10 @@
                 <p>Квартиры, дома и апартаменты в лучших районах. Забронируйте идеальное пространство за пару минут.</p>
                 <div class="btn-group">
                     <a href="catalog.html" class="btn-primary"><i class="fas fa-arrow-right"></i> Искать жильё</a>
-                    <a href="add-listing.html" class="btn-secondary"><i class="fas fa-plus-circle"></i> Стать хозяином</a>
+                    <a href="add-listing.html" class="btn-secondary">
+                        <i class="fas fa-plus-circle"></i> Стать хозяином
+                        <span class="demo-badge">DEMO</span>
+                    </a>
                 </div>
             </div>
             <div class="hero-image">
@@ -914,7 +952,7 @@
     </div>
 </footer>
 
-<!-- Модальное окно входа -->
+<!-- Модальное окно входа (расширенное) -->
 <div id="loginModal" class="modal">
     <div class="modal-content">
         <span class="modal-close" onclick="closeModal('loginModal')">&times;</span>
@@ -923,7 +961,22 @@
         <input type="password" id="loginPassword" placeholder="Пароль">
         <div id="loginError" style="color: var(--accent-coral); font-size: 0.8rem; margin-bottom: 10px;"></div>
         <button class="btn-primary" onclick="login()">Войти</button>
-        <button class="btn-secondary" style="margin-top: 10px;" onclick="openRegisterModal()">Нет аккаунта? Зарегистрироваться</button>
+        
+        <div class="divider">
+            <span>или</span>
+        </div>
+        
+        <button class="btn-google" onclick="socialLogin('Google')">
+            <i class="fab fa-google"></i> Продолжить с Google
+        </button>
+        
+        <button class="btn-vk" onclick="socialLogin('VK')" style="margin-top: 8px;">
+            <i class="fab fa-vk"></i> Продолжить с VK
+        </button>
+        
+        <div class="register-note" style="text-align: center; margin-top: 24px; color: var(--cool-gray); font-size: 0.9rem;">
+            Нет аккаунта? <a href="#" onclick="openRegisterModal()" style="color: var(--accent-pink); text-decoration: none; font-weight: 600;">Зарегистрироваться</a>
+        </div>
     </div>
 </div>
 
@@ -939,16 +992,26 @@
         <div id="registerError" style="color: var(--accent-coral); font-size: 0.8rem; margin-bottom: 10px;"></div>
         <div id="registerSuccess" style="color: var(--accent-pink); font-size: 0.8rem; margin-bottom: 10px; display: none;"></div>
         <button class="btn-primary" onclick="register()">Зарегистрироваться</button>
+        
+        <div class="divider">
+            <span>или</span>
+        </div>
+        
+        <button class="btn-google" onclick="socialLogin('Google')">
+            <i class="fab fa-google"></i> Регистрация через Google
+        </button>
+        
+        <div class="login-note" style="text-align: center; margin-top: 24px; color: var(--cool-gray); font-size: 0.9rem;">
+            Уже есть аккаунт? <a href="#" onclick="openLoginModal()" style="color: var(--accent-pink); text-decoration: none; font-weight: 600;">Войти</a>
+        </div>
     </div>
 </div>
 
 <script>
     // ========== НАСТРОЙКИ SUPABASE ==========
-    // ⬇️⬇️⬇️ ЗАМЕНИ НА СВОИ ДАННЫЕ ИЗ SUPABASE ⬇️⬇️⬇️
     const SUPABASE_URL = 'https://bgyjgzzvoxyvpysywvlb.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJneWpnenp2b3h5dnB5c3l3dmxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2Mzk3NjQsImV4cCI6MjA5NjIxNTc2NH0.Yz91MvAXo45Z3hq-76V5yBD4aB_2dFgpjXDBDWG9FHM';
-
-    // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
+    
     let currentUser = null;
 
     // ========== ФУНКЦИИ РАБОТЫ С SUPABASE ==========
@@ -959,9 +1022,9 @@
             'Authorization': `Bearer ${SUPABASE_KEY}`,
             'Content-Type': 'application/json'
         };
-
+        
         let options = { method, headers };
-
+        
         if (method === 'GET') {
             if (id) url += `?id=eq.${id}`;
             options.method = 'GET';
@@ -973,7 +1036,7 @@
         } else if (method === 'DELETE') {
             url += `?id=eq.${id}`;
         }
-
+        
         try {
             const response = await fetch(url, options);
             if (!response.ok) throw new Error(`Ошибка ${response.status}`);
@@ -989,16 +1052,16 @@
         const listings = await supabaseRequest('listings', 'GET');
         return listings || [];
     }
-
+    
     async function getUsers() {
         const users = await supabaseRequest('users', 'GET');
         return users || [];
     }
-
+    
     async function addUser(user) {
         return await supabaseRequest('users', 'POST', user);
     }
-
+    
     async function addBooking(booking) {
         return await supabaseRequest('bookings', 'POST', booking);
     }
@@ -1007,12 +1070,12 @@
     async function renderListings() {
         const listings = await getListings();
         const container = document.getElementById('listingsGrid');
-
+        
         if (!listings.length) {
             container.innerHTML = '<div style="text-align: center; padding: 60px; background: white; border-radius: 28px;">Нет объявлений</div>';
             return;
         }
-
+        
         container.innerHTML = listings.map(listing => `
             <div class="listing-card" onclick="window.location.href='listing-detail.html?id=${listing.id}'">
                 <div class="card-image">
@@ -1040,17 +1103,17 @@
             openLoginModal();
             return;
         }
-
+        
         const checkin = prompt('Дата заезда (ГГГГ-ММ-ДД):', new Date().toISOString().split('T')[0]);
         const checkout = prompt('Дата выезда (ГГГГ-ММ-ДД):', new Date(Date.now() + 3*24*60*60*1000).toISOString().split('T')[0]);
-
+        
         if (!checkin || !checkout) return;
-
+        
         const listings = await getListings();
         const listing = listings.find(l => l.id === listingId);
         const days = Math.max(1, Math.ceil((new Date(checkout) - new Date(checkin)) / (1000 * 60 * 60 * 24)));
         const totalPrice = listing.price * days;
-
+        
         const booking = {
             user_id: currentUser.id,
             listing_id: listingId,
@@ -1062,7 +1125,7 @@
             status: 'pending',
             created_at: new Date().toISOString()
         };
-
+        
         const result = await addBooking(booking);
         if (result?.success) {
             showToast(`Бронирование оформлено! ${totalPrice.toLocaleString()} ₽`);
@@ -1077,7 +1140,7 @@
         const password = document.getElementById('loginPassword').value;
         const users = await getUsers();
         const user = users.find(u => u.email === email && u.password === password);
-
+        
         if (user) {
             currentUser = { id: user.id, name: user.name, email: user.email };
             localStorage.setItem('brosky_current_user', JSON.stringify(currentUser));
@@ -1095,9 +1158,9 @@
         const email = document.getElementById('regEmail').value;
         const password = document.getElementById('regPassword').value;
         const confirm = document.getElementById('regPasswordConfirm').value;
-
+        
         document.getElementById('registerError').innerText = '';
-
+        
         if (name.length < 2) {
             document.getElementById('registerError').innerText = 'Введите корректное имя';
             return;
@@ -1114,20 +1177,20 @@
             document.getElementById('registerError').innerText = 'Пароли не совпадают';
             return;
         }
-
+        
         const users = await getUsers();
         if (users.some(u => u.email === email)) {
             document.getElementById('registerError').innerText = 'Email уже используется';
             return;
         }
-
+        
         const newUser = {
             name: name,
             email: email,
             password: password,
             created_at: new Date().toISOString()
         };
-
+        
         const result = await addUser(newUser);
         if (result?.success) {
             document.getElementById('registerSuccess').style.display = 'block';
@@ -1139,6 +1202,12 @@
         } else {
             document.getElementById('registerError').innerText = 'Ошибка регистрации';
         }
+    }
+    
+    // Демо-функция для социального входа
+    function socialLogin(provider) {
+        showToast(`Вход через ${provider} (демо-режим). В реальном проекте здесь будет OAuth-авторизация.`);
+        // В реальном проекте здесь был бы редирект на OAuth-сервер
     }
 
     function logout() {
@@ -1153,7 +1222,7 @@
     function updateUserMenu() {
         const userMenu = document.getElementById('userMenu');
         if (!userMenu) return;
-
+        
         if (currentUser) {
             userMenu.innerHTML = `
                 <div class="user-dropdown">
@@ -1207,7 +1276,10 @@
         toast.className = 'toast';
         toast.innerHTML = message;
         document.body.appendChild(toast);
-        setTimeout(() => toast.remove(), 3000);
+        setTimeout(() => {
+            toast.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
     }
 
     // Показать ссылку на админку
@@ -1253,6 +1325,7 @@
     window.register = register;
     window.logout = logout;
     window.bookListing = bookListing;
+    window.socialLogin = socialLogin;
     window.openLoginModal = openLoginModal;
     window.openRegisterModal = openRegisterModal;
     window.closeModal = closeModal;
