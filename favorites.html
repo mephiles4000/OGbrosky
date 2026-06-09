@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ========== RESET & GLOBAL ========== */
         * {
             margin: 0;
             padding: 0;
@@ -18,8 +17,6 @@
             font-family: 'Inter', sans-serif;
             background: linear-gradient(145deg, #f0f6ff 0%, #e9f0fa 100%);
             color: #1a2c3e;
-            scroll-behavior: smooth;
-            line-height: 1.4;
         }
 
         :root {
@@ -42,7 +39,6 @@
             padding: 0 32px;
         }
 
-        /* ========== HEADER ========== */
         header {
             padding: 24px 0 16px;
             backdrop-filter: blur(8px);
@@ -74,11 +70,6 @@
         .logo i {
             color: var(--accent-pink);
             font-size: 2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover i {
-            transform: scale(1.05) rotate(-2deg);
         }
 
         .nav-links {
@@ -106,7 +97,6 @@
             height: 2px;
             background: var(--accent-pink);
             transition: width 0.25s;
-            border-radius: 2px;
         }
 
         .nav-links a:hover {
@@ -124,7 +114,6 @@
             border-radius: 40px;
             color: var(--accent-pink);
             font-weight: 600;
-            transition: var(--transition);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
@@ -138,7 +127,6 @@
             transform: translateY(-2px);
         }
 
-        /* ========== PAGE HEADER ========== */
         .page-header {
             text-align: center;
             margin: 48px 0 32px;
@@ -158,7 +146,6 @@
             margin: 0 auto;
         }
 
-        /* ========== FAVORITES STATS ========== */
         .favorites-stats {
             background: white;
             border-radius: 20px;
@@ -199,7 +186,6 @@
             color: white;
         }
 
-        /* ========== FAVORITES GRID ========== */
         .favorites-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -276,7 +262,6 @@
         .remove-fav-btn i {
             color: var(--accent-coral);
             font-size: 1.2rem;
-            transition: var(--transition);
         }
 
         .remove-fav-btn:hover {
@@ -342,10 +327,22 @@
             border-top: 1px solid #eef2f7;
         }
 
-        .card-details span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
+        .book-now-btn {
+            width: 100%;
+            background: var(--accent-pink);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 48px;
+            font-weight: 600;
+            margin-top: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .book-now-btn:hover {
+            background: #e85da0;
+            transform: translateY(-2px);
         }
 
         .empty-state {
@@ -381,6 +378,136 @@
             font-size: 0.85rem;
         }
 
+        /* ========== ВЫПЛЫВАЮЩИЕ ОКНА ========== */
+        .floating-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 32px;
+            padding: 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            z-index: 2000;
+            width: 90%;
+            max-width: 450px;
+            animation: fadeInScale 0.2s ease;
+        }
+
+        .floating-form.active {
+            display: block;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .floating-form h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: var(--charcoal);
+            text-align: center;
+        }
+
+        .floating-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .floating-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+
+        .floating-form input,
+        .floating-form select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d0dee9;
+            border-radius: 16px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .floating-form input:focus,
+        .floating-form select:focus {
+            outline: none;
+            border-color: var(--accent-pink);
+        }
+
+        .floating-form .demo-note {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            text-align: center;
+            margin-top: 16px;
+            color: #856404;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn-submit {
+            flex: 1;
+            background: var(--accent-pink);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 48px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-submit:hover {
+            background: #e85da0;
+        }
+
+        .btn-cancel {
+            flex: 1;
+            background: transparent;
+            border: 1px solid #d0dee9;
+            color: var(--cool-gray);
+            padding: 12px;
+            border-radius: 48px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-cancel:hover {
+            border-color: var(--accent-coral);
+            color: var(--accent-coral);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
         /* ========== TOAST ========== */
         .toast {
             position: fixed;
@@ -395,28 +522,15 @@
         }
 
         @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
         @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(100%);
-                opacity: 0;
-            }
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
         }
 
-        /* ========== USER DROPDOWN ========== */
         .user-dropdown {
             position: relative;
             display: inline-block;
@@ -457,19 +571,12 @@
             color: var(--accent-coral);
         }
 
-        /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
             .container {
                 padding: 0 20px;
             }
             .navbar {
                 flex-direction: column;
-            }
-            .nav-links {
-                justify-content: center;
-            }
-            .page-header h1 {
-                font-size: 2rem;
             }
             .favorites-grid {
                 grid-template-columns: 1fr;
@@ -525,13 +632,65 @@
     </div>
 </footer>
 
+<!-- Затемнение -->
+<div id="overlay" class="overlay"></div>
+
+<!-- ВЫПЛЫВАЮЩЕЕ ОКНО 1: ВВОД ДАННЫХ -->
+<div id="floatingDataForm" class="floating-form">
+    <h3><i class="fas fa-calendar-check"></i> Введите данные</h3>
+    <div class="form-group">
+        <label>📅 Дата заезда</label>
+        <input type="date" id="floatingCheckin" value="">
+    </div>
+    <div class="form-group">
+        <label>📅 Дата выезда</label>
+        <input type="date" id="floatingCheckout" value="">
+    </div>
+    <div class="form-group">
+        <label>👥 Количество гостей</label>
+        <input type="number" id="floatingGuests" min="1" max="10" value="2">
+    </div>
+    <div class="form-buttons">
+        <button class="btn-submit" onclick="submitDataForm()">Далее</button>
+        <button class="btn-cancel" onclick="closeDataForm()">Отмена</button>
+    </div>
+</div>
+
+<!-- ВЫПЛЫВАЮЩЕЕ ОКНО 2: ОПЛАТА (ДЕМО, ТОЛЬКО ВИЗУАЛ) -->
+<div id="floatingPaymentForm" class="floating-form">
+    <h3><i class="fas fa-credit-card"></i> Оплата (демо)</h3>
+    <div id="paymentDetails" style="margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 16px;">
+        <p><strong>💰 Сумма к оплате:</strong> <span id="paymentAmount">0 ₽</span></p>
+        <p><strong>🏠 Объявление:</strong> <span id="paymentTitle"></span></p>
+        <p><strong>📅 Даты:</strong> <span id="paymentDates"></span></p>
+        <p><strong>👥 Гостей:</strong> <span id="paymentGuests"></span></p>
+    </div>
+    <div class="form-group">
+        <label>💳 Способ оплаты (демо)</label>
+        <select id="paymentMethod" style="width: 100%; padding: 12px; border-radius: 16px; border: 1px solid #d0dee9;">
+            <option value="card">💳 Банковская карта (демо)</option>
+            <option value="sbp">📱 СБП (демо)</option>
+            <option value="cash">🏦 Наличные при заезде (демо)</option>
+        </select>
+    </div>
+    <div class="demo-note">
+        <i class="fas fa-info-circle"></i> Демо-режим оплаты. Никакие средства не списываются.
+    </div>
+    <div class="form-buttons">
+        <button class="btn-submit" onclick="processPayment()">Подтвердить оплату (демо)</button>
+        <button class="btn-cancel" onclick="closePaymentForm()">Отмена</button>
+    </div>
+</div>
+
 <script>
     // ========== НАСТРОЙКИ SUPABASE ==========
     const SUPABASE_URL = 'https://bgyjgzzvoxyvpysywvlb.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJneWpnenp2b3h5dnB5c3l3dmxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2Mzk3NjQsImV4cCI6MjA5NjIxNTc2NH0.Yz91MvAXo45Z3hq-76V5yBD4aB_2dFgpjXDBDWG9FHM';
-    
+
     let currentUser = null;
     let allListings = [];
+    let selectedListing = null;
+    let pendingBookingData = null;
 
     // ========== ФУНКЦИИ SUPABASE ==========
     async function supabaseRequest(table, method = 'GET', data = null, id = null) {
@@ -567,20 +726,14 @@
         return (await supabaseRequest('listings', 'GET')) || [];
     }
 
-    // ========== ГЛОБАЛЬНОЕ ИЗБРАННОЕ ==========
+    async function addBooking(booking) {
+        return await supabaseRequest('bookings', 'POST', booking);
+    }
+
     async function getFavoritesFromDB() {
         if (!currentUser) return [];
         const favs = await supabaseRequest(`favorites?user_id=eq.${currentUser.id}`, 'GET');
         return favs ? favs.map(f => f.listing_id) : [];
-    }
-
-    async function addFavoriteDB(listingId) {
-        if (!currentUser) return false;
-        const result = await supabaseRequest('favorites', 'POST', {
-            user_id: currentUser.id,
-            listing_id: listingId
-        });
-        return result?.success;
     }
 
     async function removeFavoriteDB(listingId) {
@@ -601,25 +754,145 @@
             await removeFavoriteDB(id);
         }
         showToast('Избранное очищено');
-        await renderFavorites();
+        renderFavorites();
     }
 
-    // ========== ОТОБРАЖЕНИЕ ==========
+    function formatDate(dateStr) {
+        const d = new Date(dateStr);
+        return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
+    }
+
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        setTimeout(() => {
+            toast.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => toast.remove(), 300);
+        }, 2500);
+    }
+
+    // ========== ВЫПЛЫВАЮЩЕЕ ОКНО 1: ВВОД ДАННЫХ ==========
+    function openDataForm(listing) {
+        if (!currentUser) {
+            showToast('Войдите в аккаунт');
+            return;
+        }
+        selectedListing = listing;
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const dayAfter = new Date();
+        dayAfter.setDate(dayAfter.getDate() + 3);
+        document.getElementById('floatingCheckin').value = tomorrow.toISOString().split('T')[0];
+        document.getElementById('floatingCheckout').value = dayAfter.toISOString().split('T')[0];
+        document.getElementById('floatingGuests').value = 2;
+        document.getElementById('overlay').classList.add('active');
+        document.getElementById('floatingDataForm').classList.add('active');
+    }
+
+    function closeDataForm() {
+        document.getElementById('overlay').classList.remove('active');
+        document.getElementById('floatingDataForm').classList.remove('active');
+        selectedListing = null;
+    }
+
+    function submitDataForm() {
+        const checkin = document.getElementById('floatingCheckin').value;
+        const checkout = document.getElementById('floatingCheckout').value;
+        const guests = parseInt(document.getElementById('floatingGuests').value);
+
+        if (!checkin || !checkout) {
+            showToast('Выберите даты заезда и выезда');
+            return;
+        }
+
+        const checkinDate = new Date(checkin);
+        const checkoutDate = new Date(checkout);
+        const days = Math.max(1, Math.ceil((checkoutDate - checkinDate) / (1000 * 60 * 60 * 24)));
+        const totalPrice = selectedListing.price * days;
+
+        pendingBookingData = {
+            listingId: selectedListing.id,
+            listingTitle: selectedListing.title,
+            listingPrice: selectedListing.price,
+            checkin: checkin,
+            checkout: checkout,
+            guests: guests,
+            days: days,
+            totalPrice: totalPrice
+        };
+
+        document.getElementById('floatingDataForm').classList.remove('active');
+        document.getElementById('paymentAmount').innerText = totalPrice.toLocaleString() + ' ₽';
+        document.getElementById('paymentTitle').innerText = selectedListing.title;
+        document.getElementById('paymentDates').innerText = `${formatDate(checkin)} — ${formatDate(checkout)} (${days} ночей)`;
+        document.getElementById('paymentGuests').innerText = guests;
+        document.getElementById('floatingPaymentForm').classList.add('active');
+    }
+
+    // ========== ВЫПЛЫВАЮЩЕЕ ОКНО 2: ОПЛАТА (ВИЗУАЛ) ==========
+    function closePaymentForm() {
+        document.getElementById('overlay').classList.remove('active');
+        document.getElementById('floatingPaymentForm').classList.remove('active');
+        pendingBookingData = null;
+        selectedListing = null;
+    }
+
+    async function processPayment() {
+        if (!pendingBookingData || !currentUser) {
+            closePaymentForm();
+            return;
+        }
+
+        const method = document.getElementById('paymentMethod').value;
+        let methodText = '';
+        if (method === 'card') methodText = 'банковской картой';
+        else if (method === 'sbp') methodText = 'СБП';
+        else methodText = 'наличными при заезде';
+
+        showToast(`🔄 Обработка платежа ${methodText}... (демо-режим)`);
+
+        setTimeout(async () => {
+            const booking = {
+                user_id: currentUser.id,
+                listing_id: pendingBookingData.listingId,
+                checkin: pendingBookingData.checkin,
+                checkout: pendingBookingData.checkout,
+                guests: pendingBookingData.guests,
+                days: pendingBookingData.days,
+                total_price: pendingBookingData.totalPrice,
+                status: 'pending',
+                created_at: new Date().toISOString()
+            };
+
+            const result = await addBooking(booking);
+
+            if (result?.success) {
+                showToast(`✅ Бронирование отправлено! Сумма: ${pendingBookingData.totalPrice.toLocaleString()} ₽. Ожидайте подтверждения администратора.`);
+                await removeFavoriteDB(pendingBookingData.listingId);
+                await renderFavorites();
+                closePaymentForm();
+            } else {
+                showToast('❌ Ошибка при создании бронирования');
+            }
+        }, 1500);
+    }
+
+    // ========== ОТОБРАЖЕНИЕ ИЗБРАННОГО ==========
     function generateStars(rating) {
         const fullStars = Math.floor(rating);
-        const hasHalf = rating % 1 >= 0.5;
         let stars = '★'.repeat(fullStars);
-        if (hasHalf) stars += '½';
-        stars += '☆'.repeat(5 - Math.ceil(rating));
+        stars += '☆'.repeat(5 - fullStars);
         return stars;
     }
 
     async function renderFavorites() {
         const container = document.getElementById('favoritesList');
         const statsDiv = document.getElementById('favoritesStats');
-        
+
         currentUser = getCurrentUser();
-        
+
         if (!currentUser) {
             container.innerHTML = `
                 <div class="empty-state">
@@ -632,15 +905,15 @@
             statsDiv.style.display = 'none';
             return;
         }
-        
+
         const favoriteIds = await getFavoritesFromDB();
-        
+
         if (allListings.length === 0) {
             allListings = await getListings();
         }
-        
+
         const favoriteListings = allListings.filter(l => favoriteIds.includes(l.id));
-        
+
         if (favoriteListings.length === 0) {
             container.innerHTML = `
                 <div class="empty-state">
@@ -653,43 +926,49 @@
             statsDiv.style.display = 'none';
             return;
         }
-        
+
         statsDiv.style.display = 'flex';
         document.getElementById('favCount').innerHTML = favoriteListings.length;
-        
+
         const typeName = {
             'apartment': 'Квартира',
             'house': 'Дом',
             'loft': 'Loft'
         };
-        
-        container.innerHTML = favoriteListings.map(listing => `
-            <a href="listing-detail.html?id=${listing.id}" class="favorite-card">
-                <div class="card-image">
-                    <img src="${listing.image || 'https://placehold.co/500x300/2c7da0/white?text=BroSky'}" alt="${listing.title}">
-                    <div class="card-badge">${typeName[listing.type] || 'Жильё'}</div>
-                    <div class="remove-fav-btn" onclick="event.preventDefault(); removeFromFavorites(${listing.id})">
-                        <i class="fas fa-trash-alt"></i>
+
+        container.innerHTML = favoriteListings.map(listing => {
+            const listingJson = JSON.stringify(listing).replace(/"/g, '&quot;');
+            return `
+                <div class="favorite-card">
+                    <div class="card-image">
+                        <img src="${listing.image || 'https://placehold.co/500x300/2c7da0/white?text=BroSky'}" alt="${listing.title}">
+                        <div class="card-badge">${typeName[listing.type] || 'Жильё'}</div>
+                        <div class="remove-fav-btn" onclick="event.preventDefault(); removeFromFavorites(${listing.id})">
+                            <i class="fas fa-trash-alt"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">${listing.title}</div>
+                        <div class="card-location"><i class="fas fa-map-marker-alt"></i> ${listing.city}</div>
+                        <div class="card-rating">
+                            <div class="stars">${generateStars(listing.rating || 4.5)}</div>
+                            <div class="reviews">${listing.reviews || 42} отзывов</div>
+                        </div>
+                        <div class="card-price">
+                            ${listing.price.toLocaleString()} ₽ <small>/ сутки</small>
+                        </div>
+                        <div class="card-details">
+                            <span><i class="fas fa-bed"></i> ${listing.beds || 1} спальни</span>
+                            <span><i class="fas fa-bath"></i> ${listing.baths || 1} ванна</span>
+                            <span><i class="fas fa-users"></i> до ${listing.guests || 4} гостей</span>
+                        </div>
+                        <button class="book-now-btn" onclick="openDataForm(${listingJson})">
+                            <i class="fas fa-calendar-check"></i> Забронировать
+                        </button>
                     </div>
                 </div>
-                <div class="card-content">
-                    <div class="card-title">${listing.title}</div>
-                    <div class="card-location"><i class="fas fa-map-marker-alt"></i> ${listing.city}</div>
-                    <div class="card-rating">
-                        <div class="stars">${generateStars(listing.rating || 4.5)}</div>
-                        <div class="reviews">${listing.reviews || 42} отзывов</div>
-                    </div>
-                    <div class="card-price">
-                        ${listing.price.toLocaleString()} ₽ <small>/ сутки</small>
-                    </div>
-                    <div class="card-details">
-                        <span><i class="fas fa-bed"></i> ${listing.beds || 1} спальни</span>
-                        <span><i class="fas fa-bath"></i> ${listing.baths || 1} ванна</span>
-                        <span><i class="fas fa-users"></i> до ${listing.guests || 4} гостей</span>
-                    </div>
-                </div>
-            </a>
-        `).join('');
+            `;
+        }).join('');
     }
 
     async function removeFromFavorites(listingId) {
@@ -699,18 +978,6 @@
             showToast('Удалено из избранного 💔');
             await renderFavorites();
         }
-    }
-
-    // ========== УВЕДОМЛЕНИЯ ==========
-    function showToast(message) {
-        const toast = document.createElement('div');
-        toast.className = 'toast';
-        toast.textContent = message;
-        document.body.appendChild(toast);
-        setTimeout(() => {
-            toast.style.animation = 'slideOut 0.3s ease';
-            setTimeout(() => toast.remove(), 300);
-        }, 2000);
     }
 
     // ========== ПОЛЬЗОВАТЕЛЬСКОЕ МЕНЮ ==========
@@ -770,6 +1037,11 @@
         }
     });
 
+    window.openDataForm = openDataForm;
+    window.closeDataForm = closeDataForm;
+    window.submitDataForm = submitDataForm;
+    window.closePaymentForm = closePaymentForm;
+    window.processPayment = processPayment;
     window.removeFromFavorites = removeFromFavorites;
     window.clearAllFavorites = clearAllFavorites;
 
